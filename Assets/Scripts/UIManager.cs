@@ -19,17 +19,17 @@ public class UIManager : MonoBehaviour
     }
     public void GetCardIndex(int index)
     {
-        if (GameManager.instance.cardCount == 1)
+        if (GameManager.instance.cardCount == 0)
         {
             slot1card = index;
             cardIndex[index].SetActive(false);
          }
-        else if (GameManager.instance.cardCount == 2)
+        else if (GameManager.instance.cardCount == 1)
         {
             slot2card = index;
             cardIndex[index].SetActive(false);
         }
-        else if (GameManager.instance.cardCount == 3)
+        else if (GameManager.instance.cardCount == 2)
         {
             slot3card = index;
             cardIndex[index].SetActive(false);

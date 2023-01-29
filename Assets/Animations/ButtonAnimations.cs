@@ -18,4 +18,9 @@ public class ButtonAnimations : MonoBehaviour
         buttons[0].SetTrigger("ShowTurn");
         buttons[1].SetTrigger("ShowTurn");
     }
+    public void EndShowT()
+    {
+        buttons[0].SetTrigger("ActionTurn");
+        buttons[1].SetTrigger("ActionTurn");
+    }
 }
