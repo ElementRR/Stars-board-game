@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
     private GameObject endTurnB;
     public GameObject[] cardIndex;
     public int slot1card;
@@ -12,15 +13,14 @@ public class UIManager : MonoBehaviour
     public int slot3card;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        instance = this;
         endTurnB = GameObject.Find("EndTurnB");
     }
 
     public void GetCardIndex(int index)
     {
-
-
         if (GameManager.instance.cardCount == 1)
         {
             slot1card = index;

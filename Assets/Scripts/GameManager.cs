@@ -12,12 +12,19 @@ public class GameManager : MonoBehaviour
     public GameObject cardSlot2;
     public GameObject cardSlot3;
 
-    void Start()
+    void Awake()
     {
         instance = this;
         cardCount = 0;
         actionTurn = true;
     }
+
+    private void InstantiateInSlot(GameObject cardSlot)
+    {
+        Instantiate(cardFlipped, cardSlot.transform.position, transform.rotation);
+        cardCount++;
+    }
+
 
     public void FillSlot()
     {
@@ -25,20 +32,16 @@ public class GameManager : MonoBehaviour
         {
             if(cardCount < 1)
             {
-                Instantiate(cardFlipped, cardSlot1.transform.position, transform.rotation);
-                cardCount++;
+                InstantiateInSlot(cardSlot1);
             }
             else if (cardCount < 2)
             {
-                Instantiate(cardFlipped, cardSlot2.transform.position, transform.rotation);
-                cardCount++;
+                InstantiateInSlot(cardSlot2);
             }
             else if (cardCount < 3)
             {
-                Instantiate(cardFlipped, cardSlot3.transform.position, transform.rotation);
-                cardCount++;
+                InstantiateInSlot(cardSlot3);
             }
-
         }
     }
 
@@ -55,5 +58,26 @@ public class GameManager : MonoBehaviour
             cardCount = 0;
             actionTurn = false;
         }
+    }
+
+    private void Update()
+    {
+        if (!actionTurn)
+        {
+            // StartCoroutine();
+        }
+    }
+
+    private IEnumerator ShowTurn()
+    {
+        yield return new WaitForSeconds(1.5f);
+        // vira primeira carta
+        // ação
+        // vira segunda carta
+        // ação
+        // vira terceira carta
+        // ação
+        // retornar cartas para a mão
+        // 
     }
 }
