@@ -12,13 +12,11 @@ public class UIManager : MonoBehaviour
     public int slot2card;
     public int slot3card;
 
-    // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         endTurnB = GameObject.Find("EndTurnB");
     }
-
     public void GetCardIndex(int index)
     {
         if (GameManager.instance.cardCount == 1)
@@ -37,7 +35,6 @@ public class UIManager : MonoBehaviour
             cardIndex[index].SetActive(false);
         }
     }
-
     // Update is called once per frame
     void Update()
     {

@@ -5,25 +5,17 @@ using UnityEngine.UI;
 
 public class ButtonAnimations : MonoBehaviour
 {
+    public static ButtonAnimations instance;
     public Animator[] buttons;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        if (GameManager.instance.actionTurn)
-        {
-            buttons[0].SetTrigger("ActionTurn");
-            buttons[1].SetTrigger("ActionTurn");
-        }
-        else
-        {
-            buttons[0].SetTrigger("ShowTurn");
-            buttons[1].SetTrigger("ShowTurn");
-        }
+        instance = this;
+    }
+    // Update is called once per frame
+    public void EndActionT()
+    {
+        buttons[0].SetTrigger("ShowTurn");
+        buttons[1].SetTrigger("ShowTurn");
     }
 }

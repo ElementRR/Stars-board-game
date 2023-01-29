@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
 
             cardCount = 0;
             actionTurn = false;
+            ButtonAnimations.instance.EndActionT();
         }
     }
 
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         // vira terceira carta
         // ação
         // retornar cartas para a mão
-        // 
+        // Zerar slots
+        // voltar cartas não usadas
     }
 }
