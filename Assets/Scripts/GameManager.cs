@@ -28,25 +28,28 @@ public class GameManager : MonoBehaviour
     private void InstantiateInSlot(GameObject cardSlot)
     {
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 0);
-        Instantiate(cardFlipped, cardSlot.transform.position, newRotation);
+        Instantiate(cardFlipped, cardSlot.transform.position, newRotation, cardSlot.transform);
         cardCount++;
     }
 
     public void FillSlot()
     {
-        if (actionTurn && cardCount < 3)
+        if (actionTurn)
         {
-            if (cardCount < 1)
+            if (actionTurn && cardCount < 3)
             {
-                InstantiateInSlot(cardSlot1);
-            }
-            else if (cardCount < 2)
-            {
-                InstantiateInSlot(cardSlot2);
-            }
-            else if (cardCount < 3)
-            {
-                InstantiateInSlot(cardSlot3);
+                if (cardCount < 1)
+                {
+                    InstantiateInSlot(cardSlot1);
+                }
+                else if (cardCount < 2)
+                {
+                    InstantiateInSlot(cardSlot2);
+                }
+                else if (cardCount < 3)
+                {
+                    InstantiateInSlot(cardSlot3);
+                }
             }
         }
     }
@@ -93,7 +96,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         // show the first card
         Instantiate(FieldcardIndex[ShowFase(1, 1)], cardSlot1.transform.position,
-            cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0));
+            cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
         // action
 
         showTurnAction.ActionInShowTurn(false, 1);
@@ -104,7 +107,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         // show the second card
         Instantiate(FieldcardIndex[ShowFase(2, 1)], cardSlot2.transform.position,
-            cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0));
+            cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot2.transform);
         // action
         // show the second card AI
         // action
@@ -112,7 +115,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         // show the third card
         Instantiate(FieldcardIndex[ShowFase(3, 1)], cardSlot3.transform.position,
-            cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0));
+            cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot3.transform);
         // action
         // show the third card IA
         // action
