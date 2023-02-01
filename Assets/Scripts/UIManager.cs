@@ -46,5 +46,16 @@ public class UIManager : MonoBehaviour
         {
             endTurnB.SetActive(false);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ReturnCard(0);
+        }
+
+    }
+
+    public void ReturnCard(int cardNumber)
+    {
+        cardIndex[cardNumber].SetActive(true);
+        Debug.Log("Card number " + cardNumber + " is back!!");
     }
 }

@@ -6,20 +6,23 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private ShowTurnAction showTurnAction;
+
     public bool actionTurn;
     public int cardCount;
     public GameObject cardFlipped;
     public GameObject cardSlot1;
     public GameObject cardSlot2;
     public GameObject cardSlot3;
-    public GameObject[] FieldcardIndex;
 
+    public GameObject[] FieldcardIndex;
 
     void Awake()
     {
         instance = this;
         cardCount = 0;
         actionTurn = true;
+        showTurnAction = GetComponent<ShowTurnAction>();
     }
 
     private void InstantiateInSlot(GameObject cardSlot)
@@ -65,10 +68,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-
-    }
 
     private IEnumerator ShowTurn()
     {
@@ -92,35 +91,38 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
-        // vira primeira carta
+        // show the first card
         Instantiate(FieldcardIndex[ShowFase(1, 1)], cardSlot1.transform.position,
             cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0));
-        // ação
-        // vira primeira carta IA
-        // ação
-        // espera
+        // action
+
+        showTurnAction.ActionInShowTurn(false, 1);
+
+        // show the first card AI
+        // action
+        // wait
         yield return new WaitForSeconds(2f);
-        // vira segunda carta
+        // show the second card
         Instantiate(FieldcardIndex[ShowFase(2, 1)], cardSlot2.transform.position,
             cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0));
-        // ação
-        // vira segunda carta IA
-        // ação
-        // espera
+        // action
+        // show the second card AI
+        // action
+        // wait
         yield return new WaitForSeconds(2f);
-        // vira terceira carta
+        // show the third card
         Instantiate(FieldcardIndex[ShowFase(3, 1)], cardSlot3.transform.position,
             cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0));
-        // ação
-        // vira terceira carta IA
-        // ação
-        // espera
+        // action
+        // show the third card IA
+        // action
+        // wait
         yield return new WaitForSeconds(2f);
-        // retornar cartas para a mão
-        // Zerar slots
+        // return cards to hand
+        // reset slots
         ResetSlots();
-        // voltar cartas não usadas
-        // recomeçar turno
+        // return non-used cards
+        // reset action turn
         actionTurn = true;
         ButtonAnimations.instance.EndShowT();
     }
