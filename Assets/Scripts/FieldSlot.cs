@@ -11,6 +11,7 @@ public class FieldSlot : MonoBehaviour
 
     public void InstantiateInSlot()
     {
-        Instantiate(towerIndex[towerToInstantiate], transform.position, transform.rotation);
+        Instantiate(towerIndex[towerToInstantiate], transform.position, transform.rotation, gameObject.transform);
+        isFilled = true;
     }
 }

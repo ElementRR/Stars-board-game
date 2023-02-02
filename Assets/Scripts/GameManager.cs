@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public GameObject cardSlot1;
     public GameObject cardSlot2;
     public GameObject cardSlot3;
+    public GameObject cardSlot4;
+    public GameObject cardSlot5;
+    public GameObject cardSlot6;
 
     public GameObject[] FieldcardIndex;
 
@@ -25,7 +28,7 @@ public class GameManager : MonoBehaviour
         showTurnAction = GetComponent<ShowTurnAction>();
     }
 
-    private void InstantiateInSlot(GameObject cardSlot)
+    public void InstantiateInSlot(GameObject cardSlot)
     {
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 0);
         Instantiate(cardFlipped, cardSlot.transform.position, newRotation, cardSlot.transform);
@@ -74,18 +77,30 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn()
     {
-        int ShowFase(int fase, int subfase)
+        int ShowFase(int faseNumber)
         {
-            if (fase == 1 && subfase == 1)
+            if (faseNumber == 1)
             {
                 return UIManager.instance.slot1card;
-            } else if (fase == 2 && subfase == 1)
+            } else if (faseNumber == 2)
             {
                 return UIManager.instance.slot2card;
             }
-            else if (fase == 3 && subfase == 1)
+            else if (faseNumber == 3)
             {
                 return UIManager.instance.slot3card;
+            }
+            else if (faseNumber == 4)
+            {
+                return UIManager.instance.slot4card;
+            }
+            else if (faseNumber == 5)
+            {
+                return UIManager.instance.slot5card;
+            }
+            else if (faseNumber == 6)
+            {
+                return UIManager.instance.slot6card;
             }
             else
             {
@@ -93,34 +108,65 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         // show the first card
-        Instantiate(FieldcardIndex[ShowFase(1, 1)], cardSlot1.transform.position,
+        Instantiate(FieldcardIndex[ShowFase(1)], cardSlot1.transform.position,
             cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
         // action
-
         showTurnAction.ActionInShowTurn(false, 1);
 
+        // wait
+        yield return new WaitForSeconds(1.5f);
+
         // show the first card AI
+        Instantiate(FieldcardIndex[ShowFase(4)], cardSlot4.transform.position,
+            cardSlot4.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot4.transform);
+
         // action
+        showTurnAction.ActionInShowTurn(true, 4);
+
         // wait
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+
         // show the second card
-        Instantiate(FieldcardIndex[ShowFase(2, 1)], cardSlot2.transform.position,
+        Instantiate(FieldcardIndex[ShowFase(2)], cardSlot2.transform.position,
             cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot2.transform);
+
         // action
+        showTurnAction.ActionInShowTurn(false, 2);
+
+        // wait
+        yield return new WaitForSeconds(1.5f);
         // show the second card AI
+        Instantiate(FieldcardIndex[ShowFase(5)], cardSlot5.transform.position,
+            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot5.transform);
+
         // action
+        showTurnAction.ActionInShowTurn(true, 5);
+
         // wait
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+
         // show the third card
-        Instantiate(FieldcardIndex[ShowFase(3, 1)], cardSlot3.transform.position,
+        Instantiate(FieldcardIndex[ShowFase(2)], cardSlot3.transform.position,
             cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot3.transform);
+
         // action
-        // show the third card IA
-        // action
+        showTurnAction.ActionInShowTurn(false, 3);
+
         // wait
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+
+        // show the third card IA
+        Instantiate(FieldcardIndex[ShowFase(6)], cardSlot5.transform.position,
+            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot5.transform);
+
+        // action
+        showTurnAction.ActionInShowTurn(true, 6);
+
+        // wait
+        yield return new WaitForSeconds(1.5f);
+
         // return cards to hand
         // reset slots
         ResetSlots();

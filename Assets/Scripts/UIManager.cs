@@ -11,6 +11,9 @@ public class UIManager : MonoBehaviour
     public int slot1card;
     public int slot2card;
     public int slot3card;
+    public int slot4card;
+    public int slot5card;
+    public int slot6card;
 
     void Awake()
     {
@@ -19,22 +22,23 @@ public class UIManager : MonoBehaviour
     }
     public void GetCardIndex(int index)
     {
-        if (GameManager.instance.actionTurn) { 
-        if (GameManager.instance.cardCount == 0)
-        {
+        if (GameManager.instance.actionTurn)
+        { 
+            if (GameManager.instance.cardCount == 0)
+            {
             slot1card = index;
             cardIndex[index].SetActive(false);
-         }
-        else if (GameManager.instance.cardCount == 1)
-        {
+            }
+            else if (GameManager.instance.cardCount == 1)
+            {
             slot2card = index;
             cardIndex[index].SetActive(false);
-        }
-        else if (GameManager.instance.cardCount == 2)
-        {
+            }
+            else if (GameManager.instance.cardCount == 2)
+            {
             slot3card = index;
             cardIndex[index].SetActive(false);
-        }
+            }
         }
     }
     // Update is called once per frame
