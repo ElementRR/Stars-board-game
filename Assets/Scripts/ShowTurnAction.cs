@@ -11,9 +11,7 @@ public class ShowTurnAction : MonoBehaviour
     public GameObject[] fieldSlots;
 
     public Tower[] enemy_towers;
-    public Inhibitor enemy_inhibitor;
     public Tower[] me_towers;
-    public Inhibitor me_inhibitor;
 
     public int me_value1 = 6;   // the index of the card in this fase
     public int me_value2 = 6;   // useless for now

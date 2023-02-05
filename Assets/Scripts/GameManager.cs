@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     private EnemyAI enemyAI;
 
     public bool actionTurn;
-    public bool showFase1 = true;
+    public bool showFase1;
 
     public int cardCount;
     public GameObject cardFlipped;
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public GameObject cardSlot5;
     public GameObject cardSlot6;
 
+    private Animator cardAnimator;
+
     public GameObject[] FieldcardIndex;
 
     void Awake()
@@ -28,14 +30,15 @@ public class GameManager : MonoBehaviour
         instance = this;
         cardCount = 0;
         actionTurn = true;
+        showFase1 = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         enemyAI = GetComponent<EnemyAI>();
     }
 
-    public void InstantiateInSlot(GameObject cardSlot, bool isEnemy)
+    public void InstantiateInSlot(GameObject cardSlot, bool isEnemy, int index)
     {
-        Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 0);
-        Instantiate(cardFlipped, cardSlot.transform.position, newRotation, cardSlot.transform);
+        Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
+        Instantiate(FieldcardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
 
         if (!isEnemy)
         {
@@ -43,7 +46,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void FillSlot()
+    public void FillSlot(int cardIndex)
     {
         if (actionTurn)
         {
@@ -51,15 +54,15 @@ public class GameManager : MonoBehaviour
             {
                 if (cardCount < 1)
                 {
-                    InstantiateInSlot(cardSlot1, false);
+                    InstantiateInSlot(cardSlot1, false, cardIndex);
                 }
                 else if (cardCount < 2)
                 {
-                    InstantiateInSlot(cardSlot2, false);
+                    InstantiateInSlot(cardSlot2, false, cardIndex);
                 }
                 else if (cardCount < 3)
                 {
-                    InstantiateInSlot(cardSlot3, false);
+                    InstantiateInSlot(cardSlot3, false, cardIndex);
                 }
             }
         }
@@ -69,11 +72,11 @@ public class GameManager : MonoBehaviour
     {
         if (cardCount > 2)
         {
-            var clones = GameObject.FindGameObjectsWithTag("FlippedCard");
-            foreach (var clone in clones)
-            {
-                Destroy(clone);
-            }
+            //var clones = GameObject.FindGameObjectsWithTag("FlippedCard");
+            //foreach (var clone in clones)
+            //{
+             //   Destroy(clone);
+            //}
 
             cardCount = 0;
             actionTurn = false;
@@ -81,12 +84,10 @@ public class GameManager : MonoBehaviour
             if (showFase1)
             {
                 StartCoroutine(ShowTurn1());
-                showFase1 = false;
             }
             else
             {
                 StartCoroutine(ShowTurn2());
-                showFase1 = true;
             }
         }
     }
@@ -94,230 +95,164 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn1()
     {
-        static int ShowFase(int faseNumber)
-        {
-            if (faseNumber == 1)
-            {
-                return UIManager.instance.slot1card;
-            } else if (faseNumber == 2)
-            {
-                return UIManager.instance.slot2card;
-            }
-            else if (faseNumber == 3)
-            {
-                return UIManager.instance.slot3card;
-            }
-            else if (faseNumber == 4)
-            {
-                return UIManager.instance.slot4card;
-            }
-            else if (faseNumber == 5)
-            {
-                return UIManager.instance.slot5card;
-            }
-            else if (faseNumber == 6)
-            {
-                return UIManager.instance.slot6card;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        float timeToWait = 1.7f;
 
         yield return new WaitForSeconds(1.5f);
         // show the first card
-        Instantiate(FieldcardIndex[ShowFase(1)], cardSlot1.transform.position,
-            cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
+        //Instantiate(FieldcardIndex[ShowFase(1)], cardSlot1.transform.position,
+        //cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
+        cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 1);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // show the first card AI
-        Instantiate(FieldcardIndex[ShowFase(4)], cardSlot4.transform.position,
-            cardSlot4.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot4.transform);
+        cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 4);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // show the second card
-        Instantiate(FieldcardIndex[ShowFase(2)], cardSlot2.transform.position,
-            cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot2.transform);
+        cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 2);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
-        // show the second card AI
-        Instantiate(FieldcardIndex[ShowFase(5)], cardSlot5.transform.position,
-            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot5.transform);
-
         yield return new WaitForSeconds(1f);
+        // show the second card AI
+        cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 5);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
-
-        // show the third card
-        Instantiate(FieldcardIndex[ShowFase(3)], cardSlot3.transform.position,
-            cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot3.transform);
-
         yield return new WaitForSeconds(1f);
+
+        // show the third cards
+        cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 3);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // show the third card IA
-        Instantiate(FieldcardIndex[ShowFase(6)], cardSlot6.transform.position,
-            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot6.transform);
+        cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 6);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(timeToWait);
 
         // reset slots
         ResetSlots();
 
         // reset action turn
         actionTurn = true;
+        showFase1 = false;
         ButtonAnimations.instance.EndShowT();
         enemyAI.EnemyPlay();
     }
 
     private IEnumerator ShowTurn2()
     {
-        static int ShowFase(int faseNumber)
-        {
-            if (faseNumber == 1)
-            {
-                return UIManager.instance.slot1card;
-            }
-            else if (faseNumber == 2)
-            {
-                return UIManager.instance.slot2card;
-            }
-            else if (faseNumber == 3)
-            {
-                return UIManager.instance.slot3card;
-            }
-            else if (faseNumber == 4)
-            {
-                return UIManager.instance.slot4card;
-            }
-            else if (faseNumber == 5)
-            {
-                return UIManager.instance.slot5card;
-            }
-            else if (faseNumber == 6)
-            {
-                return UIManager.instance.slot6card;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        float timeToWait = 1.7f;
 
-        // wait
-        yield return new WaitForSeconds(1.5f);
-
+        yield return new WaitForSeconds(timeToWait);
         // show the first card AI
-        Instantiate(FieldcardIndex[ShowFase(4)], cardSlot4.transform.position,
-            cardSlot4.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot4.transform);
+        cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 4);
 
-
-        yield return new WaitForSeconds(1.5f);
-        // show the first card
-        Instantiate(FieldcardIndex[ShowFase(1)], cardSlot1.transform.position,
-            cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
-
+        // wait
         yield return new WaitForSeconds(1f);
+
+        // show the first card
+        cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 1);
-       
-        // wait
-        yield return new WaitForSeconds(1.5f);
-        // show the second card AI
-        Instantiate(FieldcardIndex[ShowFase(5)], cardSlot5.transform.position,
-            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot5.transform);
 
+        // wait
         yield return new WaitForSeconds(1f);
+
+        // show the second card AI
+        cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 5);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // show the second card
-        Instantiate(FieldcardIndex[ShowFase(2)], cardSlot2.transform.position,
-            cardSlot2.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot2.transform);
+        cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 2);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
-
-        // show the third card IA
-        Instantiate(FieldcardIndex[ShowFase(6)], cardSlot6.transform.position,
-            cardSlot5.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot6.transform);
-
         yield return new WaitForSeconds(1f);
+
+        // show the third card AI
+        cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
+
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(true, 6);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
         // show the third card
-        Instantiate(FieldcardIndex[ShowFase(3)], cardSlot3.transform.position,
-            cardSlot3.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot3.transform);
+        cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeToWait);
 
         // action
         showTurnAction.ActionInShowTurn(false, 3);
 
         // wait
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(timeToWait);
 
         // reset slots
         ResetSlots();
 
         // reset action turn
         actionTurn = true;
+        showFase1 = true;
         ButtonAnimations.instance.EndShowT();
         enemyAI.EnemyPlay();
     }
@@ -327,5 +262,8 @@ public class GameManager : MonoBehaviour
         UIManager.instance.slot1card = 6;
         UIManager.instance.slot2card = 6;
         UIManager.instance.slot3card = 6;
+        UIManager.instance.slot4card = 6;
+        UIManager.instance.slot5card = 6;
+        UIManager.instance.slot6card = 6;
     }
 }

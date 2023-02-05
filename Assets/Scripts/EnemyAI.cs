@@ -16,9 +16,9 @@ public class EnemyAI : MonoBehaviour
             UIManager.instance.slot5card = Random.Range(0, 6);
             UIManager.instance.slot6card = Random.Range(0, 6);
 
-                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot4, true);
-                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot5, true);
-                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot6, true);
+                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot4, true, UIManager.instance.slot4card);
+                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot5, true, UIManager.instance.slot5card);
+                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot6, true, UIManager.instance.slot6card);
             
         }
     }

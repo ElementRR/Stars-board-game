@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
         {
             cardIndex[cardNumber].SetActive(true);
         }
-        Debug.Log("A carta {cardNumber} retornou!");
+        Debug.Log("A carta " + cardNumber + " retornou!");
         if(cardSlot.transform.childCount > 0)
         {
             Destroy(cardSlot.transform.GetChild(0).gameObject);
