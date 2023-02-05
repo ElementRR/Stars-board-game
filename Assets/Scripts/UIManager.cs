@@ -52,17 +52,19 @@ public class UIManager : MonoBehaviour
         {
             endTurnB.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ReturnCard(0, GameManager.instance.cardSlot1);
-        }
 
     }
 
-    public void ReturnCard(int cardNumber, GameObject cardSlot)
+    public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
     {
-        cardIndex[cardNumber].SetActive(true);
-        Debug.Log("Card number " + cardNumber + " is back!!");
-        Destroy(cardSlot.transform.GetChild(0).gameObject);
+        if (!isEnemy)
+        {
+            cardIndex[cardNumber].SetActive(true);
+        }
+        Debug.Log("A carta {cardNumber} retornou!");
+        if(cardSlot.transform.childCount > 0)
+        {
+            Destroy(cardSlot.transform.GetChild(0).gameObject);
+        }
     }
 }

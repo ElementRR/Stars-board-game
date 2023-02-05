@@ -1555,9 +1555,9 @@ MonoBehaviour:
   slot1card: 6
   slot2card: 6
   slot3card: 6
-  slot4card: 3
-  slot5card: 4
-  slot6card: 5
+  slot4card: 6
+  slot5card: 6
+  slot6card: 6
 --- !u!1 &1340624889
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,6 +2044,7 @@ GameObject:
   - component: {fileID: 1817210723}
   - component: {fileID: 1817210724}
   - component: {fileID: 1817210725}
+  - component: {fileID: 1817210726}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2122,7 +2123,18 @@ MonoBehaviour:
   me_value2: 6
   en_value1: 6
   en_value2: 6
-  adversaryHasAnt: 0
+--- !u!114 &1817210726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817210722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 130d61b309c09f4479a66aa0dcf334f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1817790158
 GameObject:
   m_ObjectHideFlags: 0
