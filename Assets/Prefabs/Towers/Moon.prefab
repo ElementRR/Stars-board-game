@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 2683649246860708215}
   - component: {fileID: 2214543167514842601}
   - component: {fileID: 4895795249896671727}
-  - component: {fileID: 8665194337617437803}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
@@ -130,16 +129,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8665194337617437803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8268655985622662835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60ea5019b51835448bb4798c3e1ead58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerNumber: 3

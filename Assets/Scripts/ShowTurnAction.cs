@@ -10,9 +10,6 @@ public class ShowTurnAction : MonoBehaviour
 {
     public GameObject[] fieldSlots;
 
-    public Tower[] enemy_towers;
-    public Tower[] me_towers;
-
     public int me_value1 = 6;   // the index of the card in this fase
     public int me_value2 = 6;   // useless for now
     public int en_value1 = 6;   // the index of the adversary tower 1
@@ -229,16 +226,14 @@ public class ShowTurnAction : MonoBehaviour
                 // Destroy 1 enemy cold tower
                 Destroy1InhTower(3, 1);
                 // return enemy card
-                if (en_value2 == 1 || en_value2 == 3)
+                    if (en_value2 == 1 || en_value2 == 3)
                     {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
+                        UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
                     }
                     else
                     {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
+                        UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
                     }
-                
-
                 } else if (me_value1 == 5 && ((en_value1 == 0 || en_value2 == 2) || (en_value1 == 2 || en_value2 == 0)))
                 {
                 // Destroy 1 enemy hot tower
@@ -259,34 +254,34 @@ public class ShowTurnAction : MonoBehaviour
             {
                 if (me_value1 == 4 && ((en_value1 == 1 || en_value2 == 3) || (en_value1 == 3 || en_value2 == 1)))
                 {
+                // and return me card
+                    if (en_value2 == 1 || en_value2 == 3)
+                    {
+                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    }
+                    else
+                    {
+                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    }
+
                 // Destroy 1 me cold tower
                 Destroy1InhTower(0, 1);
 
-                // and return me card
-                if (en_value2 == 1 || en_value2 == 3)
-                {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
                 }
-                else
-                {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
-                }
-            }
                 else if (me_value1 == 5 && ((en_value1 == 0 || en_value2 == 2) || (en_value1 == 2 || en_value2 == 0)))
                 {
+                // and return me card
+                    if (en_value2 == 0 || en_value2 == 2)
+                    {
+                        UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    }
+                    else
+                    {
+                        UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    }
                 // Destroy 1 me hot tower
                 Destroy1InhTower(0, 0);
-
-                // and return me card
-                if (en_value2 == 0 || en_value2 == 2)
-                {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
                 }
-                else
-                {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
-                }
-            }
             }
 
 

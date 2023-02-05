@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FieldSlot : MonoBehaviour
 {
-    public int slotNumber;
     public GameObject[] towerIndex;
     public int towerToInstantiate;
     public bool isFilled;
