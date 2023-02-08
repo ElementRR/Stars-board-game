@@ -55,6 +55,29 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void BackCard()
+    {
+        if(GameManager.instance.cardCount > 2)
+        {
+            ReturnCard(slot3card, GameManager.instance.cardSlot3, false);
+            GameManager.instance.cardCount--;
+        }
+        else if (GameManager.instance.cardCount == 2)
+        {
+            ReturnCard(slot2card, GameManager.instance.cardSlot2, false);
+            GameManager.instance.cardCount--;
+        }
+        else if (GameManager.instance.cardCount == 1)
+        {
+            ReturnCard(slot1card, GameManager.instance.cardSlot1, false);
+            GameManager.instance.cardCount--;
+        }
+        else
+        {
+            return;
+        }
+    }
+
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
     {
         if (!isEnemy)

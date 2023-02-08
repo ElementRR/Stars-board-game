@@ -10,10 +10,9 @@ public class ShowTurnAction : MonoBehaviour
 {
     public GameObject[] fieldSlots;
 
-    public int me_value1 = 6;   // the index of the card in this fase
-    public int me_value2 = 6;   // useless for now
-    public int en_value1 = 6;   // the index of the adversary tower 1
-    public int en_value2 = 6;   // the index of the adversary tower 2
+    private int me_value1 = 6;   // the index of the card in this fase
+    private int en_value1 = 6;   // the index of the adversary tower 1
+    private int en_value2 = 6;   // the index of the adversary tower 2
 
     int whereInstallT;
 
@@ -129,20 +128,15 @@ public class ShowTurnAction : MonoBehaviour
             {
                 CheckAdversarySlots(isEnemy);
 
-                DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower  
-
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy); //return inhibitor card
+
+                DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower  
             }
             else // no : return inhibitor card
             {
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
             }
         }
-
-        // enemy : tower: me have antagonist?
-        // yes: dont put
-        // no: put
-        // enemy : ihnibitor: inhibit one tower from me
     }
 
 
@@ -172,19 +166,19 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void CheckReturnCard(GameObject cardSlot, bool isEnemy)
         {
-            if ((me_value1 == 0 || me_value2 == 0) && (en_value1 == 1 || en_value2 == 1))
+            if (me_value1 == 0 && (en_value1 == 1 || en_value2 == 1))
             {
                 UIManager.instance.ReturnCard(0, cardSlot, isEnemy);
             }
-            else if ((me_value1 == 1 || me_value2 == 1) && (en_value1 == 0 || en_value2 == 0))
+            else if (me_value1 == 1 && (en_value1 == 0 || en_value2 == 0))
             {
                 UIManager.instance.ReturnCard(1, cardSlot, isEnemy);
             }
-            else if ((me_value1 == 2 || me_value2 == 2) && (en_value1 == 3 || en_value2 == 3))
+            else if (me_value1 == 2 && (en_value1 == 3 || en_value2 == 3))
             {
                 UIManager.instance.ReturnCard(2, cardSlot, isEnemy);
             }
-            else if ((me_value1 == 3 || me_value2 == 3) && (en_value1 == 2 || en_value2 == 2))
+            else if (me_value1 == 3 && (en_value1 == 2 || en_value2 == 2))
             {
                 UIManager.instance.ReturnCard(3, cardSlot, isEnemy);
             }
@@ -213,7 +207,6 @@ public class ShowTurnAction : MonoBehaviour
 
             Destroy(cardSlot.transform.GetChild(0).gameObject);
             me_value1 = 6;
-            me_value2 = 6;
             en_value1 = 6;
             en_value2 = 6;
     }
@@ -295,13 +288,21 @@ public class ShowTurnAction : MonoBehaviour
         {
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate = 6;
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().isFilled = false;
-            Destroy(fieldSlots[minSlot + 1].transform.GetChild(0).gameObject);
+            
+            if(fieldSlots[minSlot + 1].transform.childCount > 0)
+            {
+                Destroy(fieldSlots[minSlot + 1].transform.GetChild(0).gameObject);
+            }
+
         }
         else
         {
             fieldSlots[minSlot].GetComponent<FieldSlot>().towerToInstantiate = 6;
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
-            Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
+            if (fieldSlots[minSlot].transform.childCount > 0)
+            {
+                Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
+            }
         }
     }
     }

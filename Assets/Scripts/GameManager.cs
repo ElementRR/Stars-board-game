@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ShowTurnAction))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
