@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// OBS: The inhibitor sometimes is returning inhibitor cards that are flipped down
 
 // adversary = the opponent of the player we are looking
 // enemy = the AI player
@@ -146,26 +147,28 @@ public class ShowTurnAction : MonoBehaviour
 
     private void CheckAdversarySlots(bool isEnemy) // check if the adversary slots are filled and what tower is
     {
-        int adversarySlot1;
-        int adversarySlot2;
+        int adversarySlot;
         if (!isEnemy)
         {
-            adversarySlot1 = 3;
-            adversarySlot2 = 4;
+            adversarySlot = 3;
         }
         else
         {
-            adversarySlot1 = 0;
-            adversarySlot2 = 1;
+            adversarySlot = 0;
         }
 
-        if (fieldSlots[adversarySlot1].GetComponent<FieldSlot>().isFilled)
+        if (fieldSlots[adversarySlot].GetComponent<FieldSlot>().isFilled)
         {
-            en_value1 = fieldSlots[adversarySlot1].GetComponent<FieldSlot>().towerToInstantiate;
+            en_value1 = fieldSlots[adversarySlot].GetComponent<FieldSlot>().towerToInstantiate;
         }
-        if (fieldSlots[adversarySlot2].GetComponent<FieldSlot>().isFilled)
+
+        if (fieldSlots[adversarySlot + 1].GetComponent<FieldSlot>().isFilled)
         {
-            en_value2 = fieldSlots[adversarySlot2].GetComponent<FieldSlot>().towerToInstantiate;
+            en_value2 = fieldSlots[adversarySlot + 1].GetComponent<FieldSlot>().towerToInstantiate;
+        }
+        else
+        {
+            en_value2 = 6;
         }
     }
     private void CheckReturnCard(GameObject cardSlot, bool isEnemy)
@@ -229,11 +232,15 @@ public class ShowTurnAction : MonoBehaviour
                 // return enemy card
                 if (en_value2 == 1 || en_value2 == 3)
                 {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    en_value2 = 6;
+                    me_value1 = 6;
                 }
                 else
                 {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    en_value1 = 6;
+                    me_value1 = 6;
                 }
             }
             else if (me_value1 == 5 && ((en_value1 == 0 || en_value2 == 2) || (en_value1 == 2 || en_value2 == 0)))
@@ -244,11 +251,15 @@ public class ShowTurnAction : MonoBehaviour
                 // and return enemy card
                 if (en_value2 == 0 || en_value2 == 2)
                 {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    en_value2 = 6;
+                    me_value1 = 6;
                 }
                 else
                 {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    en_value1 = 6;
+                    me_value1 = 6;
                 }
             }
         }
@@ -259,11 +270,15 @@ public class ShowTurnAction : MonoBehaviour
                 // and return me card
                 if (en_value2 == 1 || en_value2 == 3)
                 {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
+                    en_value2 = 6;
+                    me_value1 = 6;
                 }
                 else
                 {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
+                    en_value1 = 6;
+                    me_value1 = 6;
                 }
 
                 // Destroy 1 me cold tower
@@ -275,11 +290,15 @@ public class ShowTurnAction : MonoBehaviour
                 // and return me card
                 if (en_value2 == 0 || en_value2 == 2)
                 {
-                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot2, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value2, GameManager.instance.cardSlot5, !isEnemy);
+                    en_value2 = 6;
+                    me_value1 = 6;
                 }
                 else
                 {
-                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
+                    UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot4, !isEnemy);
+                    en_value1 = 6;
+                    me_value1 = 6;
                 }
                 // Destroy 1 me hot tower
                 Destroy1InhTower(0, 0);

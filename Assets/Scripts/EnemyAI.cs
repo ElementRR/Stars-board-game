@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    // sometimes the AI is intalling 2 of the same towers
+
     private ShowTurnAction showTurnAction;
     [SerializeField]
-    int[] fieldTowers;
+    public int[] fieldTowers;
     private void Start()
     {
         showTurnAction = GetComponent<ShowTurnAction>();

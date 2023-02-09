@@ -6417,8 +6417,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -6501,8 +6501,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -6634,8 +6634,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -7731,8 +7731,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -8387,8 +8387,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -8440,8 +8440,8 @@ MonoBehaviour:
   towerIndex:
   - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
   - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 8188188120704754527, guid: 342fe9aa98395d64090796b091b17dfb, type: 3}
-  - {fileID: 7692331627222508086, guid: 1bb9264716f9d8a4899516836b616f9d, type: 3}
+  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
+  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
