@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -31,22 +29,22 @@ public class EnemyAI : MonoBehaviour
                 }
 
                 while (UIManager.instance.slot6card == UIManager.instance.slot4card ||
-                    UIManager.instance.slot6card == UIManager.instance.slot5card || 
+                    UIManager.instance.slot6card == UIManager.instance.slot5card ||
                     UIManager.instance.slot6card == item)
                 {
                     UIManager.instance.slot6card = Random.Range(0, 6);
                 }
             }
-           
+
 
             GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot4, true, UIManager.instance.slot4card);
-                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot5, true, UIManager.instance.slot5card);
-                GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot6, true, UIManager.instance.slot6card);
-            
+            GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot5, true, UIManager.instance.slot5card);
+            GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot6, true, UIManager.instance.slot6card);
+
         }
     }
     private int GetFieldCards(int fieldNumber)
     {
-            return showTurnAction.fieldSlots[fieldNumber].GetComponent<FieldSlot>().towerToInstantiate;
+        return showTurnAction.fieldSlots[fieldNumber].GetComponent<FieldSlot>().towerToInstantiate;
     }
 }

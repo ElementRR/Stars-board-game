@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ShowTurnAction))]
+[RequireComponent(typeof(AudioSource))]
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -26,6 +25,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] FieldcardIndex;
 
+    [Header("Sound FX")]
+    public AudioClip flipCard;
+    private AudioSource reproduce;
+
     void Awake()
     {
         instance = this;
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         showFase1 = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         enemyAI = GetComponent<EnemyAI>();
+        reproduce = GetComponent<AudioSource>();
     }
 
     public void InstantiateInSlot(GameObject cardSlot, bool isEnemy, int index)
@@ -73,12 +77,6 @@ public class GameManager : MonoBehaviour
     {
         if (cardCount > 2)
         {
-            //var clones = GameObject.FindGameObjectsWithTag("FlippedCard");
-            //foreach (var clone in clones)
-            //{
-             //   Destroy(clone);
-            //}
-
             cardCount = 0;
             actionTurn = false;
             ButtonAnimations.instance.EndActionT();
@@ -100,11 +98,13 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         // show the first card
-        //Instantiate(FieldcardIndex[ShowFase(1)], cardSlot1.transform.position,
-        //cardSlot1.transform.rotation * Quaternion.Euler(0, 180, 0), cardSlot1.transform);
-        cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
-
-
+        if (cardSlot1.GetComponentInChildren<Animator>() != null) 
+        {
+            cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
+            yield return new WaitForSeconds(0.1f);
+            reproduce.PlayOneShot(flipCard);
+        }
+        
         yield return new WaitForSeconds(timeToWait);
 
         // action
@@ -114,7 +114,12 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the first card AI
-        cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot4.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
+            yield return new WaitForSeconds(0.1f);
+            reproduce.PlayOneShot(flipCard);
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -125,7 +130,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the second card
-        cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot2.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -135,7 +143,10 @@ public class GameManager : MonoBehaviour
         // wait
         yield return new WaitForSeconds(1f);
         // show the second card AI
-        cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot5.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -146,7 +157,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the third cards
-        cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot3.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -157,7 +171,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the third card IA
-        cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot6.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -183,7 +200,10 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeToWait);
         // show the first card AI
-        cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot4.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -194,7 +214,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the first card
-        cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot1.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -205,7 +228,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the second card AI
-        cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot5.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -216,7 +242,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the second card
-        cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot2.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -227,7 +256,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the third card AI
-        cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot6.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
@@ -238,7 +270,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // show the third card
-        cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        if (cardSlot3.GetComponentInChildren<Animator>() != null)
+        {
+            cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
+        }
 
         yield return new WaitForSeconds(timeToWait);
 
