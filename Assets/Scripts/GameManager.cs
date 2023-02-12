@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
     public GameObject cardSlot5;
     public GameObject cardSlot6;
 
-    private Animator cardAnimator;
-
     public GameObject[] FieldcardIndex;
 
     [Header("Sound FX")]

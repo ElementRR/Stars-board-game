@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnvGenerator : MonoBehaviour
 {
     [Header("Prefabs")]
+    [SerializeField] private GameObject[] fieldPrefabs;
+
     [SerializeField] private GameObject[] soilPrefabs;
     [SerializeField] private Vector3 soilPosition;
     [SerializeField] private Vector3 soilScale;
@@ -28,6 +30,8 @@ public class EnvGenerator : MonoBehaviour
         Quaternion rockRotation = Quaternion.Euler(0, -134, 0);
         Quaternion treeRotation = Quaternion.Euler(0, -30, 0);
         Quaternion artifactRotation = Quaternion.Euler(-90, 0, -39);
+
+        Instantiate(fieldPrefabs[Random.Range(0, fieldPrefabs.Length)]);
 
         GameObject soil = Instantiate(soilPrefabs[Random.Range(0, soilPrefabs.Length)], soilPosition, transform.rotation, transform);
         soil.transform.localScale = soilScale;

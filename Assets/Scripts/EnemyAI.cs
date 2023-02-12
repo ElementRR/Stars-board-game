@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
         {
             fieldTowers = new int[] { GetFieldCards(3), GetFieldCards(4), GetFieldCards(5) };
 
-            foreach (var item in fieldTowers)
+            foreach (int item in fieldTowers)
             {
                 while (UIManager.instance.slot4card == item)
                 {
