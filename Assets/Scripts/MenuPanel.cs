@@ -20,6 +20,15 @@ public class MenuPanel : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void ExitApp()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
+    }
     public void GoToLink()
     {
         Application.OpenURL("https://forms.gle/NTZWU9CJ3i9fGLocA");
