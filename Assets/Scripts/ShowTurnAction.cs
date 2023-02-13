@@ -1,6 +1,7 @@
 using UnityEngine;
 
 // OBS: The inhibitor sometimes is returning inhibitor cards that are flipped down
+        // Try to use Lists instead of 2 en_value variables
 
 // adversary = the opponent of the player we are looking
 // enemy = the AI player

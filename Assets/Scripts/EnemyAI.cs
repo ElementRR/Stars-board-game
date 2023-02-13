@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    // sometimes the AI is intalling 2 of the same towers
-
     private ShowTurnAction showTurnAction;
     [SerializeField] List<int> cardsToChooseFrom;
     private void Awake()
