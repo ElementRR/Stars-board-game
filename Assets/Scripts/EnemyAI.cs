@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -5,8 +6,7 @@ public class EnemyAI : MonoBehaviour
     // sometimes the AI is intalling 2 of the same towers
 
     private ShowTurnAction showTurnAction;
-    [SerializeField]
-    public int[] fieldTowers;
+    [SerializeField] List<int> cardsToChooseFrom;
     private void Awake()
     {
         showTurnAction = GetComponent<ShowTurnAction>();
@@ -14,35 +14,26 @@ public class EnemyAI : MonoBehaviour
     }
     public void EnemyPlay()
     {
+        cardsToChooseFrom = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6 });
+        for (int i = 3; i < 6; i++)
+        {
+            cardsToChooseFrom.Remove(GetFieldCards(i));
+        }
+
+        UIManager.instance.slot4card = cardsToChooseFrom[Random.Range(0, cardsToChooseFrom.Count)];
+        cardsToChooseFrom.Remove(UIManager.instance.slot4card);
+
+        UIManager.instance.slot5card = cardsToChooseFrom[Random.Range(0, cardsToChooseFrom.Count)];
+        cardsToChooseFrom.Remove(UIManager.instance.slot5card);
+
+        UIManager.instance.slot6card = cardsToChooseFrom[Random.Range(0, cardsToChooseFrom.Count)];
+
+
         if (GameManager.instance.actionTurn)
         {
-            fieldTowers = new int[] { GetFieldCards(3), GetFieldCards(4), GetFieldCards(5) };
-
-            foreach (int item in fieldTowers)
-            {
-                while (UIManager.instance.slot4card == item)
-                {
-                    UIManager.instance.slot4card = Random.Range(0, 6);
-                }
-
-                while (UIManager.instance.slot4card == UIManager.instance.slot5card || UIManager.instance.slot5card == item)
-                {
-                    UIManager.instance.slot5card = Random.Range(0, 6);
-                }
-
-                while (UIManager.instance.slot6card == UIManager.instance.slot4card ||
-                    UIManager.instance.slot6card == UIManager.instance.slot5card ||
-                    UIManager.instance.slot6card == item)
-                {
-                    UIManager.instance.slot6card = Random.Range(0, 6);
-                }
-            }
-
-
             GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot4, true, UIManager.instance.slot4card);
             GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot5, true, UIManager.instance.slot5card);
             GameManager.instance.InstantiateInSlot(GameManager.instance.cardSlot6, true, UIManager.instance.slot6card);
-
         }
     }
     private int GetFieldCards(int fieldNumber)

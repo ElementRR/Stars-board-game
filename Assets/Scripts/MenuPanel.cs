@@ -28,7 +28,7 @@ public class MenuPanel : MonoBehaviour
     private IEnumerator ChangeScene()
     {
         blackPanel.Play("TransToBlack");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         SceneManager.LoadScene(1);
     }
 }
