@@ -16,10 +16,16 @@ public class UIManager : MonoBehaviour
     public int slot5card;
     public int slot6card;
 
+    [Header("Sound FX")]
+    public AudioClip youWinS;
+    public AudioClip youLoseS;
+    private AudioSource reproduce;
+
     void Awake()
     {
         instance = this;
         endTurnB = GameObject.Find("EndTurnB");
+        reproduce = GetComponent<AudioSource>();
     }
     public void GetCardIndex(int index)
     {
@@ -98,11 +104,13 @@ public class UIManager : MonoBehaviour
         endPanel.SetActive(true);
         if (!enemyWins)
         {
+            reproduce.PlayOneShot(youWinS);
             announce[0].SetActive(true);
             announce[1].SetActive(false);
         }
         else
         {
+            reproduce.PlayOneShot(youLoseS);
             announce[1].SetActive(true);
             announce[0].SetActive(false);
         }

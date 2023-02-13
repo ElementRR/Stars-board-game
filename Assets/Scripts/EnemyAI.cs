@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
     private ShowTurnAction showTurnAction;
     [SerializeField]
     public int[] fieldTowers;
-    private void Start()
+    private void Awake()
     {
         showTurnAction = GetComponent<ShowTurnAction>();
         EnemyPlay();

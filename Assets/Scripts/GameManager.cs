@@ -27,15 +27,20 @@ public class GameManager : MonoBehaviour
     public AudioClip flipCard;
     private AudioSource reproduce;
 
+    [Header("Animations")]
+    [SerializeField] Animator blackPanel;
+
     void Awake()
     {
         instance = this;
+        Time.timeScale = 1;
         cardCount = 0;
         actionTurn = true;
         showFase1 = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         enemyAI = GetComponent<EnemyAI>();
         reproduce = GetComponent<AudioSource>();
+        blackPanel.Play("BlackToTrans");
     }
 
     public void InstantiateInSlot(GameObject cardSlot, bool isEnemy, int index)

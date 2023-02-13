@@ -17,6 +17,15 @@ public class ShowTurnAction : MonoBehaviour
 
     int whereInstallT;
 
+    [Header("Sound FX")]
+    public AudioClip inhTower;
+    private AudioSource reproduce;
+
+    private void Awake()
+    {
+        reproduce = GetComponent<AudioSource>();
+    }
+
     private void Update()
     {
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
@@ -129,17 +138,17 @@ public class ShowTurnAction : MonoBehaviour
         }
         else //  inhibitor: adversary has tower?
         {
-            if (adversaryHasAnt) // yes : tower interacts with inhibitor?
+            if (!adversaryHasAnt) // no : return inhibitor card
+            {
+                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+            }
+            else // yes : tower interacts with inhibitor?
             {
                 CheckAdversarySlots(isEnemy);
 
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy); //return inhibitor card
 
-                DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower  
-            }
-            else // no : return inhibitor card
-            {
-                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
             }
         }
     }
@@ -176,18 +185,22 @@ public class ShowTurnAction : MonoBehaviour
         if (me_value1 == 0 && (en_value1 == 1 || en_value2 == 1))
         {
             UIManager.instance.ReturnCard(0, cardSlot, isEnemy);
+            reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 1 && (en_value1 == 0 || en_value2 == 0))
         {
             UIManager.instance.ReturnCard(1, cardSlot, isEnemy);
+            reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 2 && (en_value1 == 3 || en_value2 == 3))
         {
             UIManager.instance.ReturnCard(2, cardSlot, isEnemy);
+            reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 3 && (en_value1 == 2 || en_value2 == 2))
         {
             UIManager.instance.ReturnCard(3, cardSlot, isEnemy);
+            reproduce.PlayOneShot(inhTower);
         }
         else
         {
@@ -236,7 +249,7 @@ public class ShowTurnAction : MonoBehaviour
                     en_value2 = 6;
                     me_value1 = 6;
                 }
-                else
+                else if (en_value1 == 1 || en_value1 == 3)
                 {
                     UIManager.instance.ReturnCard(en_value1, GameManager.instance.cardSlot1, !isEnemy);
                     en_value1 = 6;
@@ -319,6 +332,7 @@ public class ShowTurnAction : MonoBehaviour
 
             if (fieldSlots[minSlot + 1].transform.GetChild(0) != null)
             {
+                reproduce.PlayOneShot(inhTower);
                 Destroy(fieldSlots[minSlot + 1].transform.GetChild(0).gameObject);
             }
 
@@ -329,6 +343,7 @@ public class ShowTurnAction : MonoBehaviour
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
             if (fieldSlots[minSlot].transform.GetChild(0) != null)
             {
+                reproduce.PlayOneShot(inhTower);
                 Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
             }
         }
