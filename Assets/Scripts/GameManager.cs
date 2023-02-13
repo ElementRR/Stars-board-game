@@ -102,13 +102,13 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1.5f);
         // show the first card
-        if (cardSlot1.GetComponentInChildren<Animator>() != null) 
+        if (cardSlot1.GetComponentInChildren<Animator>() != null)
         {
             cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
             yield return new WaitForSeconds(waitToFlip);
             reproduce.PlayOneShot(flipCard);
         }
-        
+
         yield return new WaitForSeconds(timeToWait);
 
         // action

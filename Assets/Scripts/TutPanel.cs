@@ -13,7 +13,8 @@ public class TutPanel : MonoBehaviour
             //tutPanels[panel].SetActive(false);
             tutPanels[panel + 1].SetActive(true);
             panel++;
-        }else if (panel >= tutPanels.Length - 1)
+        }
+        else if (panel >= tutPanels.Length - 1)
         {
             //tutPanels[^1].SetActive(false);
             panel = 0;

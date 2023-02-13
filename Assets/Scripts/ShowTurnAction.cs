@@ -330,7 +330,7 @@ public class ShowTurnAction : MonoBehaviour
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate = 6;
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().isFilled = false;
 
-            if (fieldSlots[minSlot + 1].transform.GetChild(0) != null)
+            if (fieldSlots[minSlot + 1].transform.childCount > 0)
             {
                 reproduce.PlayOneShot(inhTower);
                 Destroy(fieldSlots[minSlot + 1].transform.GetChild(0).gameObject);
@@ -341,7 +341,7 @@ public class ShowTurnAction : MonoBehaviour
         {
             fieldSlots[minSlot].GetComponent<FieldSlot>().towerToInstantiate = 6;
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
-            if (fieldSlots[minSlot].transform.GetChild(0) != null)
+            if (fieldSlots[minSlot].transform.childCount > 0)
             {
                 reproduce.PlayOneShot(inhTower);
                 Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
