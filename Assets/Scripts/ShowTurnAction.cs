@@ -153,9 +153,11 @@ public class ShowTurnAction : MonoBehaviour
             {
                 CheckAdversarySlots(isEnemy);
 
-                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy); //return inhibitor card
-
                 DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
+
+                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                me_value1 = 6;
+
                 en_value.Clear();
             }
         }
@@ -239,49 +241,15 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void DestroyAdversaryTower(bool isEnemy)
     {
-        bool isCardReturned = false;
         if (!isEnemy)
         {
             if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
             {
-                // return enemy card
-                while (!isCardReturned)
-                {
-                    if (en_value.Count == 2 && en_value[1] is (1 or 3))
-                    {
-                        UIManager.instance.ReturnCard(en_value[1], GameManager.instance.cardSlot2, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                    else if (en_value[0] is (1 or 3))
-                    {
-                        UIManager.instance.ReturnCard(en_value[0], GameManager.instance.cardSlot1, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                }
                 // Destroy 1 enemy cold tower
                 Destroy1InhTower(3, 1);
             }
             else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
             {
-                // and return enemy card
-                while (!isCardReturned)
-                {
-                    if (en_value.Count == 2 && en_value[1] is (0 or 2))
-                    {
-                        UIManager.instance.ReturnCard(en_value[1], GameManager.instance.cardSlot2, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                    else if (en_value[0] is (0 or 2))
-                    {
-                        UIManager.instance.ReturnCard(en_value[0], GameManager.instance.cardSlot1, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                }
-
                 // Destroy 1 enemy hot tower
                 Destroy1InhTower(3, 0);
             }
@@ -290,46 +258,36 @@ public class ShowTurnAction : MonoBehaviour
         {
             if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
             {
-                // and return me card
-                while (!isCardReturned)
-                {
-                    if (en_value.Count == 2 && en_value[1] is (1 or 3))
-                    {
-                        UIManager.instance.ReturnCard(en_value[1], GameManager.instance.cardSlot5, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                    else if (en_value[0] is (1 or 3))
-                    {
-                        UIManager.instance.ReturnCard(en_value[0], GameManager.instance.cardSlot4, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                }
                 // Destroy 1 me cold tower
                 Destroy1InhTower(0, 1);
 
+                // and return me card
+
+                if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                {
+                    UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                }
+                else if (en_value[0] is (1 or 3))
+                {
+                    UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                }
             }
             else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
             {
-                // and return me card
-                while (!isCardReturned)
-                {
-                    if (en_value.Count == 2 && en_value[1] is (0 or 2))
-                    {
-                        UIManager.instance.ReturnCard(en_value[1], GameManager.instance.cardSlot5, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                    else if (en_value[0] is (0 or 2))
-                    {
-                        UIManager.instance.ReturnCard(en_value[0], GameManager.instance.cardSlot4, !isEnemy);
-                        me_value1 = 6;
-                        isCardReturned = true;
-                    }
-                }
                 // Destroy 1 me hot tower
                 Destroy1InhTower(0, 0);
+
+                // and return me card
+                if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                {
+                    UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+
+                }
+                else if (en_value[0] is (0 or 2))
+                {
+                    UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                }
+
             }
         }
     }
