@@ -6523,10 +6523,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -6607,10 +6607,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -6740,10 +6740,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -7952,10 +7952,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -8466,6 +8466,7 @@ MonoBehaviour:
   - {fileID: 1817790158}
   - {fileID: 942922028}
   - {fileID: 649851758}
+  en_value: 
   inhTower: {fileID: 8300000, guid: 11dcb796b2fd41846b3e56921d7ae0e4, type: 3}
 --- !u!114 &1817210726
 MonoBehaviour:
@@ -8621,10 +8622,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -8674,10 +8675,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerIndex:
-  - {fileID: 8573050862510548408, guid: 33b6a585800de144d8a7fd6fd180b335, type: 3}
-  - {fileID: 8573050862510548408, guid: 2357b132d10b7da44ba0553119ad1de2, type: 3}
-  - {fileID: 3520661655214742326, guid: fce148b22e38eb6458c5644df5f04768, type: 3}
-  - {fileID: 5242375872871355004, guid: 9df7a18fdd120db4396776d359a9b2b2, type: 3}
+  - {fileID: 3116594616585221965, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
+  - {fileID: 4413156366420598700, guid: c2804ad2e32b67b49a6eb71aabfea7e0, type: 3}
+  - {fileID: 727483727523580957, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
+  - {fileID: 6977971401163273223, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   towerToInstantiate: 6
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -8798,6 +8799,10 @@ MonoBehaviour:
   - {fileID: 3950899220703820276, guid: db51336c635fb5c43a3fd3a85cef0dfe, type: 3}
   - {fileID: 1002442651832448, guid: 87c5e12bff88d18409f85fb7ccaeb3fe, type: 3}
   artifactPosition: {x: -9.43, y: -0.24, z: 9.03}
+  whetherPrefabs:
+  - {fileID: 9199869932069385804, guid: 0073a46e83349fd46b39670b56a172ac, type: 3}
+  whetherPosition: {x: 2.1, y: 20.2, z: 0}
+  artifactChance: 10
 --- !u!1001 &2704979064438761183
 PrefabInstance:
   m_ObjectHideFlags: 0

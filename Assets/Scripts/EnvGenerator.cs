@@ -24,12 +24,17 @@ public class EnvGenerator : MonoBehaviour
     [SerializeField] private GameObject[] artifactPrefabs;
     [SerializeField] private Vector3 artifactPosition;
 
+    [SerializeField] private GameObject[] whetherPrefabs;
+    [SerializeField] private Vector3 whetherPosition;
+
+    public int artifactChance = 10;  // must be in %
 
     void Awake()
     {
         Quaternion rockRotation = Quaternion.Euler(0, -134, 0);
         Quaternion treeRotation = Quaternion.Euler(0, -30, 0);
         Quaternion artifactRotation = Quaternion.Euler(-90, 0, -39);
+        Quaternion whetherRotation = Quaternion.Euler(285, 90, 270);
 
         Instantiate(fieldPrefabs[Random.Range(0, fieldPrefabs.Length)]);
 
@@ -48,9 +53,10 @@ public class EnvGenerator : MonoBehaviour
 
         int randNumber = Random.Range(0, 101);
 
-        if (randNumber >= 90)
+        if (randNumber <= artifactChance)
         {
             Instantiate(artifactPrefabs[Random.Range(0, artifactPrefabs.Length)], artifactPosition, artifactRotation, transform);
+            Instantiate(whetherPrefabs[Random.Range(0, whetherPrefabs.Length)], whetherPosition, whetherRotation, transform);
         }
     }
 }

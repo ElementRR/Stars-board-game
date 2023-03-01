@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // OBS: The inhibitor sometimes is returning inhibitor cards that are flipped down
-        // Try to use Lists instead of 2 en_value variables
+// Try to use Lists instead of 2 en_value variables
 
 // adversary = the opponent of the player we are looking
 // enemy = the AI player
@@ -176,14 +176,12 @@ public class ShowTurnAction : MonoBehaviour
             adversarySlot = 0;
         }
 
-        if (fieldSlots[adversarySlot].GetComponent<FieldSlot>().isFilled)
+        for (int i = 0; i < 2; i++)
         {
-            en_value.Add(fieldSlots[adversarySlot].GetComponent<FieldSlot>().towerToInstantiate);
-        }
-
-        if (fieldSlots[adversarySlot + 1].GetComponent<FieldSlot>().isFilled)
-        {
-            en_value.Add(fieldSlots[adversarySlot + 1].GetComponent<FieldSlot>().towerToInstantiate);
+            if (fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().isFilled)
+            {
+                en_value.Add(fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().towerToInstantiate);
+            }
         }
 
     }
@@ -191,22 +189,22 @@ public class ShowTurnAction : MonoBehaviour
     {
         if (me_value1 == 0 && en_value.Contains(1))
         {
-            UIManager.instance.ReturnCard(0, cardSlot, isEnemy);
+            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 1 && en_value.Contains(0))
         {
-            UIManager.instance.ReturnCard(1, cardSlot, isEnemy);
+            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 2 && en_value.Contains(3))
         {
-            UIManager.instance.ReturnCard(2, cardSlot, isEnemy);
+            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
         }
         else if (me_value1 == 3 && en_value.Contains(2))
         {
-            UIManager.instance.ReturnCard(3, cardSlot, isEnemy);
+            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
         }
         else
@@ -216,20 +214,15 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void InstallTower(int slot, GameObject cardSlot)
     {
-        if (!fieldSlots[slot].GetComponent<FieldSlot>().isFilled)
+        for (int i = 0; i <= 2; i++)
         {
-            fieldSlots[slot].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
-            fieldSlots[slot].GetComponent<FieldSlot>().InstantiateInSlot();
-        }
-        else if (!fieldSlots[slot + 1].GetComponent<FieldSlot>().isFilled)
-        {
-            fieldSlots[slot + 1].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
-            fieldSlots[slot + 1].GetComponent<FieldSlot>().InstantiateInSlot();
-        }
-        else
-        {
-            fieldSlots[slot + 2].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
-            fieldSlots[slot + 2].GetComponent<FieldSlot>().InstantiateInSlot();
+            if (!fieldSlots[slot + i].GetComponent<FieldSlot>().isFilled)
+            {
+                fieldSlots[slot + i].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
+                fieldSlots[slot + i].GetComponent<FieldSlot>().InstantiateInSlot();
+                Debug.Log("Tower installed in slot " + (slot + i));
+                break;
+            }
         }
 
         if (cardSlot.transform.childCount > 0)
