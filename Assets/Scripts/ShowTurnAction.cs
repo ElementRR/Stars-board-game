@@ -46,6 +46,41 @@ public class ShowTurnAction : MonoBehaviour
         }
     }
 
+    private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
+    {
+        switch (faseNumber)
+        {
+            case 1:
+                slotcard = UIManager.instance.slot1card;
+                cardSlot1 = GameManager.instance.cardSlot1;
+                break;
+            case 2:
+                slotcard = UIManager.instance.slot2card;
+                cardSlot1 = GameManager.instance.cardSlot2;
+                break;
+            case 3:
+                slotcard = UIManager.instance.slot3card;
+                cardSlot1 = GameManager.instance.cardSlot3;
+                break;
+            case 4:
+                slotcard = UIManager.instance.slot4card;
+                cardSlot1 = GameManager.instance.cardSlot4;
+                break;
+            case 5:
+                slotcard = UIManager.instance.slot5card;
+                cardSlot1 = GameManager.instance.cardSlot5;
+                break;
+            case 6:
+                slotcard = UIManager.instance.slot6card;
+                cardSlot1 = GameManager.instance.cardSlot6;
+                break;
+            default:
+                slotcard = 7;
+                cardSlot1 = GameManager.instance.cardSlot1;
+                break;
+        }
+    }
+
     public void ActionInShowTurn(bool isEnemy, int faseNumber)
     {
         bool adversaryHasAnt;
@@ -61,68 +96,14 @@ public class ShowTurnAction : MonoBehaviour
             whereInstallT = 0;
         }
 
-        int slotcard;
         GameObject cardSlot1;
-        // what fase?
-        if (faseNumber == 1)
-        {
-            slotcard = UIManager.instance.slot1card;
-            cardSlot1 = GameManager.instance.cardSlot1;
-        }
-        else if (faseNumber == 2)
-        {
-            slotcard = UIManager.instance.slot2card;
-            cardSlot1 = GameManager.instance.cardSlot2;
-        }
-        else if (faseNumber == 3)
-        {
-            slotcard = UIManager.instance.slot3card;
-            cardSlot1 = GameManager.instance.cardSlot3;
-        }
-        else if (faseNumber == 4)
-        {
-            slotcard = UIManager.instance.slot4card;
-            cardSlot1 = GameManager.instance.cardSlot4;
-        }
-        else if (faseNumber == 5)
-        {
-            slotcard = UIManager.instance.slot5card;
-            cardSlot1 = GameManager.instance.cardSlot5;
-        }
-        else if (faseNumber == 6)
-        {
-            slotcard = UIManager.instance.slot6card;
-            cardSlot1 = GameManager.instance.cardSlot6;
-        }
-        else
-        {
-            slotcard = 7;
-            cardSlot1 = GameManager.instance.cardSlot1;
-        } // Fases 1.2 = 4, 2.2 = 5, 3.2 = 6
+        GetCardAndSlot(faseNumber, out int slotcard, out cardSlot1); // Fases 1.2 = 4, 2.2 = 5, 3.2 = 6
 
-        int adversarySlot1;
-        int adversarySlot2;
-        if (!isEnemy)
-        {
-            adversarySlot1 = 3;
-            adversarySlot2 = 4;
-        }
-        else
-        {
-            adversarySlot1 = 0;
-            adversarySlot2 = 1;
-        }
+        int adversarySlot1 = isEnemy ? 0 : 3;
+        int adversarySlot2 = isEnemy ? 1 : 4;
 
-        if (fieldSlots[adversarySlot1].GetComponent<FieldSlot>().isFilled ||
-            fieldSlots[adversarySlot2].GetComponent<FieldSlot>().isFilled)
-        {
-            adversaryHasAnt = true;
-        }
-        else
-        {
-            adversaryHasAnt = false;
-        }
-
+        adversaryHasAnt = (fieldSlots[adversarySlot1].GetComponent<FieldSlot>().isFilled ||
+            fieldSlots[adversarySlot2].GetComponent<FieldSlot>().isFilled) ? true : false;
 
         me_value1 = slotcard;
         // tower or inhibitor?
@@ -166,15 +147,7 @@ public class ShowTurnAction : MonoBehaviour
 
     private void CheckAdversarySlots(bool isEnemy) // check if the adversary slots are filled and what tower is
     {
-        int adversarySlot;
-        if (!isEnemy)
-        {
-            adversarySlot = 3;
-        }
-        else
-        {
-            adversarySlot = 0;
-        }
+        int adversarySlot = isEnemy ? 0 : 3;
 
         for (int i = 0; i < 2; i++)
         {
