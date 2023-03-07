@@ -48,36 +48,39 @@ public class ShowTurnAction : MonoBehaviour
 
     private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
     {
-        switch (faseNumber)
+        slotcard = UIManager.instance.slotCards[faseNumber - 1];
+        cardSlot1 = GameManager.instance.cardSlots[faseNumber - 1];
+
+        //switch (faseNumber)
         {
-            case 1:
-                slotcard = UIManager.instance.slot1card;
-                cardSlot1 = GameManager.instance.cardSlot1;
-                break;
-            case 2:
-                slotcard = UIManager.instance.slot2card;
-                cardSlot1 = GameManager.instance.cardSlot2;
-                break;
-            case 3:
-                slotcard = UIManager.instance.slot3card;
-                cardSlot1 = GameManager.instance.cardSlot3;
-                break;
-            case 4:
-                slotcard = UIManager.instance.slot4card;
-                cardSlot1 = GameManager.instance.cardSlot4;
-                break;
-            case 5:
-                slotcard = UIManager.instance.slot5card;
-                cardSlot1 = GameManager.instance.cardSlot5;
-                break;
-            case 6:
-                slotcard = UIManager.instance.slot6card;
-                cardSlot1 = GameManager.instance.cardSlot6;
-                break;
-            default:
-                slotcard = 7;
-                cardSlot1 = GameManager.instance.cardSlot1;
-                break;
+           // case 1:
+          //      slotcard = UIManager.instance.slot1card;
+          //      cardSlot1 = GameManager.instance.cardSlot1;
+          //      break;
+          //  case 2:
+          // /     slotcard = UIManager.instance.slot2card;
+         // /     cardSlot1 = GameManager.instance.cardSlot2;
+         //       break;
+         //   case 3:
+         //       slotcard = UIManager.instance.slot3card;
+         //       cardSlot1 = GameManager.instance.cardSlot3;
+         //       break;
+        //    case 4:
+        //        slotcard = UIManager.instance.slot4card;
+        //        cardSlot1 = GameManager.instance.cardSlot4;
+          //      break;
+//case 5:
+         //       slotcard = UIManager.instance.slot5card;
+         //       cardSlot1 = GameManager.instance.cardSlot5;
+          //      break;
+          //  case 6:
+//slotcard = UIManager.instance.slot6card;
+          //      cardSlot1 = GameManager.instance.cardSlot6;
+          //      break;
+          //  default:
+          //      slotcard = 7;
+         //       cardSlot1 = GameManager.instance.cardSlot1;
+          //      break;
         }
     }
 
@@ -87,17 +90,18 @@ public class ShowTurnAction : MonoBehaviour
         en_value = new List<int>(0);
 
         // me or enemy?
-        if (isEnemy)
-        {
-            whereInstallT = 3;
-        }
-        else
-        {
-            whereInstallT = 0;
-        }
+        whereInstallT = (isEnemy) ? 3 : 0;
 
-        GameObject cardSlot1;
-        GetCardAndSlot(faseNumber, out int slotcard, out cardSlot1); // Fases 1.2 = 4, 2.2 = 5, 3.2 = 6
+        //if (isEnemy)
+        //{
+        //    whereInstallT = 3;
+        //}
+        //else
+       // {
+        //    whereInstallT = 0;
+        //}
+
+        GetCardAndSlot(faseNumber, out int slotcard, out GameObject cardSlot1); // Fases 1.2 = 4, 2.2 = 5, 3.2 = 6
 
         int adversarySlot1 = isEnemy ? 0 : 3;
         int adversarySlot2 = isEnemy ? 1 : 4;

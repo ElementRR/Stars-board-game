@@ -7255,6 +7255,7 @@ MonoBehaviour:
   announce:
   - {fileID: 1347612946}
   - {fileID: 310194944}
+  cardCount: 0
   cardIndex:
   - {fileID: 75058366}
   - {fileID: 1040259986}
@@ -7262,6 +7263,7 @@ MonoBehaviour:
   - {fileID: 998820155}
   - {fileID: 357950206}
   - {fileID: 1957861888}
+  slotCards: 
   slot1card: 6
   slot2card: 6
   slot3card: 6
@@ -8429,9 +8431,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionTurn: 0
   showFase1: 1
-  cardCount: 0
   cardFlipped: {fileID: 3845989541241727890, guid: 0941f786976c9c94083d0cb1908b513a,
     type: 3}
+  cardSlots:
+  - {fileID: 110273951}
+  - {fileID: 1964691356}
+  - {fileID: 949506780}
+  - {fileID: 54285770}
+  - {fileID: 789675912}
+  - {fileID: 890060003}
   cardSlot1: {fileID: 110273951}
   cardSlot2: {fileID: 1964691356}
   cardSlot3: {fileID: 949506780}
@@ -8481,6 +8489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardsToChooseFrom: 
+  cardsToPlay: 
 --- !u!82 &1817210727
 AudioSource:
   m_ObjectHideFlags: 0

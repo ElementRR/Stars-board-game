@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ShowTurnAction))]
@@ -12,8 +13,10 @@ public class GameManager : MonoBehaviour
     public bool actionTurn;
     public bool showFase1;
 
-    public int cardCount;
     public GameObject cardFlipped;
+
+    public List<GameObject> cardSlots;
+
     public GameObject cardSlot1;
     public GameObject cardSlot2;
     public GameObject cardSlot3;
@@ -34,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         Time.timeScale = 1;
-        cardCount = 0;
+        UIManager.instance.cardCount = 0;
         actionTurn = true;
         showFase1 = true;
         showTurnAction = GetComponent<ShowTurnAction>();
@@ -43,44 +46,47 @@ public class GameManager : MonoBehaviour
         blackPanel.Play("BlackToTrans");
     }
 
-    public void InstantiateInSlot(GameObject cardSlot, bool isEnemy, int index)
+    public void InstantiateInSlot(GameObject cardSlot, int index)
     {
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
         Instantiate(FieldcardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
-
-        if (!isEnemy)
-        {
-            cardCount++;
-        }
     }
 
     public void FillSlot(int cardIndex)
     {
-        if (actionTurn)
+        if(actionTurn && UIManager.instance.cardCount < 3)
         {
-            if (actionTurn && cardCount < 3)
+            InstantiateInSlot(cardSlots[UIManager.instance.cardCount], cardIndex);
+            UIManager.instance.cardCount++;
+        }
+        else
+        {
+            return;
+        }
+
+
+            //if (actionTurn && cardCount < 3)
             {
-                if (cardCount < 1)
+                //if (cardCount < 1)
                 {
-                    InstantiateInSlot(cardSlot1, false, cardIndex);
+                //    InstantiateInSlot(cardSlot1, false, cardIndex);
                 }
-                else if (cardCount < 2)
+                //else if (cardCount < 2)
                 {
-                    InstantiateInSlot(cardSlot2, false, cardIndex);
+               //     InstantiateInSlot(cardSlot2, false, cardIndex);
                 }
-                else if (cardCount < 3)
+               // else if (cardCount < 3)
                 {
-                    InstantiateInSlot(cardSlot3, false, cardIndex);
+                //    InstantiateInSlot(cardSlot3, false, cardIndex);
                 }
             }
-        }
     }
 
     public void EndTurn()
     {
-        if (cardCount > 2)
+        if (UIManager.instance.cardCount > 2)
         {
-            cardCount = 0;
+            UIManager.instance.cardCount = 0;
             actionTurn = false;
             ButtonAnimations.instance.EndActionT();
             if (showFase1)

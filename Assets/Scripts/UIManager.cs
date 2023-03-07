@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -7,8 +9,11 @@ public class UIManager : MonoBehaviour
     public GameObject endPanel;
     public GameObject[] announce;
 
+    public int cardCount;
     private GameObject endTurnB;
     public GameObject[] cardIndex;
+
+    public List<int> slotCards = new();
     public int slot1card;
     public int slot2card;
     public int slot3card;
@@ -29,59 +34,83 @@ public class UIManager : MonoBehaviour
     }
     public void GetCardIndex(int index)
     {
-        if (GameManager.instance.actionTurn)
+        if (GameManager.instance.actionTurn && cardCount < 3)
         {
-            if (GameManager.instance.cardCount == 0)
-            {
-                slot1card = index;
-                cardIndex[index].SetActive(false);
-            }
-            else if (GameManager.instance.cardCount == 1)
-            {
-                slot2card = index;
-                cardIndex[index].SetActive(false);
-            }
-            else if (GameManager.instance.cardCount == 2)
-            {
-                slot3card = index;
-                cardIndex[index].SetActive(false);
-            }
+            slotCards.Add(index);
+            cardIndex[index].SetActive(false);
+        }
+
+
+        //if (GameManager.instance.actionTurn)
+        {
+            //if (GameManager.instance.cardCount == 0)
+            //{
+            //    slot1card = index;
+            //    cardIndex[index].SetActive(false);
+            //}
+            //else if (GameManager.instance.cardCount == 1)
+            //{
+            //    slot2card = index;
+            //    cardIndex[index].SetActive(false);
+           // }
+            //else if (GameManager.instance.cardCount == 2)
+           // {
+           //     slot3card = index;
+           //     cardIndex[index].SetActive(false);
+           // }
         }
     }
     void Update()
     {
-        if (GameManager.instance.cardCount > 2)
+        endTurnB.SetActive(_ = (cardCount > 2));
+
+
+        //if (GameManager.instance.cardCount > 2)
+        //{
+        //    endTurnB.SetActive(true);
+        //}
+        //else
         {
-            endTurnB.SetActive(true);
-        }
-        else
-        {
-            endTurnB.SetActive(false);
+        //    endTurnB.SetActive(false);
         }
 
     }
 
     public void BackCard()
     {
-        if (GameManager.instance.cardCount > 2)
+        int lastUIIndex = slotCards.Last<int>();
+        GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];
+
+        if (GameManager.instance.actionTurn && cardCount > 0)
         {
-            ReturnCard(slot3card, GameManager.instance.cardSlot3, false);
-            GameManager.instance.cardCount--;
-        }
-        else if (GameManager.instance.cardCount == 2)
-        {
-            ReturnCard(slot2card, GameManager.instance.cardSlot2, false);
-            GameManager.instance.cardCount--;
-        }
-        else if (GameManager.instance.cardCount == 1)
-        {
-            ReturnCard(slot1card, GameManager.instance.cardSlot1, false);
-            GameManager.instance.cardCount--;
+            ReturnCard(lastUIIndex, lastCardIndex, false);
+            slotCards.Remove(slotCards.Last<int>());
+            cardCount--;
         }
         else
         {
             return;
         }
+
+        //if (cardCount > 2)
+        {
+        //    ReturnCard(slot3card, GameManager.instance.cardSlot3, false);
+        //    cardCount--;
+        }
+       // else if (cardCount == 2)
+        //{
+        //    ReturnCard(slot2card, GameManager.instance.cardSlot2, false);
+        //    GameManager.instance.cardCount--;
+       // }
+       // else if (GameManager.instance.cardCount == 1)
+       // {
+         //   ReturnCard(slot1card, GameManager.instance.cardSlot1, false);
+        //    GameManager.instance.cardCount--;
+      //  }
+       // else
+       // {
+        //    return;
+       // }
     }
 
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
