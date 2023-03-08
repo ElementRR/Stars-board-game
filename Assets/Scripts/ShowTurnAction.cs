@@ -48,8 +48,8 @@ public class ShowTurnAction : MonoBehaviour
 
     private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
     {
-        slotcard = UIManager.instance.slotCards[faseNumber - 1];
         cardSlot1 = GameManager.instance.cardSlots[faseNumber - 1];
+        slotcard = cardSlot1.GetComponentInChildren<Card>().index;
 
         //switch (faseNumber)
         {

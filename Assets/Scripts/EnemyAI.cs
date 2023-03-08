@@ -25,14 +25,12 @@ public class EnemyAI : MonoBehaviour
         while (cardsToPlay.Count < 3)
         {
             int random = Random.Range(0, 6);
-            cardsToPlay.Add(cardsToChooseFrom[random]);
-            int i = cardsToPlay.Last<int>();
-
-            //foreach (int item in cardsToChooseFrom)
+            foreach (int item in cardsToChooseFrom)
             {
-                //if(i != item)
+                if (item == random && !cardsToPlay.Contains(random))
                 {
-                   // cardsToPlay.Remove(i);
+                    cardsToPlay.Add(random);
+                    break;
                 }
             }
         }
