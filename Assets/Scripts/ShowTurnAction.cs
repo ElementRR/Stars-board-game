@@ -50,38 +50,6 @@ public class ShowTurnAction : MonoBehaviour
     {
         cardSlot1 = GameManager.instance.cardSlots[faseNumber - 1];
         slotcard = cardSlot1.GetComponentInChildren<Card>().index;
-
-        //switch (faseNumber)
-        {
-           // case 1:
-          //      slotcard = UIManager.instance.slot1card;
-          //      cardSlot1 = GameManager.instance.cardSlot1;
-          //      break;
-          //  case 2:
-          // /     slotcard = UIManager.instance.slot2card;
-         // /     cardSlot1 = GameManager.instance.cardSlot2;
-         //       break;
-         //   case 3:
-         //       slotcard = UIManager.instance.slot3card;
-         //       cardSlot1 = GameManager.instance.cardSlot3;
-         //       break;
-        //    case 4:
-        //        slotcard = UIManager.instance.slot4card;
-        //        cardSlot1 = GameManager.instance.cardSlot4;
-          //      break;
-//case 5:
-         //       slotcard = UIManager.instance.slot5card;
-         //       cardSlot1 = GameManager.instance.cardSlot5;
-          //      break;
-          //  case 6:
-//slotcard = UIManager.instance.slot6card;
-          //      cardSlot1 = GameManager.instance.cardSlot6;
-          //      break;
-          //  default:
-          //      slotcard = 7;
-         //       cardSlot1 = GameManager.instance.cardSlot1;
-          //      break;
-        }
     }
 
     public void ActionInShowTurn(bool isEnemy, int faseNumber)
@@ -91,15 +59,6 @@ public class ShowTurnAction : MonoBehaviour
 
         // me or enemy?
         whereInstallT = (isEnemy) ? 3 : 0;
-
-        //if (isEnemy)
-        //{
-        //    whereInstallT = 3;
-        //}
-        //else
-       // {
-        //    whereInstallT = 0;
-        //}
 
         GetCardAndSlot(faseNumber, out int slotcard, out GameObject cardSlot1); // Fases 1.2 = 4, 2.2 = 5, 3.2 = 6
 
@@ -147,7 +106,6 @@ public class ShowTurnAction : MonoBehaviour
             }
         }
     }
-
 
     private void CheckAdversarySlots(bool isEnemy) // check if the adversary slots are filled and what tower is
     {

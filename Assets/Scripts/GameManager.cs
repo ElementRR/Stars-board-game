@@ -17,13 +17,6 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> cardSlots;
 
-    public GameObject cardSlot1;
-    public GameObject cardSlot2;
-    public GameObject cardSlot3;
-    public GameObject cardSlot4;
-    public GameObject cardSlot5;
-    public GameObject cardSlot6;
-
     public GameObject[] FieldcardIndex;
 
     [Header("Sound FX")]
@@ -63,23 +56,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
-
-            //if (actionTurn && cardCount < 3)
-            {
-                //if (cardCount < 1)
-                {
-                //    InstantiateInSlot(cardSlot1, false, cardIndex);
-                }
-                //else if (cardCount < 2)
-                {
-               //     InstantiateInSlot(cardSlot2, false, cardIndex);
-                }
-               // else if (cardCount < 3)
-                {
-                //    InstantiateInSlot(cardSlot3, false, cardIndex);
-                }
-            }
     }
 
     public void EndTurn()
@@ -106,98 +82,53 @@ public class GameManager : MonoBehaviour
         float timeToWait = 1.7f;
         float waitToFlip = 0.15f;
 
-        yield return new WaitForSeconds(1.5f);
-        // show the first card
-        if (cardSlot1.GetComponentInChildren<Animator>() != null)
+        for (int i = 0; i < 6;)
         {
-            cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
+            if(i < 3)
+            {
+                yield return new WaitForSeconds(timeToWait);
+                // show the first card
+                if (cardSlots[i].GetComponentInChildren<Animator>() != null)
+                {
+                    cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
+                    yield return new WaitForSeconds(waitToFlip);
+                    reproduce.PlayOneShot(flipCard);
+                }
+
+                yield return new WaitForSeconds(timeToWait);
+
+                // action
+                showTurnAction.ActionInShowTurn(false, i + 1);
+
+                i += 3;
+            }
+            else
+            {
+                yield return new WaitForSeconds(timeToWait);
+                // show the first card
+                if (cardSlots[i].GetComponentInChildren<Animator>() != null)
+                {
+                    cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
+                    yield return new WaitForSeconds(waitToFlip);
+                    reproduce.PlayOneShot(flipCard);
+                }
+
+                yield return new WaitForSeconds(timeToWait);
+
+                // action
+                showTurnAction.ActionInShowTurn(true, i + 1);
+
+                if(i == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    i -= 2;
+                }
+            }
+            
         }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 1);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the first card AI
-        if (cardSlot4.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 4);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the second card
-        if (cardSlot2.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 2);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-        // show the second card AI
-        if (cardSlot5.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 5);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the third cards
-        if (cardSlot3.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 3);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the third card IA
-        if (cardSlot6.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 6);
 
         // wait
         yield return new WaitForSeconds(timeToWait);
@@ -217,99 +148,45 @@ public class GameManager : MonoBehaviour
         float timeToWait = 1.7f;
         float waitToFlip = 0.15f;
 
-        yield return new WaitForSeconds(timeToWait);
-        // show the first card AI
-        if (cardSlot4.GetComponentInChildren<Animator>() != null)
+        for (int i = 3; i < 6;)
         {
-            cardSlot4.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
+            if (i < 3)
+            {
+                yield return new WaitForSeconds(timeToWait);
+                // show the first card
+                if (cardSlots[i].GetComponentInChildren<Animator>() != null)
+                {
+                    cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
+                    yield return new WaitForSeconds(waitToFlip);
+                    reproduce.PlayOneShot(flipCard);
+                }
+
+                yield return new WaitForSeconds(timeToWait);
+
+                // action
+                showTurnAction.ActionInShowTurn(false, i + 1);
+
+                i += 4;
+            }
+            else
+            {
+                yield return new WaitForSeconds(timeToWait);
+                // show the first card
+                if (cardSlots[i].GetComponentInChildren<Animator>() != null)
+                {
+                    cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
+                    yield return new WaitForSeconds(waitToFlip);
+                    reproduce.PlayOneShot(flipCard);
+                }
+
+                yield return new WaitForSeconds(timeToWait);
+
+                // action
+                showTurnAction.ActionInShowTurn(true, i + 1);
+
+                i -= 3;
+            }
         }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 4);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the first card
-        if (cardSlot1.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot1.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 1);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the second card AI
-        if (cardSlot5.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot5.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 5);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the second card
-        if (cardSlot2.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot2.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 2);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the third card AI
-        if (cardSlot6.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot6.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(true, 6);
-
-        // wait
-        yield return new WaitForSeconds(1f);
-
-        // show the third card
-        if (cardSlot3.GetComponentInChildren<Animator>() != null)
-        {
-            cardSlot3.GetComponentInChildren<Animator>().SetTrigger("Flip");
-            yield return new WaitForSeconds(waitToFlip);
-            reproduce.PlayOneShot(flipCard);
-        }
-
-        yield return new WaitForSeconds(timeToWait);
-
-        // action
-        showTurnAction.ActionInShowTurn(false, 3);
 
         // wait
         yield return new WaitForSeconds(timeToWait);
@@ -326,11 +203,6 @@ public class GameManager : MonoBehaviour
 
     public void ResetSlots()
     {
-        UIManager.instance.slot1card = 6;
-        UIManager.instance.slot2card = 6;
-        UIManager.instance.slot3card = 6;
-        UIManager.instance.slot4card = 6;
-        UIManager.instance.slot5card = 6;
-        UIManager.instance.slot6card = 6;
+        UIManager.instance.slotCards = new();
     }
 }

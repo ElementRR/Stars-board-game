@@ -14,12 +14,6 @@ public class UIManager : MonoBehaviour
     public GameObject[] cardIndex;
 
     public List<int> slotCards = new();
-    public int slot1card;
-    public int slot2card;
-    public int slot3card;
-    public int slot4card;
-    public int slot5card;
-    public int slot6card;
 
     [Header("Sound FX")]
     public AudioClip youWinS;
@@ -40,40 +34,10 @@ public class UIManager : MonoBehaviour
             cardIndex[index].SetActive(false);
         }
 
-
-        //if (GameManager.instance.actionTurn)
-        {
-            //if (GameManager.instance.cardCount == 0)
-            //{
-            //    slot1card = index;
-            //    cardIndex[index].SetActive(false);
-            //}
-            //else if (GameManager.instance.cardCount == 1)
-            //{
-            //    slot2card = index;
-            //    cardIndex[index].SetActive(false);
-           // }
-            //else if (GameManager.instance.cardCount == 2)
-           // {
-           //     slot3card = index;
-           //     cardIndex[index].SetActive(false);
-           // }
-        }
     }
     void Update()
     {
         endTurnB.SetActive(_ = (cardCount > 2));
-
-
-        //if (GameManager.instance.cardCount > 2)
-        //{
-        //    endTurnB.SetActive(true);
-        //}
-        //else
-        {
-        //    endTurnB.SetActive(false);
-        }
-
     }
 
     public void BackCard()
