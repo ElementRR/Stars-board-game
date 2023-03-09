@@ -99,12 +99,14 @@ public class UIManager : MonoBehaviour
             reproduce.PlayOneShot(youWinS);
             announce[0].SetActive(true);
             announce[1].SetActive(false);
+            ScoreManager.instance.AddScore(100);
         }
         else
         {
             reproduce.PlayOneShot(youLoseS);
             announce[1].SetActive(true);
             announce[0].SetActive(false);
+            ScoreManager.instance.AddScore(50);
         }
     }
 }

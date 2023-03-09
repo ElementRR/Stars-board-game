@@ -33,16 +33,16 @@ public class ShowTurnAction : MonoBehaviour
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
             Debug.Log("Player wins!");
-            Time.timeScale = 0;
             UIManager.instance.GameOver(false);
             isGameOver = true;
+            Time.timeScale = 0;
         }
         if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
             Debug.Log("AI wins!");
-            Time.timeScale = 0;
             UIManager.instance.GameOver(true);
             isGameOver = true;
+            Time.timeScale = 0;
         }
     }
 

@@ -7,6 +7,10 @@ public class MenuPanel : MonoBehaviour
     [SerializeField] GameObject tut;
     [SerializeField] Animator blackPanel;
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
     public void EnterTutorial()
     {
         Instantiate(tut);
