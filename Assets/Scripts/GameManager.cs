@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     private ShowTurnAction showTurnAction;
     private EnemyAI enemyAI;
 
@@ -38,6 +40,10 @@ public class GameManager : MonoBehaviour
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
     }
+
+
+    public event Action onFirstTurnEnd;
+    void FirstTurnEnd() => onFirstTurnEnd?.Invoke();
 
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
@@ -74,8 +80,8 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(ShowTurn2());
             }
         }
+        FirstTurnEnd();
     }
-
 
     private IEnumerator ShowTurn1()
     {

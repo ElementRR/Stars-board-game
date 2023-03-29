@@ -13,7 +13,9 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] fieldSlots;
 
-    private int me_value1 = 6;   // the index of the card in this fase
+    private const int blankIndex = 7;
+
+    private int me_value1 = blankIndex;   // the index of the card in this fase
 
     [SerializeField] private List<int> en_value; // the index of the adversary tower
 
@@ -70,7 +72,7 @@ public class ShowTurnAction : MonoBehaviour
 
         me_value1 = slotcard;
         // tower or inhibitor?
-        if (me_value1 < 4)
+        if (me_value1 < 4 || me_value1 == 6)
         {
             //  tower: adversary has antagonist?
             if (adversaryHasAnt) // yes : antagonist interacts with tower?
@@ -85,8 +87,7 @@ public class ShowTurnAction : MonoBehaviour
                 InstallTower(whereInstallT, cardSlot1);
                 en_value.Clear();
             }
-        }
-        else //  inhibitor: adversary has tower?
+        }else //  inhibitor: adversary has tower?
         {
             if (!adversaryHasAnt) // no : return inhibitor card
             {
@@ -100,7 +101,7 @@ public class ShowTurnAction : MonoBehaviour
                 DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
 
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
-                me_value1 = 6;
+                me_value1 = blankIndex;
 
                 en_value.Clear();
             }
@@ -142,6 +143,11 @@ public class ShowTurnAction : MonoBehaviour
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
         }
+        else if (me_value1 == 6)
+        {
+            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+            reproduce.PlayOneShot(inhTower);
+        }
         else
         {
             InstallTower(whereInstallT, cardSlot);
@@ -165,7 +171,7 @@ public class ShowTurnAction : MonoBehaviour
             Destroy(cardSlot.transform.GetChild(0).gameObject);
         }
 
-        me_value1 = 6;
+        me_value1 = blankIndex;
     }
     private void DestroyAdversaryTower(bool isEnemy)
     {
@@ -226,7 +232,7 @@ public class ShowTurnAction : MonoBehaviour
                     (fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate == hotNcoldValue ||
                     fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate == hotNcoldValue + 2))
         {
-            fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate = 6;
+            fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate = blankIndex;
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().isFilled = false;
 
             if (fieldSlots[minSlot + 1].transform.childCount > 0)
@@ -238,7 +244,7 @@ public class ShowTurnAction : MonoBehaviour
         }
         else
         {
-            fieldSlots[minSlot].GetComponent<FieldSlot>().towerToInstantiate = 6;
+            fieldSlots[minSlot].GetComponent<FieldSlot>().towerToInstantiate = blankIndex;
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
             if (fieldSlots[minSlot].transform.childCount > 0)
             {

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,12 +22,24 @@ public class UIManager : MonoBehaviour
     public AudioClip youLoseS;
     private AudioSource reproduce;
 
+    private void Start()
+    {
+        GameManager.instance.onFirstTurnEnd += ActivateCard;
+    }
+
     void Awake()
     {
         instance = this;
         endTurnB = GameObject.Find("EndTurnB");
         reproduce = GetComponent<AudioSource>();
+        cardIndex[6].GetComponent<Button>().interactable = false;
     }
+
+    void ActivateCard()
+    {
+        cardIndex[6].GetComponent<Button>().interactable = true;
+    }
+
     public void GetCardIndex(int index)
     {
         if (GameManager.instance.actionTurn && cardCount < 3)
@@ -42,39 +56,22 @@ public class UIManager : MonoBehaviour
 
     public void BackCard()
     {
-        int lastUIIndex = slotCards.Last<int>();
-        GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];
+        if(slotCards.Any())
+        {
+            int lastUIIndex = slotCards.Last<int>();
+            GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];
 
-        if (GameManager.instance.actionTurn && cardCount > 0)
-        {
-            ReturnCard(lastUIIndex, lastCardIndex, false);
-            slotCards.Remove(slotCards.Last<int>());
-            cardCount--;
+            if (GameManager.instance.actionTurn && cardCount > 0)
+            {
+                ReturnCard(lastUIIndex, lastCardIndex, false);
+                slotCards.Remove(slotCards.Last<int>());
+                cardCount--;
+            }
+            else
+            {
+                return;
+            }
         }
-        else
-        {
-            return;
-        }
-
-        //if (cardCount > 2)
-        {
-        //    ReturnCard(slot3card, GameManager.instance.cardSlot3, false);
-        //    cardCount--;
-        }
-       // else if (cardCount == 2)
-        //{
-        //    ReturnCard(slot2card, GameManager.instance.cardSlot2, false);
-        //    GameManager.instance.cardCount--;
-       // }
-       // else if (GameManager.instance.cardCount == 1)
-       // {
-         //   ReturnCard(slot1card, GameManager.instance.cardSlot1, false);
-        //    GameManager.instance.cardCount--;
-      //  }
-       // else
-       // {
-        //    return;
-       // }
     }
 
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
