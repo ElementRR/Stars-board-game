@@ -750,7 +750,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1218761242971545003, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: acc4070398b81334089018d0cdfc14f5, type: 3}
 --- !u!1 &551210790
 GameObject:
@@ -2085,7 +2086,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8365380118777859122, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8e9f6520a4482f3439c2117908f71e15, type: 3}
 --- !u!1 &1428669560
 GameObject:
@@ -2234,6 +2236,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 558173184}
     m_Modifications:
+    - target: {fileID: -686209316067621520, guid: 176b7169d4b9f1941b893fc1a2fe6da9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1218709162819202674, guid: 176b7169d4b9f1941b893fc1a2fe6da9,
         type: 3}
       propertyPath: m_RootOrder
@@ -2319,7 +2326,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: MoonTower (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -686209316067621520, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 176b7169d4b9f1941b893fc1a2fe6da9, type: 3}
 --- !u!1 &1581127056
 GameObject:

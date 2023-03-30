@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -238,7 +239,7 @@ public class ShowTurnAction : MonoBehaviour
             if (fieldSlots[minSlot + 1].transform.childCount > 0)
             {
                 reproduce.PlayOneShot(inhTower);
-                Destroy(fieldSlots[minSlot + 1].transform.GetChild(0).gameObject);
+                InhibitSequence(minSlot + 1);
             }
 
         }
@@ -249,8 +250,15 @@ public class ShowTurnAction : MonoBehaviour
             if (fieldSlots[minSlot].transform.childCount > 0)
             {
                 reproduce.PlayOneShot(inhTower);
-                Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
+                InhibitSequence(minSlot);
+                //fieldSlots[minSlot].transform.GetComponentInChildren<Tower>().Destruction();
+                //Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
             }
         }
+    }
+    private void InhibitSequence(int slot)
+    {
+        fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
+        Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
     }
 }

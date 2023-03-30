@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6069755039161540468}
+  - component: {fileID: 6356793253295544553}
+  - component: {fileID: 1935391615454863602}
   m_Layer: 0
   m_Name: BellTower
   m_TagString: Untagged
@@ -33,6 +35,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6356793253295544553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455145391324238178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 186910e756534a14491cc47946865b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destrFX: {fileID: 3879196137986154632, guid: e0dcaaf96c7a78f4e9120ab9bbdba154, type: 3}
+--- !u!111 &1935391615454863602
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455145391324238178}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a58fbb5c813360c4a8c7ca02bafd7d83, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a58fbb5c813360c4a8c7ca02bafd7d83, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5424085864584911844
 GameObject:
   m_ObjectHideFlags: 0
