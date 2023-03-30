@@ -201,9 +201,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 6629eab00ea71e34ebc52dcea906539a,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6629eab00ea71e34ebc52dcea906539a,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 393a75082ba9619468c1f2dd3a8950e0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 6629eab00ea71e34ebc52dcea906539a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e9a1694bdfa082b48b01ea1dbca89d7a, type: 2}
     - target: {fileID: 919132149155446097, guid: 6629eab00ea71e34ebc52dcea906539a,
         type: 3}
       propertyPath: m_Name
