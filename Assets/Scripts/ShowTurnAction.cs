@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine;
 // me = the human player
 public class ShowTurnAction : MonoBehaviour
 {
-    private bool isGameOver = false;
+    private static bool isGameOver = false;
 
     public GameObject[] fieldSlots;
 
@@ -21,6 +22,8 @@ public class ShowTurnAction : MonoBehaviour
     [SerializeField] private List<int> en_value; // the index of the adversary tower
 
     int whereInstallT;
+
+    public GameObject[] cameras;
 
     [Header("Sound FX")]
     public AudioClip inhTower;
@@ -167,6 +170,15 @@ public class ShowTurnAction : MonoBehaviour
             }
         }
 
+        if(slot < 3)
+        {
+            cameras[1].SetActive(true);
+        }
+        else
+        {
+            cameras[2].SetActive(true);
+        }
+
         if (cardSlot.transform.childCount > 0)
         {
             Destroy(cardSlot.transform.GetChild(0).gameObject);
@@ -251,8 +263,6 @@ public class ShowTurnAction : MonoBehaviour
             {
                 reproduce.PlayOneShot(inhTower);
                 InhibitSequence(minSlot);
-                //fieldSlots[minSlot].transform.GetComponentInChildren<Tower>().Destruction();
-                //Destroy(fieldSlots[minSlot].transform.GetChild(0).gameObject);
             }
         }
     }

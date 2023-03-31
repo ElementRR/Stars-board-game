@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool actionTurn;
     public bool showFase1;
+    public bool installEnd = false;
 
     public GameObject cardFlipped;
 
@@ -41,9 +42,11 @@ public class GameManager : MonoBehaviour
         blackPanel.Play("BlackToTrans");
     }
 
+    public event Action OnFirstTurnEnd;
+    void FirstTurnEnd() => OnFirstTurnEnd?.Invoke();
 
-    public event Action onFirstTurnEnd;
-    void FirstTurnEnd() => onFirstTurnEnd?.Invoke();
+    public event Action OnShowTurnEnd;
+    void ShowTurnEnd() => OnShowTurnEnd?.Invoke();
 
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
@@ -70,7 +73,6 @@ public class GameManager : MonoBehaviour
         {
             UIManager.instance.cardCount = 0;
             actionTurn = false;
-            ButtonAnimations.instance.EndActionT();
             if (showFase1)
             {
                 StartCoroutine(ShowTurn1());
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn1()
     {
-        float timeToWait = 1.7f;
+        float timeToWait = 1.2f;
         float waitToFlip = 0.15f;
 
         for (int i = 0; i < 6;)
@@ -106,6 +108,8 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(false, i + 1);
 
+                StartCoroutine(WaitInstallAnimation(timeToWait));
+
                 i += 3;
             }
             else
@@ -124,7 +128,9 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(true, i + 1);
 
-                if(i == 5)
+                StartCoroutine(WaitInstallAnimation(timeToWait));
+
+                if (i == 5)
                 {
                     break;
                 }
@@ -133,7 +139,6 @@ public class GameManager : MonoBehaviour
                     i -= 2;
                 }
             }
-            
         }
 
         // wait
@@ -145,13 +150,13 @@ public class GameManager : MonoBehaviour
         // reset action turn
         actionTurn = true;
         showFase1 = false;
-        ButtonAnimations.instance.EndShowT();
+        ShowTurnEnd();
         enemyAI.EnemyPlay();
     }
 
     private IEnumerator ShowTurn2()
     {
-        float timeToWait = 1.7f;
+        float timeToWait = 1.2f;
         float waitToFlip = 0.15f;
 
         for (int i = 3; i < 6;)
@@ -172,6 +177,8 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(false, i + 1);
 
+                StartCoroutine(WaitInstallAnimation(timeToWait));
+
                 i += 4;
             }
             else
@@ -190,6 +197,8 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(true, i + 1);
 
+                StartCoroutine(WaitInstallAnimation(timeToWait));
+
                 i -= 3;
             }
         }
@@ -203,8 +212,18 @@ public class GameManager : MonoBehaviour
         // reset action turn
         actionTurn = true;
         showFase1 = true;
-        ButtonAnimations.instance.EndShowT();
+        ShowTurnEnd();
         enemyAI.EnemyPlay();
+    }
+
+    private IEnumerator WaitInstallAnimation(float t)
+    {
+        yield return new WaitForSeconds(t);
+
+        yield return new WaitUntil(() => installEnd == true);
+
+        showTurnAction.cameras[1].SetActive(false);
+        showTurnAction.cameras[2].SetActive(false);
     }
 
     public void ResetSlots()

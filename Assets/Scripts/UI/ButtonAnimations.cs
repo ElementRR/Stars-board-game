@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class ButtonAnimations : MonoBehaviour
 {
-    public static ButtonAnimations instance;
     public Animator[] buttons;
 
-    private void Awake()
+    private void Start()
     {
-        instance = this;
+        GameManager.instance.OnFirstTurnEnd += EndActionT;
+        GameManager.instance.OnShowTurnEnd += EndShowT;
     }
     // Update is called once per frame
     public void EndActionT()

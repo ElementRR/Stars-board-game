@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.onFirstTurnEnd += ActivateCard;
+        GameManager.instance.OnFirstTurnEnd += ActivateCard;
     }
 
     void Awake()
