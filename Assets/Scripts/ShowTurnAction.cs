@@ -32,6 +32,7 @@ public class ShowTurnAction : MonoBehaviour
     private void Awake()
     {
         reproduce = GetComponent<AudioSource>();
+        isGameOver = false;
     }
 
     private void Update()

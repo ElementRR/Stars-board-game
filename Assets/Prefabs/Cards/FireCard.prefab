@@ -155,7 +155,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b16286277f63f2748af85a21824b6ab3, type: 2}
+      objectReference: {fileID: 2100000, guid: b1a117fa3c6e46c4bb1ea131586a0f02, type: 2}
     - target: {fileID: 6124577863185018062, guid: 0941f786976c9c94083d0cb1908b513a,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -187,3 +187,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82164e8395eb5ba4ba069b897fb1b7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0

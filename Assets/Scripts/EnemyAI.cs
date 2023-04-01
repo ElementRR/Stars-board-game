@@ -7,14 +7,29 @@ public class EnemyAI : MonoBehaviour
     private ShowTurnAction showTurnAction;
     [SerializeField] List<int> cardsToChooseFrom;
     [SerializeField] List<int> cardsToPlay;
+
+    private bool firstTurn = true;
+
+    private void Start()
+    {
+        GameManager.instance.OnFirstTurnEnd += InsertCard6;
+    }
+
     private void Awake()
     {
         showTurnAction = GetComponent<ShowTurnAction>();
         EnemyPlay();
+        firstTurn = true;
     }
     public void EnemyPlay()
     {
-        cardsToChooseFrom = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7 });
+        cardsToChooseFrom = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 7 });
+
+        if (!firstTurn)
+        {
+            cardsToChooseFrom.Add(6);
+        }
+
         for (int i = 3; i < 6; i++)
         {
             cardsToChooseFrom.Remove(GetFieldCards(i));
@@ -43,5 +58,10 @@ public class EnemyAI : MonoBehaviour
     private int GetFieldCards(int fieldNumber)
     {
         return showTurnAction.fieldSlots[fieldNumber].GetComponent<FieldSlot>().towerToInstantiate;
+    }
+
+    private void InsertCard6()
+    {
+        firstTurn = false;
     }
 }
