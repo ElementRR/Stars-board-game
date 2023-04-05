@@ -29,6 +29,9 @@ public class ShowTurnAction : MonoBehaviour
     public AudioClip inhTower;
     private AudioSource reproduce;
 
+    public delegate void Outdoor(string message);
+    public static event Outdoor OnMessageSent;
+
     private void Awake()
     {
         reproduce = GetComponent<AudioSource>();
@@ -39,14 +42,14 @@ public class ShowTurnAction : MonoBehaviour
     {
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            Debug.Log("Player wins!");
+            OnMessageSent?.Invoke("You win!");
             UIManager.instance.GameOver(false);
             isGameOver = true;
             Time.timeScale = 0;
         }
         if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            Debug.Log("AI wins!");
+            OnMessageSent?.Invoke("You Loose");
             UIManager.instance.GameOver(true);
             isGameOver = true;
             Time.timeScale = 0;
@@ -96,6 +99,8 @@ public class ShowTurnAction : MonoBehaviour
         {
             if (!adversaryHasAnt) // no : return inhibitor card
             {
+                reproduce.PlayOneShot(inhTower);
+                OnMessageSent?.Invoke("Ihnibitor did not work!");
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
                 en_value.Clear();
             }
@@ -132,26 +137,31 @@ public class ShowTurnAction : MonoBehaviour
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Fire tower could not be installed!");
         }
         else if (me_value1 == 1 && en_value.Contains(0))
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Water tower could not be installed!");
         }
         else if (me_value1 == 2 && en_value.Contains(3))
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Sun tower could not be installed!");
         }
         else if (me_value1 == 3 && en_value.Contains(2))
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Moon tower could not be installed!");
         }
         else if (me_value1 == 6)
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Bell tower could not be installed!");
         }
         else
         {
@@ -166,7 +176,7 @@ public class ShowTurnAction : MonoBehaviour
             {
                 fieldSlots[slot + i].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
                 fieldSlots[slot + i].GetComponent<FieldSlot>().InstantiateInSlot();
-                Debug.Log("Tower installed in slot " + (slot + i));
+                OnMessageSent?.Invoke("Tower installed!");
                 break;
             }
         }
@@ -251,7 +261,6 @@ public class ShowTurnAction : MonoBehaviour
 
             if (fieldSlots[minSlot + 1].transform.childCount > 0)
             {
-                reproduce.PlayOneShot(inhTower);
                 InhibitSequence(minSlot + 1);
             }
 
@@ -262,13 +271,14 @@ public class ShowTurnAction : MonoBehaviour
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
             if (fieldSlots[minSlot].transform.childCount > 0)
             {
-                reproduce.PlayOneShot(inhTower);
                 InhibitSequence(minSlot);
             }
         }
     }
     private void InhibitSequence(int slot)
     {
+        reproduce.PlayOneShot(inhTower);
+        OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
     }
