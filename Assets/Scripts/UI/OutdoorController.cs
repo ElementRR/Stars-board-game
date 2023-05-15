@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// This is the script who controlls the messages that appear in the superior screen
 public class OutdoorController : MonoBehaviour
 {
     private TextMeshProUGUI text;

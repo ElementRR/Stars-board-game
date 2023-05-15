@@ -3385,7 +3385,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bell cannot be inhibited, but the enemy field needs to be empty
+  m_text: Bell cannot be inhibited, but the enemy field needs to be empty to install
+    the tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60ca55b38fb89204096701f75413f844, type: 2}
   m_sharedMaterial: {fileID: -3706816381523553075, guid: 60ca55b38fb89204096701f75413f844,

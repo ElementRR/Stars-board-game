@@ -16333,6 +16333,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -16420,6 +16422,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -16556,6 +16560,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -18469,6 +18475,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -19151,6 +19159,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -19207,6 +19217,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
+  installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
   towerToInstantiate: 7
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
