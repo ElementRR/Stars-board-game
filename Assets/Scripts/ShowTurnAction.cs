@@ -38,24 +38,6 @@ public class ShowTurnAction : MonoBehaviour
         isGameOver = false;
     }
 
-    private void Update()
-    {
-        if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
-        {
-            OnMessageSent?.Invoke("You win!");
-            UIManager.instance.GameOver(false);
-            isGameOver = true;
-            Time.timeScale = 0;
-        }
-        if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
-        {
-            OnMessageSent?.Invoke("You Loose");
-            UIManager.instance.GameOver(true);
-            isGameOver = true;
-            Time.timeScale = 0;
-        }
-    }
-
     private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
     {
         cardSlot1 = GameManager.instance.cardSlots[faseNumber - 1];
@@ -196,6 +178,19 @@ public class ShowTurnAction : MonoBehaviour
         }
 
         me_value1 = blankIndex;
+
+        if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
+        {
+            OnMessageSent?.Invoke("You win!");
+            StopAllCoroutines();
+            StartCoroutine(EndGameRoutine());
+        }
+        if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
+        {
+            OnMessageSent?.Invoke("You Loose");
+            StopAllCoroutines();
+            StartCoroutine(EndGameRoutine());
+        }
     }
     private void DestroyAdversaryTower(bool isEnemy)
     {
@@ -281,5 +276,14 @@ public class ShowTurnAction : MonoBehaviour
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
+    }
+
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        UIManager.instance.GameOver(false);
+        isGameOver = true;
+        Time.timeScale = 0;
+
     }
 }
