@@ -15,7 +15,7 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] fieldSlots;
 
-    private const int blankIndex = 7;
+    private const int blankIndex = 8;
 
     private int me_value1 = blankIndex;   // the index of the card in this fase
 
@@ -77,7 +77,7 @@ public class ShowTurnAction : MonoBehaviour
                 InstallTower(whereInstallT, cardSlot1);
                 en_value.Clear();
             }
-        }else //  inhibitor: adversary has tower?
+        }else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
         {
             if (!adversaryHasAnt) // no : return inhibitor card
             {
@@ -97,6 +97,10 @@ public class ShowTurnAction : MonoBehaviour
 
                 en_value.Clear();
             }
+        }
+        else
+        {
+            GameManager.instance.meStars += 2;
         }
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class UIManager : MonoBehaviour
     public GameObject[] cardIndex;
 
     public List<int> slotCards = new();
+
+    public TextMeshProUGUI starCount;
 
     [Header("Sound FX")]
     public AudioClip youWinS;
@@ -45,13 +48,17 @@ public class UIManager : MonoBehaviour
         if (GameManager.instance.actionTurn && cardCount < 3)
         {
             slotCards.Add(index);
-            cardIndex[index].SetActive(false);
+            if(index < 7)
+            {
+                cardIndex[index].SetActive(false);
+            }
         }
 
     }
     void Update()
     {
         endTurnB.SetActive(_ = (cardCount > 2));
+        starCount.text = "Stars: " + GameManager.instance.meStars;
     }
 
     public void BackCard()
@@ -76,7 +83,7 @@ public class UIManager : MonoBehaviour
 
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
     {
-        if (!isEnemy)
+        if (!isEnemy && cardNumber < 7)
         {
             cardIndex[cardNumber].SetActive(true);
         }
