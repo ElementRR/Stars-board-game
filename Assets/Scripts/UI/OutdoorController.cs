@@ -8,7 +8,7 @@ public class OutdoorController : MonoBehaviour
 {
     private TextMeshProUGUI text;
     private Animator anim;
-    void Start()
+    void Awake()
     {
         text = GetComponent<TextMeshProUGUI>();
         ShowTurnAction.OnMessageSent += ShowMessage;
@@ -26,5 +26,10 @@ public class OutdoorController : MonoBehaviour
     void ShowMessage(string message)
     {
         StartCoroutine(MessageRoutine(message, 1.5f));
+    }
+
+    private void OnDestroy()
+    {
+        ShowTurnAction.OnMessageSent -= ShowMessage;
     }
 }

@@ -15,7 +15,7 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] fieldSlots;
 
-    private const int blankIndex = 7;
+    private const int blankIndex = 8;
 
     private int me_value1 = blankIndex;   // the index of the card in this fase
 
@@ -36,24 +36,6 @@ public class ShowTurnAction : MonoBehaviour
     {
         reproduce = GetComponent<AudioSource>();
         isGameOver = false;
-    }
-
-    private void Update()
-    {
-        if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
-        {
-            OnMessageSent?.Invoke("You win!");
-            UIManager.instance.GameOver(false);
-            isGameOver = true;
-            Time.timeScale = 0;
-        }
-        if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
-        {
-            OnMessageSent?.Invoke("You Loose");
-            UIManager.instance.GameOver(true);
-            isGameOver = true;
-            Time.timeScale = 0;
-        }
     }
 
     private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
@@ -95,7 +77,7 @@ public class ShowTurnAction : MonoBehaviour
                 InstallTower(whereInstallT, cardSlot1);
                 en_value.Clear();
             }
-        }else //  inhibitor: adversary has tower?
+        }else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
         {
             if (!adversaryHasAnt) // no : return inhibitor card
             {
@@ -115,6 +97,10 @@ public class ShowTurnAction : MonoBehaviour
 
                 en_value.Clear();
             }
+        }
+        else
+        {
+            GameManager.instance.meStars += 2;
         }
     }
 
@@ -196,6 +182,19 @@ public class ShowTurnAction : MonoBehaviour
         }
 
         me_value1 = blankIndex;
+
+        if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
+        {
+            OnMessageSent?.Invoke("You win!");
+            StopAllCoroutines();
+            StartCoroutine(EndGameRoutine());
+        }
+        if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
+        {
+            OnMessageSent?.Invoke("You Loose");
+            StopAllCoroutines();
+            StartCoroutine(EndGameRoutine());
+        }
     }
     private void DestroyAdversaryTower(bool isEnemy)
     {
@@ -281,5 +280,14 @@ public class ShowTurnAction : MonoBehaviour
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
+    }
+
+    private IEnumerator EndGameRoutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+        UIManager.instance.GameOver(false);
+        isGameOver = true;
+        Time.timeScale = 0;
+
     }
 }
