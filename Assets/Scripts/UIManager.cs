@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI starCount;
 
+    public TextMeshProUGUI EnemyStarCount;
+
     [Header("Sound FX")]
     public AudioClip youWinS;
     public AudioClip youLoseS;
@@ -59,6 +61,7 @@ public class UIManager : MonoBehaviour
     {
         endTurnB.SetActive(_ = (cardCount > 2));
         starCount.text = "Stars: " + GameManager.instance.meStars;
+        EnemyStarCount.text = "Stars: " + GameManager.instance.enemyStars;
     }
 
     public void BackCard()

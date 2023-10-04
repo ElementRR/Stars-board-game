@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     public int meStars = 0;
 
+    public int enemyStars = 0;
+
     [Header("Sound FX")]
     public AudioClip flipCard;
     private AudioSource reproduce;

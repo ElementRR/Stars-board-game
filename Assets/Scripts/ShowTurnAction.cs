@@ -100,7 +100,22 @@ public class ShowTurnAction : MonoBehaviour
         }
         else
         {
-            GameManager.instance.meStars += 2;
+            if (!isEnemy)
+            { 
+                GameManager.instance.meStars += 2;
+                OnMessageSent?.Invoke("+2 Stars for you!");
+            }
+            else
+            {
+                GameManager.instance.enemyStars += 2;
+                OnMessageSent?.Invoke("+2 Stars for enemy!");
+            }
+            
+
+            if (cardSlot1.transform.childCount > 0)
+            {
+                Destroy(cardSlot1.transform.GetChild(0).gameObject);
+            }
         }
     }
 

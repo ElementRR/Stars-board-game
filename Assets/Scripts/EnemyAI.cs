@@ -39,7 +39,7 @@ public class EnemyAI : MonoBehaviour
 
         while (cardsToPlay.Count < 3)
         {
-            int random = Random.Range(0, 7);
+            int random = Random.Range(0, 8);
             foreach (int item in cardsToChooseFrom)
             {
                 if (item == random && !cardsToPlay.Contains(random))
