@@ -148,14 +148,7 @@ public class GameManager : MonoBehaviour
         // wait
         yield return new WaitForSeconds(timeToWait);
 
-        // reset slots
-        ResetSlots();
-
-        // reset action turn
-        actionTurn = true;
-        showFase1 = false;
-        ShowTurnEnd();
-        enemyAI.EnemyPlay();
+        EndOfShowTurn();
     }
 
     private IEnumerator ShowTurn2()
@@ -210,14 +203,21 @@ public class GameManager : MonoBehaviour
         // wait
         yield return new WaitForSeconds(timeToWait);
 
+        EndOfShowTurn();
+    }
+
+    private void EndOfShowTurn()
+    {
         // reset slots
         ResetSlots();
 
         // reset action turn
         actionTurn = true;
-        showFase1 = true;
+        showFase1 = false;
         ShowTurnEnd();
         enemyAI.EnemyPlay();
+        meStars += 2;
+        enemyStars += 2;
     }
 
     private IEnumerator WaitInstallAnimation(float t)

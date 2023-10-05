@@ -21,7 +21,7 @@ public class ShowTurnAction : MonoBehaviour
 
     [SerializeField] private List<int> en_value; // the index of the adversary tower
 
-    int whereInstallT;
+    int whereInstallT; // This will show us if is me time (0) or enemy time (3)
 
     public GameObject[] cameras;
 
@@ -84,6 +84,7 @@ public class ShowTurnAction : MonoBehaviour
                 reproduce.PlayOneShot(inhTower);
                 OnMessageSent?.Invoke("Ihnibitor did not work!");
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+
                 en_value.Clear();
             }
             else // yes : tower interacts with inhibitor?
@@ -93,6 +94,7 @@ public class ShowTurnAction : MonoBehaviour
                 DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
 
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+
                 me_value1 = blankIndex;
 
                 en_value.Clear();
@@ -134,83 +136,128 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void CheckReturnCard(GameObject cardSlot, bool isEnemy)
     {
-        if (me_value1 == 0 && en_value.Contains(1))
+        string message = "";
+        bool shouldReturnCard = false;
+
+        switch (me_value1)
         {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
-            reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Fire tower could not be installed!");
+            case 0:
+                if (en_value.Contains(1)) 
+                {
+                    message = "Fire tower could not be installed!";
+                    shouldReturnCard = true;
+                }
+                break;
+            case 1:
+                if (en_value.Contains(0)) 
+                {
+                    message = "Water tower could not be installed!";
+                    shouldReturnCard = true;
+                }
+                break;
+            case 2:
+                if (en_value.Contains(3)) 
+                {
+                    message = "Sun tower could not be installed!";
+                    shouldReturnCard = true;
+                }
+                break;
+            case 3:
+                if (en_value.Contains(2)) 
+                {
+                    message = "Moon tower could not be installed!";
+                    shouldReturnCard = true;
+                }
+                break;
+            case 6:
+                if (en_value.Count > 0) 
+                {
+                    message = "Bell tower could not be installed!";
+                    shouldReturnCard = true;
+                }
+                break;
+            default:
+                shouldReturnCard = false;
+                break;
         }
-        else if (me_value1 == 1 && en_value.Contains(0))
+
+        if (shouldReturnCard)
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
             reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Water tower could not be installed!");
-        }
-        else if (me_value1 == 2 && en_value.Contains(3))
-        {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
-            reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Sun tower could not be installed!");
-        }
-        else if (me_value1 == 3 && en_value.Contains(2))
-        {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
-            reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Moon tower could not be installed!");
-        }
-        else if (me_value1 == 6)
-        {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
-            reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Bell tower could not be installed!");
+            OnMessageSent?.Invoke(message);
         }
         else
         {
             InstallTower(whereInstallT, cardSlot);
         }
     }
+
+
     private void InstallTower(int slot, GameObject cardSlot)
     {
+        int stars = (whereInstallT == 3) ? GameManager.instance.enemyStars : GameManager.instance.meStars;
+
+        if (stars <= 2)
+        {
+            UIManager.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false );
+            reproduce.PlayOneShot(inhTower);
+            OnMessageSent?.Invoke("Not enough stars!");
+            me_value1 = blankIndex;
+            return;
+        }
+
         for (int i = 0; i <= 2; i++)
         {
-            if (!fieldSlots[slot + i].GetComponent<FieldSlot>().isFilled)
+            FieldSlot fieldSlot = fieldSlots[slot + i].GetComponent<FieldSlot>();
+            if (!fieldSlot.isFilled)
             {
-                fieldSlots[slot + i].GetComponent<FieldSlot>().towerToInstantiate = me_value1;
-                fieldSlots[slot + i].GetComponent<FieldSlot>().InstantiateInSlot();
+                fieldSlot.towerToInstantiate = me_value1;
+                fieldSlot.InstantiateInSlot();
                 OnMessageSent?.Invoke("Tower installed!");
                 break;
             }
         }
 
-        if(slot < 3)
-        {
-            cameras[1].SetActive(true);
-        }
-        else
-        {
-            cameras[2].SetActive(true);
-        }
+        cameras[slot < 3 ? 1 : 2].SetActive(true);
 
-        if (cardSlot.transform.childCount > 0)
-        {
-            Destroy(cardSlot.transform.GetChild(0).gameObject);
-        }
+        DestroyChildObject(cardSlot);
 
-        me_value1 = blankIndex;
+        switch (whereInstallT)
+        {
+            case 3:
+                GameManager.instance.enemyStars -= 3;
+                break;
+            default:
+                GameManager.instance.meStars -= 3;
+                break;
+        }
 
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            OnMessageSent?.Invoke("You win!");
-            StopAllCoroutines();
-            StartCoroutine(EndGameRoutine());
+            EndGame("You win!");
         }
         if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            OnMessageSent?.Invoke("You Loose");
-            StopAllCoroutines();
-            StartCoroutine(EndGameRoutine());
+            EndGame("You Lose");
         }
     }
+
+    private void DestroyChildObject(GameObject parent)
+    {
+        if (parent.transform.childCount != 0)
+        {
+            Destroy(parent.transform.GetChild(0).gameObject);
+        }
+    }
+
+    private void EndGame(string message)
+    {
+        OnMessageSent?.Invoke(message);
+        StopAllCoroutines();
+        StartCoroutine(EndGameRoutine());
+    }
+
     private void DestroyAdversaryTower(bool isEnemy)
     {
         if (!isEnemy)
