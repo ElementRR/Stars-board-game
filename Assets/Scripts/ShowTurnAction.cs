@@ -235,11 +235,11 @@ public class ShowTurnAction : MonoBehaviour
 
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            EndGame("You win!");
+            EndGame("You win!", false);
         }
         if (fieldSlots[5].GetComponent<FieldSlot>().isFilled && !isGameOver)
         {
-            EndGame("You Lose");
+            EndGame("You Lose", true);
         }
     }
 
@@ -251,11 +251,11 @@ public class ShowTurnAction : MonoBehaviour
         }
     }
 
-    private void EndGame(string message)
+    private void EndGame(string message, bool enemyWins)
     {
         OnMessageSent?.Invoke(message);
         StopAllCoroutines();
-        StartCoroutine(EndGameRoutine());
+        StartCoroutine(EndGameRoutine(enemyWins));
     }
 
     private void DestroyAdversaryTower(bool isEnemy)
@@ -344,10 +344,10 @@ public class ShowTurnAction : MonoBehaviour
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
     }
 
-    private IEnumerator EndGameRoutine()
+    private IEnumerator EndGameRoutine(bool enemyWins)
     {
         yield return new WaitForSeconds(1.5f);
-        UIManager.instance.GameOver(false);
+        UIManager.instance.GameOver(enemyWins);
         isGameOver = true;
         Time.timeScale = 0;
 

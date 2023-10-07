@@ -37,11 +37,32 @@ public class EnemyAI : MonoBehaviour
 
         cardsToPlay = new();
 
+        int enemyStars = GameManager.instance.enemyStars;
+
         while (cardsToPlay.Count < 3)
         {
-            int random = Random.Range(0, 8);
+            if (enemyStars < 3)
+            {
+                cardsToPlay.Add(7);
+                enemyStars += 2;
+                continue;
+            }
+
+            int random = Random.Range(0, 9);
+
+            if(random > 7)
+            {
+                random = 7;
+            }
+
             foreach (int item in cardsToChooseFrom)
             {
+                if(random == 7)
+                {
+                    cardsToPlay.Add(random);
+                    break;
+                }
+
                 if (item == random && !cardsToPlay.Contains(random))
                 {
                     cardsToPlay.Add(random);
