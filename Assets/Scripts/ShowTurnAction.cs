@@ -25,6 +25,10 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] cameras;
 
+    private int towerCost = 3;
+
+    private int inhCost = 1;
+
     [Header("Sound FX")]
     public AudioClip inhTower;
     private AudioSource reproduce;
@@ -79,25 +83,48 @@ public class ShowTurnAction : MonoBehaviour
             }
         }else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
         {
-            if (!adversaryHasAnt) // no : return inhibitor card
+            int stars = (whereInstallT == 3) ? GameManager.instance.enemyStars : GameManager.instance.meStars;
+
+            if (stars < inhCost)
             {
-                reproduce.PlayOneShot(inhTower);
-                OnMessageSent?.Invoke("Ihnibitor did not work!");
+                
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
 
-                en_value.Clear();
+                NotEnoughStars();
             }
-            else // yes : tower interacts with inhibitor?
+            else
             {
-                CheckAdversarySlots(isEnemy);
+                if (isEnemy)
+                {
+                    GameManager.instance.enemyStars -= inhCost;
+                    UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
+                }
+                else
+                {
+                    GameManager.instance.meStars -= inhCost;
+                    UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
+                }
 
-                DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
+                if (!adversaryHasAnt) // no : return inhibitor card
+                {
+                    reproduce.PlayOneShot(inhTower);
+                    OnMessageSent?.Invoke("Inhibitor did not work!");
+                    UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
 
-                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    en_value.Clear();
+                }
+                else // yes : tower interacts with inhibitor?
+                {
+                    CheckAdversarySlots(isEnemy);
 
-                me_value1 = blankIndex;
+                    DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
 
-                en_value.Clear();
+                    UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+
+                    me_value1 = blankIndex;
+
+                    en_value.Clear();
+                }
             }
         }
         else
@@ -106,11 +133,13 @@ public class ShowTurnAction : MonoBehaviour
             { 
                 GameManager.instance.meStars += 2;
                 OnMessageSent?.Invoke("+2 Stars for you!");
+                UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
             }
             else
             {
                 GameManager.instance.enemyStars += 2;
                 OnMessageSent?.Invoke("+2 Stars for enemy!");
+                //UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
             }
             
 
@@ -193,17 +222,24 @@ public class ShowTurnAction : MonoBehaviour
         }
     }
 
+    private void NotEnoughStars()
+    {
+        reproduce.PlayOneShot(inhTower);
+        OnMessageSent?.Invoke("Not enough stars!");
+        me_value1 = blankIndex;
+        en_value.Clear();
+    }
 
     private void InstallTower(int slot, GameObject cardSlot)
     {
         int stars = (whereInstallT == 3) ? GameManager.instance.enemyStars : GameManager.instance.meStars;
 
-        if (stars <= 2)
+        if (stars < towerCost)
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false );
-            reproduce.PlayOneShot(inhTower);
-            OnMessageSent?.Invoke("Not enough stars!");
-            me_value1 = blankIndex;
+            
+            NotEnoughStars();
+            
             return;
         }
 
@@ -226,10 +262,12 @@ public class ShowTurnAction : MonoBehaviour
         switch (whereInstallT)
         {
             case 3:
-                GameManager.instance.enemyStars -= 3;
+                GameManager.instance.enemyStars -= towerCost;
+                //UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
                 break;
             default:
-                GameManager.instance.meStars -= 3;
+                GameManager.instance.meStars -= towerCost;
+                UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
                 break;
         }
 

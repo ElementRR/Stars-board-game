@@ -12,15 +12,15 @@ public class UIManager : MonoBehaviour
     public GameObject endPanel;
     public GameObject[] announce;
 
-    public int cardCount;
-    private GameObject endTurnB;
+    public int cardCount = 0;
+    public GameObject endTurnB;
     public GameObject[] cardIndex;
 
     public List<int> slotCards = new();
 
     public TextMeshProUGUI starCount;
 
-    public TextMeshProUGUI EnemyStarCount;
+    public TextMeshProUGUI enemyStarCount;
 
     [Header("Sound FX")]
     public AudioClip youWinS;
@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         endTurnB = GameObject.Find("EndTurnB");
+        endTurnB.SetActive(false);
         reproduce = GetComponent<AudioSource>();
         cardIndex[6].GetComponent<Button>().interactable = false;
     }
@@ -55,13 +56,12 @@ public class UIManager : MonoBehaviour
                 cardIndex[index].SetActive(false);
             }
         }
-
     }
     void Update()
     {
-        endTurnB.SetActive(_ = (cardCount > 2));
-        starCount.text = "Stars: " + GameManager.instance.meStars;
-        EnemyStarCount.text = "Stars: " + GameManager.instance.enemyStars;
+        // try to eliminate this method
+        //starCount.text = "" + GameManager.instance.meStars;
+        //enemyStarCount.text = "" + GameManager.instance.enemyStars;
     }
 
     public void BackCard()
@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
                 ReturnCard(lastUIIndex, lastCardIndex, false);
                 slotCards.Remove(slotCards.Last<int>());
                 cardCount--;
+                endTurnB.SetActive(_ = (cardCount > 2));
             }
             else
             {

@@ -67,8 +67,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            return;
+            if(UIManager.instance.cardCount < 3)
+            {
+                UIManager.instance.cardCount++;
+            }
         }
+
+        UIManager.instance.endTurnB.SetActive(_ = (UIManager.instance.cardCount > 2));
     }
 
     public void EndTurn()
@@ -91,7 +96,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn1()
     {
-        float timeToWait = 1.2f;
+        float timeToWait = 1.4f;
         float waitToFlip = 0.15f;
 
         for (int i = 0; i < 6;)
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
                     cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
                     yield return new WaitForSeconds(waitToFlip);
                     reproduce.PlayOneShot(flipCard);
+                    cardSlots[i].GetComponentInChildren<Card>().OnParticleTrigger();
                 }
 
                 yield return new WaitForSeconds(timeToWait);
@@ -125,6 +131,7 @@ public class GameManager : MonoBehaviour
                     cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
                     yield return new WaitForSeconds(waitToFlip);
                     reproduce.PlayOneShot(flipCard);
+                    cardSlots[i].GetComponentInChildren<Card>().OnParticleTrigger();
                 }
 
                 yield return new WaitForSeconds(timeToWait);
@@ -153,7 +160,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn2()
     {
-        float timeToWait = 1.2f;
+        float timeToWait = 1.5f;
         float waitToFlip = 0.15f;
 
         for (int i = 3; i < 6;)
@@ -167,6 +174,7 @@ public class GameManager : MonoBehaviour
                     cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
                     yield return new WaitForSeconds(waitToFlip);
                     reproduce.PlayOneShot(flipCard);
+                    cardSlots[i].GetComponentInChildren<Card>().OnParticleTrigger();
                 }
 
                 yield return new WaitForSeconds(timeToWait);
@@ -187,6 +195,7 @@ public class GameManager : MonoBehaviour
                     cardSlots[i].GetComponentInChildren<Animator>().SetTrigger("Flip");
                     yield return new WaitForSeconds(waitToFlip);
                     reproduce.PlayOneShot(flipCard);
+                    cardSlots[i].GetComponentInChildren<Card>().OnParticleTrigger();
                 }
 
                 yield return new WaitForSeconds(timeToWait);
@@ -218,6 +227,8 @@ public class GameManager : MonoBehaviour
         enemyAI.EnemyPlay();
         meStars += 2;
         enemyStars += 2;
+        UIManager.instance.starCount.text = "" + enemyStars;
+        UIManager.instance.enemyStarCount.text = "" + meStars;
     }
 
     private IEnumerator WaitInstallAnimation(float t)
