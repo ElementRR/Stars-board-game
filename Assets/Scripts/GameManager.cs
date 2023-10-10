@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
         // wait
         yield return new WaitForSeconds(timeToWait);
 
-        EndOfShowTurn();
+        EndOfShowTurn(true);
     }
 
     private IEnumerator ShowTurn2()
@@ -212,17 +212,19 @@ public class GameManager : MonoBehaviour
         // wait
         yield return new WaitForSeconds(timeToWait);
 
-        EndOfShowTurn();
+        EndOfShowTurn(false);
     }
 
-    private void EndOfShowTurn()
+    private void EndOfShowTurn(bool isTurn1)
     {
         // reset slots
         ResetSlots();
 
         // reset action turn
         actionTurn = true;
-        showFase1 = false;
+
+        showFase1 = (isTurn1) ? false : true;
+
         ShowTurnEnd();
         enemyAI.EnemyPlay();
         meStars += 2;
