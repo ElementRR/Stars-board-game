@@ -57,12 +57,6 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-    void Update()
-    {
-        // try to eliminate this method
-        //starCount.text = "" + GameManager.instance.meStars;
-        //enemyStarCount.text = "" + GameManager.instance.enemyStars;
-    }
 
     public void BackCard()
     {

@@ -37,7 +37,7 @@ public class EnemyAI : MonoBehaviour
 
         cardsToPlay = new();
 
-        int enemyStars = GameManager.instance.enemyStars;
+        int enemyStars = GameManager.enemyStars;
 
         while (cardsToPlay.Count < 3)
         {

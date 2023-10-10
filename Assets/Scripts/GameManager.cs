@@ -20,11 +20,11 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> cardSlots;
 
-    public GameObject[] FieldcardIndex;
+    public GameObject[] fieldCardIndex;
 
-    public int meStars = 0;
+    public static int meStars = 0;
 
-    public int enemyStars = 0;
+    public static int enemyStars = 0;
 
     [Header("Sound FX")]
     public AudioClip flipCard;
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
-        Instantiate(FieldcardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
+        Instantiate(fieldCardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
     }
 
     public void FillSlot(int cardIndex)
@@ -226,9 +226,9 @@ public class GameManager : MonoBehaviour
         ShowTurnEnd();
         enemyAI.EnemyPlay();
         meStars += 2;
+        UIManager.instance.starCount.text = "" + meStars;
         enemyStars += 2;
-        UIManager.instance.starCount.text = "" + enemyStars;
-        UIManager.instance.enemyStarCount.text = "" + meStars;
+        UIManager.instance.enemyStarCount.text = "" + enemyStars;
     }
 
     private IEnumerator WaitInstallAnimation(float t)

@@ -17489,7 +17489,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 282682673}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -17947,6 +17948,7 @@ MonoBehaviour:
   - {fileID: 1347612946}
   - {fileID: 310194944}
   cardCount: 0
+  endTurnB: {fileID: 0}
   cardIndex:
   - {fileID: 75058366}
   - {fileID: 1040259986}
@@ -17957,7 +17959,7 @@ MonoBehaviour:
   - {fileID: 5442973329052851470}
   slotCards: 
   starCount: {fileID: 475358867}
-  EnemyStarCount: {fileID: 588333061}
+  enemyStarCount: {fileID: 588333061}
   youWinS: {fileID: 8300000, guid: b769a9a0c7db1f64693f5e9c707cdc04, type: 3}
   youLoseS: {fileID: 8300000, guid: a1c0f2e701963da46a41a63a217ace83, type: 3}
 --- !u!82 &1053211830
@@ -18340,7 +18342,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 282682673}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -19843,7 +19846,7 @@ MonoBehaviour:
   - {fileID: 54285770}
   - {fileID: 789675912}
   - {fileID: 890060003}
-  FieldcardIndex:
+  fieldCardIndex:
   - {fileID: 8041570867762117878, guid: bebd2c80fad656a4a8dad73d71148b41, type: 3}
   - {fileID: 2035681050910321514, guid: f2fdbe3828b67314aa6d2fd6be1b88e6, type: 3}
   - {fileID: 3920092607788738752, guid: b2af78beccc62884d8cceab959249a9a, type: 3}
@@ -19852,8 +19855,6 @@ MonoBehaviour:
   - {fileID: 4698500039984500059, guid: ed9869e66ae1c6e48b690b685237353c, type: 3}
   - {fileID: 2035681050910321514, guid: 6d239056f9ed2da45910f4b2cec20c29, type: 3}
   - {fileID: 2090661258493998730, guid: fc0033c564551b34ebc3ba3a6566339c, type: 3}
-  meStars: 0
-  enemyStars: 0
   flipCard: {fileID: 8300000, guid: 43807b570d8603841aa763673dbdcb3f, type: 3}
   blackPanel: {fileID: 1593668340}
 --- !u!114 &1817210725

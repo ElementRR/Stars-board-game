@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// OBS: The inhibitor sometimes is returning inhibitor cards that are flipped down
-// Try to use Lists instead of 2 en_value variables
-
 // adversary = the opponent of the player we are looking
 // enemy = the AI player
 // me = the human player
@@ -83,7 +80,7 @@ public class ShowTurnAction : MonoBehaviour
             }
         }else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
         {
-            int stars = (whereInstallT == 3) ? GameManager.instance.enemyStars : GameManager.instance.meStars;
+            int stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
 
             if (stars < inhCost)
             {
@@ -96,13 +93,13 @@ public class ShowTurnAction : MonoBehaviour
             {
                 if (isEnemy)
                 {
-                    GameManager.instance.enemyStars -= inhCost;
-                    UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
+                    GameManager.enemyStars -= inhCost;
+                    UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
                 }
                 else
                 {
-                    GameManager.instance.meStars -= inhCost;
-                    UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
+                    GameManager.meStars -= inhCost;
+                    UIManager.instance.starCount.text = "" + GameManager.meStars;
                 }
 
                 if (!adversaryHasAnt) // no : return inhibitor card
@@ -129,17 +126,17 @@ public class ShowTurnAction : MonoBehaviour
         }
         else
         {
-            if (!isEnemy)
+            if (isEnemy)
             { 
-                GameManager.instance.meStars += 2;
-                OnMessageSent?.Invoke("+2 Stars for you!");
-                UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
+                GameManager.enemyStars += 2;
+                UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
+                OnMessageSent?.Invoke("+2 Stars for enemy!");
             }
             else
             {
-                GameManager.instance.enemyStars += 2;
-                OnMessageSent?.Invoke("+2 Stars for enemy!");
-                //UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
+                GameManager.meStars += 2;
+                UIManager.instance.starCount.text = "" + GameManager.meStars;
+                OnMessageSent?.Invoke("+2 Stars for you!");
             }
             
 
@@ -232,7 +229,7 @@ public class ShowTurnAction : MonoBehaviour
 
     private void InstallTower(int slot, GameObject cardSlot)
     {
-        int stars = (whereInstallT == 3) ? GameManager.instance.enemyStars : GameManager.instance.meStars;
+        int stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
 
         if (stars < towerCost)
         {
@@ -262,12 +259,13 @@ public class ShowTurnAction : MonoBehaviour
         switch (whereInstallT)
         {
             case 3:
-                GameManager.instance.enemyStars -= towerCost;
-                //UIManager.instance.enemyStarCount.text = "" + GameManager.instance.enemyStars;
+                GameManager.enemyStars -= towerCost;
+                UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
+
                 break;
             default:
-                GameManager.instance.meStars -= towerCost;
-                UIManager.instance.starCount.text = "" + GameManager.instance.meStars;
+                GameManager.meStars -= towerCost;
+                UIManager.instance.starCount.text = "" + GameManager.meStars;
                 break;
         }
 
