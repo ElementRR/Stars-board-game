@@ -32,7 +32,7 @@ public class EnvGenerator : MonoBehaviour
     void Awake()
     {
         Quaternion rockRotation = Quaternion.Euler(0, -134, 0);
-        Quaternion treeRotation = Quaternion.Euler(0, -30, 0);
+        Quaternion treeRotation = Quaternion.Euler(0, -89.97f, 0);
         Quaternion artifactRotation = Quaternion.Euler(-90, 0, -39);
         Quaternion whetherRotation = Quaternion.Euler(285, 90, 270);
 
@@ -41,9 +41,9 @@ public class EnvGenerator : MonoBehaviour
         GameObject soil = Instantiate(soilPrefabs[Random.Range(0, soilPrefabs.Length)], soilPosition, transform.rotation, transform);
         soil.transform.localScale = soilScale;
 
-        GameObject tree = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length)], treePosition, treeRotation, transform);
+        GameObject tree = Instantiate(treePrefabs[Random.Range(0, 2)], treePosition, treeRotation, transform);
         tree.transform.localScale = treeScale;
-        GameObject tree1 = Instantiate(treePrefabs[Random.Range(0, treePrefabs.Length)], treePosition1, transform.rotation, transform);
+        GameObject tree1 = Instantiate(treePrefabs[2], treePosition1, treeRotation, transform);
         tree1.transform.localScale = tree1Scale;
 
         GameObject rock = Instantiate(rockPrefabs[Random.Range(0, rockPrefabs.Length)], rockPosition, transform.rotation, transform);

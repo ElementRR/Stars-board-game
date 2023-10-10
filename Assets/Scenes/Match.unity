@@ -20415,10 +20415,9 @@ MonoBehaviour:
   soilPosition: {x: 0, y: -0.64, z: 0}
   soilScale: {x: 30, y: 2, z: 30}
   treePrefabs:
-  - {fileID: 5350280534173931464, guid: 1270402012478fb42b97dbc97d92b781, type: 3}
-  - {fileID: 2109869859679598787, guid: 0496fafde5e29f8418f8c34bbf308707, type: 3}
-  - {fileID: 4627695552375927484, guid: a38018ed68df74949b6fb8e98e070ba1, type: 3}
-  - {fileID: 1456544242132356, guid: 44ef4afd1e20f65478f7ca1d2c3b00ee, type: 3}
+  - {fileID: 766041494476661722, guid: 7c816d79a565d6b4296f53e2edd22576, type: 3}
+  - {fileID: 1148486945945106996, guid: fbdc3443d19645248aaba69a64822a51, type: 3}
+  - {fileID: 7205473660168998055, guid: 4bb3e8c31a9408a4583c982d69c5db40, type: 3}
   treePosition: {x: 8.1, y: -0.23999977, z: 8.4}
   treeScale: {x: 2.8296003, y: 2.8296, z: 2.8296003}
   treePosition1: {x: 11, y: -0.24000025, z: 7.42}
