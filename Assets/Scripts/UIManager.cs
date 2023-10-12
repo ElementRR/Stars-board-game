@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
     }
 
+    public void SpeedTime()
+    {
+        Time.timeScale = 2;
+    }
+
     void Awake()
     {
         instance = this;

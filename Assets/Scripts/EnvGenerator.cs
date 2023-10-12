@@ -32,7 +32,7 @@ public class EnvGenerator : MonoBehaviour
     void Awake()
     {
         Quaternion rockRotation = Quaternion.Euler(0, -134, 0);
-        Quaternion treeRotation = Quaternion.Euler(0, -89.97f, 0);
+        Quaternion treeRotation = Quaternion.Euler(new Vector3(0, -89.97f, 0));
         Quaternion artifactRotation = Quaternion.Euler(-90, 0, -39);
         Quaternion whetherRotation = Quaternion.Euler(285, 90, 270);
 
@@ -43,19 +43,19 @@ public class EnvGenerator : MonoBehaviour
 
         GameObject tree = Instantiate(treePrefabs[Random.Range(0, 2)], treePosition, treeRotation, transform);
         tree.transform.localScale = treeScale;
-        GameObject tree1 = Instantiate(treePrefabs[2], treePosition1, treeRotation, transform);
+        GameObject tree1 = Instantiate(treePrefabs[Random.Range(2, 3)], treePosition1, treeRotation, transform);
         tree1.transform.localScale = tree1Scale;
 
-        GameObject rock = Instantiate(rockPrefabs[Random.Range(0, rockPrefabs.Length)], rockPosition, transform.rotation, transform);
+        GameObject rock = Instantiate(rockPrefabs[Random.Range(0, rockPrefabs.Length)], rockPosition, treeRotation, transform);
         rock.transform.localScale = rockScale;
-        GameObject rock1 = Instantiate(rockPrefabs[Random.Range(0, rockPrefabs.Length)], rockPosition1, rockRotation, transform);
+        GameObject rock1 = Instantiate(rockPrefabs[Random.Range(0, rockPrefabs.Length)], rockPosition1, treeRotation, transform);
         rock1.transform.localScale = rock1Scale;
 
         int randNumber = Random.Range(0, 101);
 
         if (randNumber <= artifactChance)
         {
-            Instantiate(artifactPrefabs[Random.Range(0, artifactPrefabs.Length)], artifactPosition, artifactRotation, transform);
+            Instantiate(artifactPrefabs[Random.Range(0, artifactPrefabs.Length)], artifactPosition, transform.rotation, transform);
             Instantiate(whetherPrefabs[Random.Range(0, whetherPrefabs.Length)], whetherPosition, whetherRotation, transform);
         }
     }

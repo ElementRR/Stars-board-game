@@ -22,6 +22,8 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] cameras;
 
+    public GameObject redSquare;
+
     private int towerCost = 3;
 
     private int inhCost = 1;
@@ -82,14 +84,13 @@ public class ShowTurnAction : MonoBehaviour
         {
             int stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
 
-            if (stars < inhCost)
+            if (stars < inhCost) // inhibitor: do you have enough stars?
             {
-                
                 UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
 
                 NotEnoughStars();
             }
-            else
+            else // stars requisition: success
             {
                 if (isEnemy)
                 {
@@ -156,6 +157,7 @@ public class ShowTurnAction : MonoBehaviour
             if (fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().isFilled)
             {
                 en_value.Add(fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().towerToInstantiate);
+                Instantiate(redSquare, fieldSlots[adversarySlot + i].transform);
             }
         }
 
