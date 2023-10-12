@@ -22,8 +22,6 @@ public class ShowTurnAction : MonoBehaviour
 
     public GameObject[] cameras;
 
-    public GameObject redSquare;
-
     private int towerCost = 3;
 
     private int inhCost = 1;
@@ -157,7 +155,6 @@ public class ShowTurnAction : MonoBehaviour
             if (fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().isFilled)
             {
                 en_value.Add(fieldSlots[adversarySlot + i].GetComponent<FieldSlot>().towerToInstantiate);
-                Instantiate(redSquare, fieldSlots[adversarySlot + i].transform);
             }
         }
 
@@ -166,6 +163,8 @@ public class ShowTurnAction : MonoBehaviour
     {
         string message = "";
         bool shouldReturnCard = false;
+        int blockTowerIndex = 3; // dummy value
+        bool failBellTower = false;
 
         switch (me_value1)
         {
@@ -173,6 +172,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (en_value.Contains(1)) 
                 {
                     message = "Fire tower could not be installed!";
+                    blockTowerIndex = en_value.IndexOf(1);
                     shouldReturnCard = true;
                 }
                 break;
@@ -180,6 +180,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (en_value.Contains(0)) 
                 {
                     message = "Water tower could not be installed!";
+                    blockTowerIndex = en_value.IndexOf(0);
                     shouldReturnCard = true;
                 }
                 break;
@@ -187,6 +188,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (en_value.Contains(3)) 
                 {
                     message = "Sun tower could not be installed!";
+                    blockTowerIndex = en_value.IndexOf(3);
                     shouldReturnCard = true;
                 }
                 break;
@@ -194,6 +196,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (en_value.Contains(2)) 
                 {
                     message = "Moon tower could not be installed!";
+                    blockTowerIndex = en_value.IndexOf(2);
                     shouldReturnCard = true;
                 }
                 break;
@@ -201,6 +204,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (en_value.Count > 0) 
                 {
                     message = "Bell tower could not be installed!";
+                    failBellTower = true;
                     shouldReturnCard = true;
                 }
                 break;
@@ -212,6 +216,39 @@ public class ShowTurnAction : MonoBehaviour
         if (shouldReturnCard)
         {
             UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+
+            if (failBellTower)
+            {
+                for (int i = 0; i < 2; i++) 
+                {
+                    switch (isEnemy)
+                    {
+                        case false when fieldSlots[i + 3].GetComponent<FieldSlot>().isFilled:
+                            fieldSlots[i + 3].GetComponent<FieldSlot>().FailedToInstall();
+                            break;
+                        case true when fieldSlots[i].GetComponent<FieldSlot>().isFilled:
+                            fieldSlots[i].GetComponent<FieldSlot>().FailedToInstall();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                switch (isEnemy)
+                {
+                    case false when fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().isFilled:
+                        fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().FailedToInstall();
+                        break;
+                    case true when fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().isFilled:
+                        fieldSlots[blockTowerIndex].GetComponent<FieldSlot>().FailedToInstall();
+                        break;
+                    default:
+                        break;
+                }
+            }
+
             reproduce.PlayOneShot(inhTower);
             OnMessageSent?.Invoke(message);
         }

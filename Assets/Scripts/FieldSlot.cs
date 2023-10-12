@@ -4,6 +4,7 @@ public class FieldSlot : MonoBehaviour
 {
     public GameObject[] towerIndex;
     public GameObject installFX;
+    public GameObject redSquare;
     public int towerToInstantiate;
     public bool isFilled;
 
@@ -19,5 +20,10 @@ public class FieldSlot : MonoBehaviour
         Instantiate(towerIndex[towerToInstantiate], transform.position, towerRotation, gameObject.transform);
         Instantiate(installFX, transform.position, transform.rotation, gameObject.transform);
         isFilled = true;
+    }
+
+    public void FailedToInstall()
+    {
+        Instantiate(redSquare, gameObject.transform);
     }
 }

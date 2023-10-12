@@ -17230,6 +17230,8 @@ MonoBehaviour:
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
     type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
+    type: 3}
   towerToInstantiate: 8
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -17318,6 +17320,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
     type: 3}
   towerToInstantiate: 8
   isFilled: 0
@@ -17456,6 +17460,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
     type: 3}
   towerToInstantiate: 8
   isFilled: 0
@@ -19495,6 +19501,8 @@ MonoBehaviour:
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
     type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
+    type: 3}
   towerToInstantiate: 8
   isFilled: 0
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
@@ -20015,8 +20023,6 @@ MonoBehaviour:
   - {fileID: 330585543}
   - {fileID: 1183236023}
   - {fileID: 981354290}
-  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
-    type: 3}
   inhTower: {fileID: 8300000, guid: 11dcb796b2fd41846b3e56921d7ae0e4, type: 3}
 --- !u!114 &1817210726
 MonoBehaviour:
@@ -20182,6 +20188,8 @@ MonoBehaviour:
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
     type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
+    type: 3}
   towerToInstantiate: 8
   isFilled: 0
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
@@ -20264,6 +20272,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1455145391324238178, guid: a5e89d2927831aa4ca1206e0cc1f43f6, type: 3}
   installFX: {fileID: 381668743370615429, guid: f19f1e1b2350524419447165f7ce3ded,
+    type: 3}
+  redSquare: {fileID: 5332115822841049795, guid: 35e45c6d576d9c040a3f3beddd2f0f36,
     type: 3}
   towerToInstantiate: 8
   isFilled: 0
