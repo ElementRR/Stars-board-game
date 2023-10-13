@@ -9,6 +9,12 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
+    [Header("Jokenpo")]
+
+    public GameObject jokepoCanvas;
+
+    [Header("Game")]
+
     public GameObject endPanel;
     public GameObject[] announce;
 
@@ -30,6 +36,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
+
+        jokepoCanvas.SetActive(true);
     }
 
     public void SpeedTime()
