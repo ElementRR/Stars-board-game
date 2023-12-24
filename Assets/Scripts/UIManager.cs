@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Jokenpo")]
 
-    public GameObject jokepoCanvas;
+    public GameObject jokenpoCanvas;
 
     [Header("Game")]
 
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
 
-        jokepoCanvas.SetActive(true);
+        jokenpoCanvas.SetActive(true);
     }
 
     public void SpeedTime()

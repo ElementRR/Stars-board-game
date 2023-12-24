@@ -18763,7 +18763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fa0e86211d63e45a132536e39ffb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jokepoCanvas: {fileID: 1934062783}
+  jokenpoCanvas: {fileID: 1934062783}
   endPanel: {fileID: 954858073}
   announce:
   - {fileID: 1347612946}
@@ -21649,7 +21649,7 @@ GameObject:
   - component: {fileID: 1934062785}
   - component: {fileID: 1934062788}
   m_Layer: 5
-  m_Name: Jokepo Canvas
+  m_Name: Jokenpo Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21759,6 +21759,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyText: {fileID: 640268977}
   textDecision: {fileID: 46846891}
+  WhoFirstLogic: {fileID: 639826036923589565, guid: 400969503b6551947ad3f15ecbb0d7bc,
+    type: 3}
   meHand: 0
   enemyHand: 0
   isWinner: 0

@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         UIManager.instance.cardCount = 0;
         actionTurn = true;
-        showFase1 = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         enemyAI = GetComponent<EnemyAI>();
         reproduce = GetComponent<AudioSource>();

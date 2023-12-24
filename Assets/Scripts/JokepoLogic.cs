@@ -10,6 +10,8 @@ public class JokepoLogic : MonoBehaviour
 
     public TextMeshProUGUI textDecision;
 
+    public WhoFirstLogic WhoFirstLogic;
+
     public int meHand;
     // 0 = rock, 1 = paper, 2 = scissors
     public int enemyHand;
@@ -74,16 +76,31 @@ public class JokepoLogic : MonoBehaviour
                 break;
         }
 
-        if(isWinner) {
-
-            textDecision.text = "You win";
-        }
-        else { textDecision.text = "You lose";
-        }
+        StartCoroutine(NextWindow());
     }
     private void ResetGame()
     {
         enemyHand = Random.Range(0, 2);
         isHandPicked = false;
+    }
+
+    private IEnumerator NextWindow() 
+    {
+        float time = 1.2f;
+
+        if (isWinner)
+        {
+            textDecision.text = "You win";
+            yield return new WaitForSeconds(time);
+            Instantiate(WhoFirstLogic.gameObject, transform);
+        }
+        else
+        {
+            textDecision.text = "You lose";
+            GameManager.instance.showFase1 = false;
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
+        }
+
     }
 }
