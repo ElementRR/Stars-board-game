@@ -99,7 +99,8 @@ public class JokepoLogic : MonoBehaviour
             textDecision.text = "You lose";
             GameManager.instance.showFase1 = false;
             yield return new WaitForSeconds(time);
-            gameObject.SetActive(false);
+            Instantiate(WhoFirstLogic.gameObject, transform);
+            //gameObject.SetActive(false);
         }
 
     }

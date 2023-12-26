@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42bdf322a094c5f49b5be84398d7767a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JokenpoLogic: {fileID: 0}
+  jokenpoLogic: {fileID: 0}
 --- !u!1 &639826037325555171
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a610337597cb1c04f824c61179a9f5e4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

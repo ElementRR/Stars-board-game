@@ -12,6 +12,7 @@ public class OutdoorController : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>();
         ShowTurnAction.OnMessageSent += ShowMessage;
+        WhoFirstLogic.OnMessageSent += ShowMessage;
         anim = GetComponent<Animator>();
     }
 
