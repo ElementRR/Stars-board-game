@@ -12,7 +12,7 @@ public class WhoFirstLogic : MonoBehaviour
         jokenpoLogic = GetComponentInParent<JokepoLogic>();
         if(!GameManager.instance.showFase1)
         {
-            OnMessageSent?.Invoke("Enemy will start to show cards!!");
+            OnMessageSent?.Invoke("Enemy will start showing cards!!");
             jokenpoLogic.gameObject.SetActive(false);
         }
     }
@@ -21,7 +21,7 @@ public class WhoFirstLogic : MonoBehaviour
         if (isYou)
         {
             GameManager.instance.showFase1 = true;
-            OnMessageSent?.Invoke("You will start to show cards!");
+            OnMessageSent?.Invoke("You will start showing cards!");
             jokenpoLogic.gameObject.SetActive(false);
         }
         else

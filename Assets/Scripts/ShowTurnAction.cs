@@ -20,7 +20,9 @@ public class ShowTurnAction : MonoBehaviour
 
     int whereInstallT; // This will show us if is me time (0) or enemy time (3)
 
-    public GameObject[] cameras;
+    public Transform[] cameraLocs;
+
+    public GameObject mainCamera;
 
     private int towerCost = 3;
 
@@ -291,7 +293,9 @@ public class ShowTurnAction : MonoBehaviour
             }
         }
 
-        cameras[slot < 3 ? 1 : 2].SetActive(true);
+        //cameras[slot < 3 ? 1 : 2].SetActive(true);
+        mainCamera.transform.SetPositionAndRotation(cameraLocs[slot < 3 ? 1 : 2].position,
+            cameraLocs[slot < 3 ? 1 : 2].rotation);
 
         DestroyChildObject(cardSlot);
 

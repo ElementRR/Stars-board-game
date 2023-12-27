@@ -40,9 +40,9 @@ public class UIManager : MonoBehaviour
         jokenpoCanvas.SetActive(true);
     }
 
-    public void SpeedTime()
+    public void SpeedTime(bool isFast)
     {
-        Time.timeScale = 2;
+        Time.timeScale = (isFast) ? 2 : 1;  
     }
 
     void Awake()

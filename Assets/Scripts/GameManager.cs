@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] fieldCardIndex;
 
+    private const int endTurnStars = 1;
+
     public static int meStars = 0;
 
     public static int enemyStars = 0;
@@ -32,6 +34,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] Animator blackPanel;
+
+    public delegate void Outdoor(string message);
+    public static event Outdoor OnMessageSent;
 
     void Awake()
     {
@@ -226,10 +231,11 @@ public class GameManager : MonoBehaviour
 
         ShowTurnEnd();
         enemyAI.EnemyPlay();
-        meStars += 2;
+        meStars += endTurnStars;
         UIManager.instance.starCount.text = "" + meStars;
-        enemyStars += 2;
+        enemyStars += endTurnStars;
         UIManager.instance.enemyStarCount.text = "" + enemyStars;
+        OnMessageSent?.Invoke("+" + endTurnStars + " star(s) to both players");
     }
 
     private IEnumerator WaitInstallAnimation(float t)
@@ -238,8 +244,10 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitUntil(() => installEnd == true);
 
-        showTurnAction.cameras[1].SetActive(false);
-        showTurnAction.cameras[2].SetActive(false);
+        //showTurnAction.cameras[1].SetActive(false);
+        //showTurnAction.cameras[2].SetActive(false);
+        showTurnAction.mainCamera.transform.SetPositionAndRotation(showTurnAction.cameraLocs[0].position,
+            showTurnAction.cameraLocs[0].rotation);
     }
 
     public void ResetSlots()

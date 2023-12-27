@@ -13,6 +13,7 @@ public class OutdoorController : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
         ShowTurnAction.OnMessageSent += ShowMessage;
         WhoFirstLogic.OnMessageSent += ShowMessage;
+        GameManager.OnMessageSent += ShowMessage;
         anim = GetComponent<Animator>();
     }
 
