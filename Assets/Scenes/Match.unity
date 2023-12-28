@@ -21663,6 +21663,8 @@ GameObject:
   - component: {fileID: 1934062786}
   - component: {fileID: 1934062785}
   - component: {fileID: 1934062788}
+  - component: {fileID: 1934062790}
+  - component: {fileID: 1934062789}
   m_Layer: 5
   m_Name: Jokenpo Canvas
   m_TagString: Untagged
@@ -21774,11 +21776,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyText: {fileID: 640268977}
   textDecision: {fileID: 46846891}
-  WhoFirstLogic: {fileID: 639826036923589565, guid: 400969503b6551947ad3f15ecbb0d7bc,
+  WhoFirstLogic: {fileID: 6344520324484415928, guid: b31ac547eb5c29046ba19faf7a3453f3,
     type: 3}
   meHand: 0
   enemyHand: 0
   isWinner: 0
+--- !u!114 &1934062789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934062783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1934062790
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934062783}
+  m_CullTransparentMesh: 1
 --- !u!1 &1957722141
 GameObject:
   m_ObjectHideFlags: 0

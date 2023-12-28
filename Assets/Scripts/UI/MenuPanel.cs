@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MenuPanel : MonoBehaviour
 {
     [SerializeField] GameObject tut;
-    [SerializeField] Animator blackPanel;
+    [SerializeField] GameObject enemyPanel;
 
     private void Awake()
     {
@@ -18,7 +18,8 @@ public class MenuPanel : MonoBehaviour
 
     public void PlayMatch()
     {
-        StartCoroutine(ChangeScene());
+        Instantiate(enemyPanel);
+        //StartCoroutine(ChangeScene());
     }
     public void BackToMenu()
     {
@@ -38,10 +39,4 @@ public class MenuPanel : MonoBehaviour
         Application.OpenURL("https://forms.gle/NTZWU9CJ3i9fGLocA");
     }
 
-    private IEnumerator ChangeScene()
-    {
-        blackPanel.Play("TransToBlack");
-        yield return new WaitForSecondsRealtime(0.5f);
-        SceneManager.LoadScene(1);
-    }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00071994803, g: 0.0039886488, b: 0.019870741, a: 1}
+  m_IndirectSpecularColor: {r: 0.00077867036, g: 0.004123315, b: 0.019989327, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2396,6 +2396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tut: {fileID: 6866984211686753420, guid: 964ab5072c5950e449eaa37afaf9a6cb, type: 3}
+  enemyPanel: {fileID: 7214866110137433794, guid: 5b9b1dc7ee6020240880b7bc6e15f828,
+    type: 3}
   blackPanel: {fileID: 427185839}
 --- !u!1001 &1638075683
 PrefabInstance:
