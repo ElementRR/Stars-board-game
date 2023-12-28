@@ -45,9 +45,11 @@ public class GameManager : MonoBehaviour
         UIManager.instance.cardCount = 0;
         actionTurn = true;
         showTurnAction = GetComponent<ShowTurnAction>();
-        enemyAI = GetComponent<EnemyAI>();
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
+
+            enemyAI = GetComponent<EdAI>();
+
     }
 
     public event Action OnFirstTurnEnd;

@@ -7,9 +7,13 @@ public class EnemySelection : TutPanel
 {
     [SerializeField] Animator blackPanel;
 
+    public delegate void Outdoor(Enemy.Name enemyName);
+    public static event Outdoor OnEnemyChose;
+
     //enemyIndex = 0 : Ed, 1 : Rick, 2 : Ana
     public void EnemyChose(int enemyIndex)
     {
+        OnEnemyChose?.Invoke(Enemy.Name.Ed);
         StartCoroutine(ChangeScene());
     }
 

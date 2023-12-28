@@ -1741,6 +1741,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1305937423}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1307570256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1307570257}
+  m_Layer: 0
+  m_Name: EnemyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1307570257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307570256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 959.76, y: 540.00006, z: 0.49999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1320453711
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2398,7 +2429,6 @@ MonoBehaviour:
   tut: {fileID: 6866984211686753420, guid: 964ab5072c5950e449eaa37afaf9a6cb, type: 3}
   enemyPanel: {fileID: 7214866110137433794, guid: 5b9b1dc7ee6020240880b7bc6e15f828,
     type: 3}
-  blackPanel: {fileID: 427185839}
 --- !u!1001 &1638075683
 PrefabInstance:
   m_ObjectHideFlags: 0

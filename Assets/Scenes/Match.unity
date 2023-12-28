@@ -18143,7 +18143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tut: {fileID: 0}
-  blackPanel: {fileID: 0}
+  enemyPanel: {fileID: 0}
 --- !u!1 &959931274
 GameObject:
   m_ObjectHideFlags: 0
@@ -21206,8 +21206,8 @@ GameObject:
   - component: {fileID: 1817210723}
   - component: {fileID: 1817210724}
   - component: {fileID: 1817210725}
-  - component: {fileID: 1817210726}
   - component: {fileID: 1817210727}
+  - component: {fileID: 1817210728}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -21291,20 +21291,6 @@ MonoBehaviour:
   - {fileID: 1106267395}
   mainCamera: {fileID: 330585543}
   inhTower: {fileID: 8300000, guid: 11dcb796b2fd41846b3e56921d7ae0e4, type: 3}
---- !u!114 &1817210726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817210722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 130d61b309c09f4479a66aa0dcf334f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardsToChooseFrom: 
-  cardsToPlay: 
 --- !u!82 &1817210727
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21401,6 +21387,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1817210728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817210722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06debf45664d56f4e8211b4be6db9bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsToChooseFrom: 
+  cardsToPlay: 
 --- !u!1 &1817790158
 GameObject:
   m_ObjectHideFlags: 0
