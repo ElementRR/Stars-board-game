@@ -21208,6 +21208,8 @@ GameObject:
   - component: {fileID: 1817210725}
   - component: {fileID: 1817210727}
   - component: {fileID: 1817210728}
+  - component: {fileID: 1817210730}
+  - component: {fileID: 1817210729}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -21397,6 +21399,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06debf45664d56f4e8211b4be6db9bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsToChooseFrom: 
+  cardsToPlay: 
+--- !u!114 &1817210729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817210722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f82f706ea895ffc4190e05c79d570dda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardsToChooseFrom: 
+  cardsToPlay: 
+--- !u!114 &1817210730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817210722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b1ec9f8b5c0ad4597a36558cea6e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardsToChooseFrom: 

@@ -48,7 +48,22 @@ public class GameManager : MonoBehaviour
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
 
+        if (GetComponent<EdAI>().enabled)
+        {
             enemyAI = GetComponent<EdAI>();
+        }else if (GetComponent<RickAI>().enabled)
+        {
+            enemyAI = GetComponent<RickAI>();
+        }
+        else if (GetComponent<AnaAI>().enabled)
+        {
+            enemyAI = GetComponent<AnaAI>();
+        }
+        else
+        {
+            enemyAI = null;
+        }
+
 
     }
 

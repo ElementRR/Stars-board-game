@@ -13,7 +13,22 @@ public class EnemySelection : TutPanel
     //enemyIndex = 0 : Ed, 1 : Rick, 2 : Ana
     public void EnemyChose(int enemyIndex)
     {
-        OnEnemyChose?.Invoke(Enemy.Name.Ed);
+        switch (enemyIndex)
+        {
+            case 0:
+                OnEnemyChose?.Invoke(Enemy.Name.Ed);
+                break;
+            case 1:
+                OnEnemyChose?.Invoke(Enemy.Name.Rick);
+                break;
+            case 2:
+                OnEnemyChose?.Invoke(Enemy.Name.Ana);
+                break;
+            default:
+                OnEnemyChose?.Invoke(Enemy.Name.Ed);
+                break;
+        }
+
         StartCoroutine(ChangeScene());
     }
 

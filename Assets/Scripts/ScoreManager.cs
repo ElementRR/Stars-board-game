@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -11,10 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    [SerializeField]
-    private TextMeshProUGUI scoreText;
-
-    public static int score;
+    [SerializeField] public static int score;
 
     public Enemy.Name _enemyName;
 
@@ -35,13 +30,11 @@ public class ScoreManager : MonoBehaviour
         {
             instance = this;
         }
-        scoreText.text = "Your score: " + score;
     }
 
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = "Your score: " + score;
     }
 
     private void GetEnemyName(Enemy.Name enemyName)
