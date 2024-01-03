@@ -34,9 +34,5 @@ public class MenuPanel : MonoBehaviour
 
         Application.Quit();
     }
-    public void GoToLink()
-    {
-        Application.OpenURL("https://forms.gle/NTZWU9CJ3i9fGLocA");
-    }
 
 }

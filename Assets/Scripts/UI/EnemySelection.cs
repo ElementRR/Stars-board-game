@@ -10,6 +10,27 @@ public class EnemySelection : TutPanel
     public delegate void Outdoor(Enemy.Name enemyName);
     public static event Outdoor OnEnemyChose;
 
+    [SerializeField] private GameObject textRoot1;
+    [SerializeField] private GameObject textRoot2;
+
+    [Header("Erase later")]
+    [SerializeField] int FalseScore;
+
+    private void Awake()
+    {
+        ScoreManager.instance.AddScore(FalseScore);
+
+        if (ScoreManager.isEdWon == true)
+        {
+            Destroy(textRoot1);
+        }
+
+        if (ScoreManager.score >= 400)
+        {
+            Destroy(textRoot2 );
+        }
+    }
+
     //enemyIndex = 0 : Ed, 1 : Rick, 2 : Ana
     public void EnemyChose(int enemyIndex)
     {

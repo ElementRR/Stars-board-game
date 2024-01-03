@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TutPanel : MonoBehaviour
 {
-    [SerializeField] private GameObject tut;
-    [SerializeField] private GameObject[] tutPanels;
-    [SerializeField] int panel = 0;
+    [SerializeField] protected GameObject tut;
+    [SerializeField] protected GameObject[] tutPanels;
+    [SerializeField] protected int panel = 0;
 
     public void NextPanel()
     {

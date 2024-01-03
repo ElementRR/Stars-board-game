@@ -33,5 +33,7 @@ public class OutdoorController : MonoBehaviour
     private void OnDestroy()
     {
         ShowTurnAction.OnMessageSent -= ShowMessage;
+        WhoFirstLogic.OnMessageSent -= ShowMessage;
+        GameManager.OnMessageSent -= ShowMessage;
     }
 }

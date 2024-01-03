@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private ShowTurnAction showTurnAction;
-    private EnemyAI enemyAI;
+    public EnemyAI enemyAI;
+    public Enemy.Name enemyIndex;
 
     public bool actionTurn;
     public bool showFase1;
@@ -43,28 +44,13 @@ public class GameManager : MonoBehaviour
         instance = this;
         Time.timeScale = 1;
         UIManager.instance.cardCount = 0;
+        meStars = 0;
+        enemyStars = 0;
         actionTurn = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
-
-        if (GetComponent<EdAI>().enabled)
-        {
-            enemyAI = GetComponent<EdAI>();
-        }else if (GetComponent<RickAI>().enabled)
-        {
-            enemyAI = GetComponent<RickAI>();
-        }
-        else if (GetComponent<AnaAI>().enabled)
-        {
-            enemyAI = GetComponent<AnaAI>();
-        }
-        else
-        {
-            enemyAI = null;
-        }
-
-
+        OnFirstTurnEnd += GetEnemyAI;
     }
 
     public event Action OnFirstTurnEnd;
@@ -236,6 +222,26 @@ public class GameManager : MonoBehaviour
         EndOfShowTurn(false);
     }
 
+    private void GetEnemyAI()
+    {
+        if (GetComponent<EdAI>() != null)
+        {
+            enemyAI = GetComponent<EdAI>();
+            enemyIndex = Enemy.Name.Ed;
+        }
+        else if (GetComponent<RickAI>() != null)
+        {
+            enemyAI = GetComponent<RickAI>();
+            enemyIndex = Enemy.Name.Rick;
+        }
+        else if (GetComponent<AnaAI>() != null)
+        {
+            enemyAI = GetComponent<AnaAI>();
+            enemyIndex = Enemy.Name.Ana;
+        }
+        Debug.Log(enemyAI);
+    }
+
     private void EndOfShowTurn(bool isTurn1)
     {
         // reset slots
@@ -270,5 +276,10 @@ public class GameManager : MonoBehaviour
     public void ResetSlots()
     {
         UIManager.instance.slotCards = new();
+    }
+
+    private void OnDestroy()
+    {
+        OnFirstTurnEnd -= GetEnemyAI;
     }
 }

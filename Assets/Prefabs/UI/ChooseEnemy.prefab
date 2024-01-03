@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6864464337330446148}
+      - m_Target: {fileID: 2772141207455514374}
         m_TargetAssemblyTypeName: TutPanel, Assembly-CSharp
         m_MethodName: BackPanel
         m_Mode: 1
@@ -1695,7 +1695,6 @@ GameObject:
   - component: {fileID: 7214866110137433823}
   - component: {fileID: 7214866110137433822}
   - component: {fileID: 7214866110137433793}
-  - component: {fileID: 6864464337330446148}
   - component: {fileID: 514420435279046674}
   - component: {fileID: 6121594265341999464}
   - component: {fileID: 2772141207455514374}
@@ -1797,22 +1796,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6864464337330446148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7214866110137433794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac52b518357a20b46b2269d5a4f0ed32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tut: {fileID: 7214866110137433794}
-  tutPanels:
-  - {fileID: 7214866110137433794}
-  panel: 0
 --- !u!222 &514420435279046674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1868,6 +1851,10 @@ MonoBehaviour:
   - {fileID: 7214866110137433794}
   panel: 0
   blackPanel: {fileID: 21816885555997156}
+  textRoot1: {fileID: 8346556388948312510}
+  isEdWon: 1
+  textRoot2: {fileID: 7236265443973073094}
+  FalseScore: 0
 --- !u!1 &7236265443973073094
 GameObject:
   m_ObjectHideFlags: 0

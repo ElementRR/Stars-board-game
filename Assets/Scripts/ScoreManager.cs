@@ -11,6 +11,8 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] public static int score;
 
+    [SerializeField] public static bool isEdWon = false;
+
     public Enemy.Name _enemyName;
 
     private void Start()

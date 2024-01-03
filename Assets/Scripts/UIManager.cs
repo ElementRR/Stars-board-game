@@ -16,7 +16,6 @@ public class UIManager : MonoBehaviour
     [Header("Game")]
 
     public GameObject endPanel;
-    public GameObject[] announce;
 
     public int cardCount = 0;
     public GameObject endTurnB;
@@ -37,6 +36,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
 
+        endPanel.SetActive(false);
         jokenpoCanvas.SetActive(true);
     }
 
@@ -112,16 +112,11 @@ public class UIManager : MonoBehaviour
         if (!enemyWins)
         {
             reproduce.PlayOneShot(youWinS);
-            announce[0].SetActive(true);
-            announce[1].SetActive(false);
-            ScoreManager.instance.AddScore(100);
         }
         else
         {
             reproduce.PlayOneShot(youLoseS);
-            announce[1].SetActive(true);
-            announce[0].SetActive(false);
-            ScoreManager.instance.AddScore(50);
         }
+        endPanel.GetComponent<EndGamePanel>().GameResult(enemyWins);
     }
 }
