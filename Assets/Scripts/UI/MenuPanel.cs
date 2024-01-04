@@ -35,4 +35,10 @@ public class MenuPanel : MonoBehaviour
         Application.Quit();
     }
 
+    public void ResetPoints()
+    {
+        ScoreManager.score = 0;
+        ScoreManager.isEdWon = false;
+        PlayerPrefs.DeleteAll();
+    }
 }

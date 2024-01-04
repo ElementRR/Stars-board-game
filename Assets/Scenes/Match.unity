@@ -12937,7 +12937,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -12966,7 +12966,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -271.137, y: 0, z: -325.3645, w: -151.06206}
+  m_margin: {x: -271.137, y: 0, z: -291.4383, w: -151.06206}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -19295,7 +19295,7 @@ MonoBehaviour:
   jokenpoCanvas: {fileID: 1934062783}
   endPanel: {fileID: 954858073}
   cardCount: 0
-  endTurnB: {fileID: 0}
+  endTurnB: {fileID: 1340624889}
   cardIndex:
   - {fileID: 75058366}
   - {fileID: 1040259986}
@@ -20797,7 +20797,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

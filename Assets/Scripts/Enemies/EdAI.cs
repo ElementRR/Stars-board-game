@@ -34,18 +34,18 @@ public class EdAI : EnemyAI
 
         cardsToPlay = new();
 
-        int enemyStars = GameManager.enemyStars;
+        //int enemyStars = GameManager.enemyStars;
 
         while (cardsToPlay.Count < 3)
         {
-            if (enemyStars < 3)
-            {
-                cardsToPlay.Add(7);
-                enemyStars += 2;
-                continue;
-            }
+            //if (enemyStars < 3)
+            //{
+             //   cardsToPlay.Add(7);
+            //    enemyStars += 2;
+            //    continue;
+            //}
 
-            int random = Random.Range(0, 9);
+            int random = Random.Range(0, 11);
 
             if (random > 7)
             {

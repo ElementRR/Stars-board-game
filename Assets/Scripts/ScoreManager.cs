@@ -18,6 +18,12 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         EnemySelection.OnEnemyChose += GetEnemyName;
+
+        score = PlayerPrefs.GetInt("score");
+
+        int intToBool = 0;
+        intToBool = PlayerPrefs.GetInt("isEdWon");
+        isEdWon = (intToBool == 1); 
     }
 
     private void Awake()
@@ -37,6 +43,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        PlayerPrefs.SetInt("score", score);
     }
 
     private void GetEnemyName(Enemy.Name enemyName)

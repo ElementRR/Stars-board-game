@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
+        GameManager.instance.OnShowTurnEnd += BackCard;
 
         endPanel.SetActive(false);
         jokenpoCanvas.SetActive(true);
@@ -90,6 +91,7 @@ public class UIManager : MonoBehaviour
                 return;
             }
         }
+        endTurnB.SetActive(_ = (cardCount > 2));
     }
 
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
@@ -118,5 +120,11 @@ public class UIManager : MonoBehaviour
             reproduce.PlayOneShot(youLoseS);
         }
         endPanel.GetComponent<EndGamePanel>().GameResult(enemyWins);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnFirstTurnEnd -= ActivateCard;
+        GameManager.instance.OnShowTurnEnd -= BackCard;
     }
 }

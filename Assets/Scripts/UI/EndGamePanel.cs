@@ -56,6 +56,7 @@ public class EndGamePanel : MonoBehaviour
             if(GameManager.instance.enemyIndex == Enemy.Name.Ed)
             {
                 ScoreManager.isEdWon = true;
+                PlayerPrefs.SetInt("isEdWon", 1);
             }
         }
 

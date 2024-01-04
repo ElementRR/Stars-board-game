@@ -46,6 +46,35 @@ public class AnaAI : EnemyAI
                 continue;
             }
 
+            // check towers in the field and add inhibitors
+
+            for (int i = 0; i < 2; i++)
+            {
+                int towerIndex = GetFieldCards(i);
+
+                if ((towerIndex == 0 || towerIndex == 2) && !cardsToPlay.Contains(5))
+                {
+                    cardsToPlay.Add(5);
+                    break;
+                }else if((towerIndex == 1 || towerIndex == 3) && !cardsToPlay.Contains(4))
+                {
+                    cardsToPlay.Add(4);
+                    break;
+                }
+                else if (!cardsToChooseFrom.Contains(6) && !cardsToPlay.Contains(6) && !firstTurn)
+                {
+                    cardsToPlay.Add(6);
+                    continue;
+                }
+                else
+                {break;}
+            }
+
+            if (cardsToPlay.Count > 2)
+            {
+                break;
+            }
+
             int random = Random.Range(0, 9);
 
             if (random > 7)
