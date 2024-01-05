@@ -27,7 +27,7 @@ public class EnvGenerator : MonoBehaviour
     [SerializeField] private GameObject[] whetherPrefabs;
     [SerializeField] private Vector3 whetherPosition;
 
-    public int artifactChance = 10;  // must be in %
+    public int artifactChance = 5;  // must be in %
 
     void Awake()
     {

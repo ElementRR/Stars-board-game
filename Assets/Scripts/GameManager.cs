@@ -222,7 +222,7 @@ public class GameManager : MonoBehaviour
         EndOfShowTurn(false);
     }
 
-    private void GetEnemyAI()
+    public void GetEnemyAI()
     {
         if (GetComponent<EdAI>() != null)
         {

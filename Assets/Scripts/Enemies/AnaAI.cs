@@ -21,10 +21,12 @@ public class AnaAI : EnemyAI
 
     public override void EnemyPlay()
     {
-        cardsToChooseFrom = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 7 });
+        cardsToChooseFrom = new List<int>(new int[] { 0, 1, 2, 3, 7 });
 
         if (!firstTurn)
         {
+            cardsToChooseFrom.Add(4);
+            cardsToChooseFrom.Add(5);
             cardsToChooseFrom.Add(6);
         }
 
@@ -55,19 +57,22 @@ public class AnaAI : EnemyAI
                 if ((towerIndex == 0 || towerIndex == 2) && !cardsToPlay.Contains(5))
                 {
                     cardsToPlay.Add(5);
-                    break;
+                    continue;
                 }else if((towerIndex == 1 || towerIndex == 3) && !cardsToPlay.Contains(4))
                 {
                     cardsToPlay.Add(4);
-                    break;
+                    continue;
                 }
-                else if (!cardsToChooseFrom.Contains(6) && !cardsToPlay.Contains(6) && !firstTurn)
+                else if (towerIndex == 6)
+                {
+                    cardsToChooseFrom.Remove(6);
+                    continue;
+                }
+                else if (cardsToChooseFrom.Contains(6) && !cardsToPlay.Contains(6) && !firstTurn)
                 {
                     cardsToPlay.Add(6);
                     continue;
                 }
-                else
-                {break;}
             }
 
             if (cardsToPlay.Count > 2)

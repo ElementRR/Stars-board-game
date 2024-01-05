@@ -26,9 +26,9 @@ public class EndGamePanel : MonoBehaviour
 
             finalText.text = GameManager.instance.enemyIndex switch
             {
-                Enemy.Name.Ed => "Ed won",
-                Enemy.Name.Rick => "Rick won",
-                Enemy.Name.Ana => "Ana won",
+                Enemy.Name.Ed => "Ed: I believe something is off... Did you let me win?",
+                Enemy.Name.Rick => "Rick: I was a nice game. But I've been training for some time\nmaybe next time? ",
+                Enemy.Name.Ana => "Ana: HAHAHA Did you really think you could win?\nA loser like you will never beat a genius like me!",
                 _ => "Error",
             };
         }
@@ -47,9 +47,9 @@ public class EndGamePanel : MonoBehaviour
 
             finalText.text = GameManager.instance.enemyIndex switch
             {
-                Enemy.Name.Ed => "Ed wish you a good luck with Rick",
-                Enemy.Name.Rick => "Rick is angry, he wants Ana to destroy you",
-                Enemy.Name.Ana => "Ana is angry",
+                Enemy.Name.Ed => "Ed: Oh fine. It was a nice game! :(\n I wish you good luck with Rick",
+                Enemy.Name.Rick => "Rick: Hey, how could this happen?\nDid you cheat o something?\nC-congrats!",
+                Enemy.Name.Ana => "Ana: NO! This is not possible!!!\nI've been training for a long time!\nI'm a genius! Get back here!",
                 _ => "Error",
             };
 

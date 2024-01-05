@@ -6,19 +6,41 @@ public class MatchMusic : MonoBehaviour
 {
     private AudioSource source;
     public AudioClip[] musics;
+    public AudioClip tensionSong;
     public float volume = 0.5f;
 
     // Start is called before the first frame update
     void Awake()
     {
         source = GetComponent<AudioSource>();
-        source.PlayOneShot(GetAudioClip(), volume);
-        source.loop = true;
+        StartCoroutine(MusicOrder());
     }
 
     public AudioClip GetAudioClip()
     {
-        int random = Random.Range(0, musics.Length);
+        int random = Random.Range(0, musics.Length - 1);
         return musics[random];
+    }
+    private IEnumerator MusicOrder()
+    {
+        source.loop = false;
+        source.volume = volume;
+        source.clip = tensionSong;
+        source.PlayDelayed(1);
+        yield return new WaitUntil(() => !source.isPlaying);
+        GameManager.instance.GetEnemyAI();
+
+        if(GameManager.instance.enemyIndex == Enemy.Name.Ana)
+        {
+            source.clip = musics[musics.Length - 1];
+            source.loop = true;
+            source.Play();
+        }else
+        {
+            source.clip = GetAudioClip();
+            source.loop = true;
+            source.Play();
+        }
+        
     }
 }
