@@ -6,6 +6,7 @@ public class MenuPanel : MonoBehaviour
 {
     [SerializeField] GameObject tut;
     [SerializeField] GameObject enemyPanel;
+    [SerializeField] GameObject settingsPanel;
 
     private void Awake()
     {
@@ -15,11 +16,14 @@ public class MenuPanel : MonoBehaviour
     {
         Instantiate(tut);
     }
+    public void EnterSettings()
+    {
+        Instantiate(settingsPanel);
+    }
 
     public void PlayMatch()
     {
         Instantiate(enemyPanel);
-        //StartCoroutine(ChangeScene());
     }
     public void BackToMenu()
     {

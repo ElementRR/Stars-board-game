@@ -9,9 +9,9 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    [SerializeField] public static int score;
+    public static int score;
 
-    [SerializeField] public static bool isEdWon = false;
+    public static bool isEdWon = false;
 
     public Enemy.Name _enemyName;
 

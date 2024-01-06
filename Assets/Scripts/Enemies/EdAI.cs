@@ -5,8 +5,20 @@ using UnityEngine;
 public class EdAI : EnemyAI
 {
     // Insert specific logic for Ed
+
+    [SerializeField] private GameObject tutArrows;
     protected override void Awake()
     {
+        if (Settings.isFirstTimePlaying)
+        {
+            tutArrows.SetActive(true);
+            Settings.isFirstTimePlaying = false;
+        }
+        else
+        {
+            tutArrows.SetActive(false);
+        }
+
         if (ScoreManager.instance._enemyName != Enemy.Name.Ed)
         {
             profilePhoto.SetActive(false);

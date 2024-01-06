@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JokepoLogic : MonoBehaviour
 {
-    public TextMeshProUGUI enemyText;
+    public Image enemyImg;
+
+    public Sprite[] enemyImgs;
+
+    public Button[] meChoices;
+
+    private Vector3 choiceFirstPos;
 
     public TextMeshProUGUI textDecision;
 
@@ -22,7 +29,7 @@ public class JokepoLogic : MonoBehaviour
 
     private void Awake()
     {
-        ResetGame();
+        ResetGame(false);
     }
 
     public void GetJokenpoGame(int number)
@@ -32,21 +39,18 @@ public class JokepoLogic : MonoBehaviour
             meHand = number;
             isHandPicked = true;
 
-            switch(enemyHand) 
+            enemyImg.sprite = enemyHand switch
             {
-                case 0:
-                    enemyText.text = "Rock";
-                    break;
-                case 1:
-                    enemyText.text = "Paper";
-                    break;
-                case 2:
-                    enemyText.text = "Scissors";
-                    break;
-                default:
-                    enemyText.text = "Rock";
-                    break;
-            }
+                0 => enemyImgs[0],
+                1 => enemyImgs[1],
+                2 => enemyImgs[2],
+                _ => enemyImgs[0],
+            };
+
+            meChoices[0].gameObject.SetActive(false); meChoices[1].gameObject.SetActive(false); meChoices[2].gameObject.SetActive(false);
+            meChoices[meHand].gameObject.SetActive(true);
+            choiceFirstPos = meChoices[meHand].gameObject.transform.localPosition;
+            meChoices[meHand].gameObject.transform.localPosition = meChoices[1].gameObject.transform.localPosition;
 
             GameDecision();
         }
@@ -55,33 +59,30 @@ public class JokepoLogic : MonoBehaviour
     {
         if (meHand == enemyHand)
         {
-            textDecision.text = "It's a draw";
-            ResetGame();
+            StartCoroutine(DrawResult());
             return;
         }
 
-        switch(meHand) 
+        isWinner = meHand switch
         {
-            case 0 when enemyHand == 1:
-                isWinner = false;
-                break;
-            case 1 when enemyHand == 2:
-                isWinner = false;
-                break;
-            case 2 when enemyHand == 0:
-                isWinner = false;
-                break;
-            default:
-                isWinner = true;
-                break;
-        }
-
+            0 when enemyHand == 1 => false,
+            1 when enemyHand == 2 => false,
+            2 when enemyHand == 0 => false,
+            _ => true,
+        };
         StartCoroutine(NextWindow());
     }
-    private void ResetGame()
+    private void ResetGame(bool isDraw)
     {
+        enemyImg.sprite = enemyImgs[enemyImgs.Length - 1];
         enemyHand = Random.Range(0, 2);
         isHandPicked = false;
+
+        if (isDraw)
+        {
+            meChoices[meHand].gameObject.transform.localPosition = choiceFirstPos;
+            meChoices[0].gameObject.SetActive(true); meChoices[1].gameObject.SetActive(true); meChoices[2].gameObject.SetActive(true);
+        }
     }
 
     private IEnumerator NextWindow() 
@@ -103,5 +104,14 @@ public class JokepoLogic : MonoBehaviour
             //gameObject.SetActive(false);
         }
 
+    }
+    private IEnumerator DrawResult()
+    {
+        float time = 1.2f;
+
+        textDecision.text = "Draw";
+        yield return new WaitForSeconds(time);
+        textDecision.text = "Chose another";
+        ResetGame(true);
     }
 }

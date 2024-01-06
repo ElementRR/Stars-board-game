@@ -7,6 +7,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7470219136894821680}
     m_Modifications:
+    - target: {fileID: -5632182393734740849, guid: 0941f786976c9c94083d0cb1908b513a,
+        type: 3}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
+    - target: {fileID: -5632182393734740849, guid: 0941f786976c9c94083d0cb1908b513a,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3845989541241727890, guid: 0941f786976c9c94083d0cb1908b513a,
         type: 3}
       propertyPath: m_Name
@@ -175,6 +185,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6541149728376330084}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &-5735356097566945842
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8041570867762117878}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
+  m_WrapMode: 1
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &-3891614655231938219
 MonoBehaviour:
   m_ObjectHideFlags: 0
