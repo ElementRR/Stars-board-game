@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,9 @@ public class Settings : MonoBehaviour
     [SerializeField] private AudioListener AudioListener;
 
     public static bool isFirstTimePlaying = true;
+
+    public static List<int> meTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
+    public static List<int> enemyTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
     private void Awake()
     {
         instance = this;

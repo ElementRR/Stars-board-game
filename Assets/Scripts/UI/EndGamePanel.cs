@@ -11,20 +11,23 @@ public class EndGamePanel : MonoBehaviour
 
     public void GameResult(bool enemyWins)
     {
+        Enemy.Name enemyIndex;
+        enemyIndex = GameManager.instance.enemyIndex;
+
         if (enemyWins)
         {
             announce[1].SetActive(true);
             announce[0].SetActive(false);
 
-            points = GameManager.instance.enemyIndex switch
+            points = enemyIndex switch
             {
                 Enemy.Name.Ed => 0,
                 Enemy.Name.Rick => 50,
-                Enemy.Name.Ana => 100,
+                Enemy.Name.Ana => 50,
                 _ => 0,
             };
 
-            finalText.text = GameManager.instance.enemyIndex switch
+            finalText.text = enemyIndex switch
             {
                 Enemy.Name.Ed => "Ed: I believe something is off... Did you let me win?",
                 Enemy.Name.Rick => "Rick: I was a nice game. But I've been training for some time\nmaybe next time? ",
@@ -37,7 +40,7 @@ public class EndGamePanel : MonoBehaviour
             announce[0].SetActive(true);
             announce[1].SetActive(false);
 
-            points = GameManager.instance.enemyIndex switch
+            points = enemyIndex switch
             {
                 Enemy.Name.Ed => 50,
                 Enemy.Name.Rick => 100,
@@ -45,7 +48,7 @@ public class EndGamePanel : MonoBehaviour
                 _ => 0,
             };
 
-            finalText.text = GameManager.instance.enemyIndex switch
+            finalText.text = enemyIndex switch
             {
                 Enemy.Name.Ed => "Ed: Oh fine. It was a nice game! :(\n I wish you good luck with Rick",
                 Enemy.Name.Rick => "Rick: Hey, how could this happen?\nDid you cheat o something?\nC-congrats!",
@@ -53,7 +56,7 @@ public class EndGamePanel : MonoBehaviour
                 _ => "Error",
             };
 
-            if(GameManager.instance.enemyIndex == Enemy.Name.Ed)
+            if(enemyIndex == Enemy.Name.Ed)
             {
                 ScoreManager.isEdWon = true;
                 PlayerPrefs.SetInt("isEdWon", 1);

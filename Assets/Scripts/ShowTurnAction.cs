@@ -29,7 +29,7 @@ public class ShowTurnAction : MonoBehaviour
     private int inhCost = 1;
 
     [Header("Sound FX")]
-    public AudioClip inhTower;
+    [SerializeField] private AudioClip inhTower;
     private AudioSource reproduce;
 
     public delegate void Outdoor(string message);
@@ -417,7 +417,7 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void InhibitSequence(int slot)
     {
-        reproduce.PlayOneShot(inhTower);
+        //reproduce.PlayOneShot(inhTower);
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);

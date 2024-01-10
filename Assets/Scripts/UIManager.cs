@@ -111,6 +111,10 @@ public class UIManager : MonoBehaviour
     public void GameOver(bool enemyWins)
     {
         endPanel.SetActive(true);
+        endPanel.GetComponent<Animator>().SetTrigger("End");
+
+        GameManager.instance.GetEnemyAI();
+
         if (!enemyWins)
         {
             reproduce.PlayOneShot(youWinS);

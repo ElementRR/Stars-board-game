@@ -37,4 +37,11 @@ public class TutPanel : MonoBehaviour
             Destroy(tut);
         }
     }
+    public void NoMoreFirstTime()
+    {
+        if (Settings.isFirstTimePlaying)
+        {
+            Settings.isFirstTimePlaying = false;
+        }
+    }
 }

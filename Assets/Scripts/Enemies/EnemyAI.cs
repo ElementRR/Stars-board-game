@@ -21,6 +21,8 @@ public class EnemyAI : MonoBehaviour
     {
         showTurnAction = GetComponent<ShowTurnAction>();
         firstTurn = true;
+
+        Settings.enemyTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
     }
 
     public virtual void EnemyPlay()
