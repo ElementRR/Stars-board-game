@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private ShowTurnAction showTurnAction;
     public EnemyAI enemyAI;
-    public Enemy.Name enemyIndex;
+    public static Enemy.Name enemyIndex;
 
     public bool actionTurn;
     public bool showFase1;
@@ -239,6 +239,11 @@ public class GameManager : MonoBehaviour
             enemyAI = GetComponent<AnaAI>();
             enemyIndex = Enemy.Name.Ana;
         }
+        else if (GetComponent<AngryAnaAI>() != null)
+        {
+            enemyAI = GetComponent<AngryAnaAI>();
+            enemyIndex = Enemy.Name.AngryAna;
+        }
         Debug.Log(enemyAI);
     }
 
@@ -250,7 +255,7 @@ public class GameManager : MonoBehaviour
         // reset action turn
         actionTurn = true;
 
-        showFase1 = (isTurn1) ? false : true;
+        showFase1 = !isTurn1;
 
         ShowTurnEnd();
         enemyAI.EnemyPlay();
@@ -258,7 +263,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.starCount.text = "" + meStars;
         enemyStars += endTurnStars;
         UIManager.instance.enemyStarCount.text = "" + enemyStars;
-        OnMessageSent?.Invoke("+" + endTurnStars + " star(s) to both players");
+        OnMessageSent?.Invoke("+" + endTurnStars + " star to both players");
     }
 
     private IEnumerator WaitInstallAnimation(float t)

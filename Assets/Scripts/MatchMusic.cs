@@ -30,9 +30,9 @@ public class MatchMusic : MonoBehaviour
         yield return new WaitUntil(() => !source.isPlaying);
         GameManager.instance.GetEnemyAI();
 
-        if(GameManager.instance.enemyIndex == Enemy.Name.Ana)
+        if(GameManager.enemyIndex == Enemy.Name.AngryAna)
         {
-            source.clip = musics[musics.Length - 1];
+            source.clip = musics[^1];
             source.loop = true;
             source.Play();
         }else

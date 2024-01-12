@@ -1,9 +1,8 @@
-using TMPro;
 using UnityEngine;
 
 public class Enemy
 {
-    public enum Name { Ed, Rick, Ana };
+    public enum Name { Ed, Rick, Ana, AngryAna };
 }
 public class ScoreManager : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         EnemySelection.OnEnemyChose += GetEnemyName;
+        EndGamePanel.OnEnemyChose += GetEnemyName;
 
         score = PlayerPrefs.GetInt("score");
 
@@ -49,5 +49,11 @@ public class ScoreManager : MonoBehaviour
     private void GetEnemyName(Enemy.Name enemyName)
     {
         _enemyName = enemyName;
+    }
+
+    private void OnDestroy()
+    {
+        EnemySelection.OnEnemyChose -= GetEnemyName;
+        EndGamePanel.OnEnemyChose -= GetEnemyName;
     }
 }

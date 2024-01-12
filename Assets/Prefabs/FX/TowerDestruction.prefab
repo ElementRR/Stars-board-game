@@ -9640,7 +9640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea702280df3fdb4aa3f1be267a2e273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
+  time: 1.4
   volume: 0.5
   fade: 0
   audio: {fileID: 8300000, guid: 78837ad2cb03cc645a841371432d0699, type: 3}

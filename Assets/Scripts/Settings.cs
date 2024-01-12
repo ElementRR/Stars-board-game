@@ -10,11 +10,20 @@ public class Settings : MonoBehaviour
 
     public static bool isFirstTimePlaying = true;
 
-    public static List<int> meTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
+    public List<int> meTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
     public static List<int> enemyTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
     private void Awake()
     {
-        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (instance = null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
         AudioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
     }
 

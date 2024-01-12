@@ -16,6 +16,7 @@ public class RickAI : EnemyAI
         profilePhoto.SetActive(true);
         showTurnAction = GetComponent<ShowTurnAction>();
         firstTurn = true;
+        Settings.enemyTowerSkins = new(new int[] { 0, 1, 0, 0, 0 });
         EnemyPlay();
     }
 

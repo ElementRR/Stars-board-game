@@ -14,6 +14,7 @@ public class OutdoorController : MonoBehaviour
         ShowTurnAction.OnMessageSent += ShowMessage;
         WhoFirstLogic.OnMessageSent += ShowMessage;
         GameManager.OnMessageSent += ShowMessage;
+        AngryAnaAI.OnMessageSent += ShowMessage;
         anim = GetComponent<Animator>();
     }
 
@@ -35,5 +36,6 @@ public class OutdoorController : MonoBehaviour
         ShowTurnAction.OnMessageSent -= ShowMessage;
         WhoFirstLogic.OnMessageSent -= ShowMessage;
         GameManager.OnMessageSent -= ShowMessage;
+        AngryAnaAI.OnMessageSent -= ShowMessage;
     }
 }

@@ -21,7 +21,7 @@ public class TowerSkin : MonoBehaviour
         }
         else
         {
-            skin[Settings.meTowerSkins[towerIndex]].SetActive(true);
+            skin[Settings.instance.meTowerSkins[towerIndex]].SetActive(true);
         }
 
     }

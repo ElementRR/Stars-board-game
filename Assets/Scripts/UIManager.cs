@@ -11,11 +11,15 @@ public class UIManager : MonoBehaviour
 
     [Header("Jokenpo")]
 
-    public GameObject jokenpoCanvas;
+    [SerializeField] private GameObject jokenpoCanvas;
+
+    [Header("Final Boss")]
+
+    [SerializeField] private GameObject angryACanvas;
 
     [Header("Game")]
 
-    public GameObject endPanel;
+    [SerializeField] private GameObject endPanel;
 
     public int cardCount = 0;
     public GameObject endTurnB;
@@ -28,8 +32,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI enemyStarCount;
 
     [Header("Sound FX")]
-    public AudioClip youWinS;
-    public AudioClip youLoseS;
+    [SerializeField] private AudioClip youWinS;
+    [SerializeField] private AudioClip youLoseS;
     private AudioSource reproduce;
 
     private void Start()
@@ -39,6 +43,15 @@ public class UIManager : MonoBehaviour
 
         endPanel.SetActive(false);
         jokenpoCanvas.SetActive(true);
+
+        if(ScoreManager.instance._enemyName != Enemy.Name.AngryAna)
+        {
+            angryACanvas.SetActive(false);
+        }
+        else
+        {
+            angryACanvas.SetActive(true);
+        }
     }
 
     public void SpeedTime(bool isFast)

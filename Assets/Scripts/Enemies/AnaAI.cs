@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ public class AnaAI : EnemyAI
         profilePhoto.SetActive(true);
         showTurnAction = GetComponent<ShowTurnAction>();
         firstTurn = true;
-        Settings.enemyTowerSkins = new(new int[] { 1, 0, 0, 0, 0 });
+        Settings.enemyTowerSkins = new(new int[] { 1, 1, 0, 0, 0 });
         EnemyPlay();
     }
 
