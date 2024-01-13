@@ -71,6 +71,7 @@ public class UIManager : MonoBehaviour
     void ActivateCard()
     {
         cardIndex[6].GetComponent<Button>().interactable = true;
+        GameManager.instance.OnFirstTurnEnd -= ActivateCard;
     }
 
     public void GetCardIndex(int index)
@@ -80,7 +81,8 @@ public class UIManager : MonoBehaviour
             slotCards.Add(index);
             if(index < 7)
             {
-                cardIndex[index].SetActive(false);
+                //cardIndex[index].SetActive(false);
+                cardIndex[index].GetComponent<Button>().interactable = false;
             }
         }
     }
@@ -111,7 +113,8 @@ public class UIManager : MonoBehaviour
     {
         if (!isEnemy && cardNumber < 7)
         {
-            cardIndex[cardNumber].SetActive(true);
+            //cardIndex[cardNumber].SetActive(true);
+            cardIndex[cardNumber].GetComponent<Button>().interactable = true;
         }
         Debug.Log("A carta " + cardNumber + " retornou!");
 
@@ -119,6 +122,15 @@ public class UIManager : MonoBehaviour
         {
             Destroy(cardSlot.transform.GetChild(0).gameObject);
         }
+    }
+
+    public void ReturnCard(int cardNumber)
+    {
+        if (cardNumber < 7)
+        {
+            cardIndex[cardNumber].GetComponent<Button>().interactable = true;
+        }
+        Debug.Log("A carta " + cardNumber + " retornou!");
     }
 
     public void GameOver(bool enemyWins)

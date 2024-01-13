@@ -363,11 +363,13 @@ public class ShowTurnAction : MonoBehaviour
 
                 if (en_value.Count == 2 && en_value[1] is (1 or 3))
                 {
-                    UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                    UIManager.instance.ReturnCard(en_value[1]);
                 }
                 else if (en_value[0] is (1 or 3))
                 {
-                    UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                    UIManager.instance.ReturnCard(en_value[0]);
                 }
             }
             else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
@@ -378,12 +380,14 @@ public class ShowTurnAction : MonoBehaviour
                 // and return me card
                 if (en_value.Count == 2 && en_value[1] is (0 or 2))
                 {
-                    UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                    UIManager.instance.ReturnCard(en_value[1]);
 
                 }
                 else if (en_value[0] is (0 or 2))
                 {
-                    UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                    UIManager.instance.ReturnCard(en_value[0]);
                 }
 
             }
@@ -417,7 +421,6 @@ public class ShowTurnAction : MonoBehaviour
     }
     private void InhibitSequence(int slot)
     {
-        //reproduce.PlayOneShot(inhTower);
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
