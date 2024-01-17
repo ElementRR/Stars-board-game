@@ -11100,6 +11100,7 @@ GameObject:
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
+  - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -11172,7 +11173,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 63.606, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.617, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11323,6 +11324,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 29144f3c4cd68e14a8ed9be040fbee68, type: 3}
   tensionSong: {fileID: 8300000, guid: af72cf19dbabe604d8090d9ab35dba5c, type: 3}
   volume: 0.3
+--- !u!111 &330585550
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 778c0950f56833045a4596eadae43045, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 778c0950f56833045a4596eadae43045, type: 2}
+  m_WrapMode: 1
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &345838523
 GameObject:
   m_ObjectHideFlags: 0
@@ -20094,6 +20111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fa0e86211d63e45a132536e39ffb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutArrows: {fileID: 954478280}
   jokenpoCanvas: {fileID: 1934062783}
   angryACanvas: {fileID: 487312091}
   endPanel: {fileID: 2236463758961546615}
@@ -23144,7 +23162,6 @@ MonoBehaviour:
   cardsToChooseFrom: 
   cardsToPlay: 
   profilePhoto: {fileID: 1656494036}
-  tutArrows: {fileID: 954478280}
 --- !u!114 &1817210729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24891,7 +24908,7 @@ MonoBehaviour:
   whetherPrefabs:
   - {fileID: 9199869932069385804, guid: 0073a46e83349fd46b39670b56a172ac, type: 3}
   whetherPosition: {x: 2.1, y: 20.2, z: 0}
-  artifactChance: 20
+  artifactChance: 10
 --- !u!114 &2236463758961546608
 MonoBehaviour:
   m_ObjectHideFlags: 0

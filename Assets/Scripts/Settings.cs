@@ -25,6 +25,15 @@ public class Settings : MonoBehaviour
             instance = this;
         }
         AudioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
+
+        if (PlayerPrefs.GetString("First time playing?") == "false")
+        {
+            isFirstTimePlaying = false;
+        }
+        else
+        {
+           isFirstTimePlaying = true;
+        }
     }
 
     void OnEnable()

@@ -106,7 +106,7 @@ public class ShowTurnAction : MonoBehaviour
                 if (!adversaryHasAnt) // no : return inhibitor card
                 {
                     reproduce.PlayOneShot(inhTower);
-                    OnMessageSent?.Invoke("Inhibitor did not work!");
+                    OnMessageSent?.Invoke("Inhibitor did not work! -1 star!");
                     UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
 
                     en_value.Clear();

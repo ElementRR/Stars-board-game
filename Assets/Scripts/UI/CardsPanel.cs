@@ -11,6 +11,8 @@ public class CardsPanel : MonoBehaviour
         animator = GetComponent<Animator>();
         GameManager.instance.OnFirstTurnEnd += HidePanel;
         GameManager.instance.OnShowTurnEnd += ShowPanel;
+        UIManager.instance.OnHidePanel += HidePanel;
+        UIManager.instance.OnShowPanel += ShowPanel;
     }
 
     void HidePanel()
@@ -20,5 +22,13 @@ public class CardsPanel : MonoBehaviour
     void ShowPanel()
     {
         animator.SetTrigger("Show");
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnFirstTurnEnd -= HidePanel;
+        GameManager.instance.OnShowTurnEnd -= ShowPanel;
+        UIManager.instance.OnHidePanel -= HidePanel;
+        UIManager.instance.OnShowPanel -= ShowPanel;
     }
 }

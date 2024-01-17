@@ -42,6 +42,7 @@ public class TutPanel : MonoBehaviour
         if (Settings.isFirstTimePlaying)
         {
             Settings.isFirstTimePlaying = false;
+            PlayerPrefs.SetString("First time playing?", "false");
         }
     }
 }

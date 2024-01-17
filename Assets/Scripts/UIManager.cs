@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -9,8 +10,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
 
-    [Header("Jokenpo")]
+    [Header("Star of match")]
 
+    [SerializeField] private GameObject tutArrows;
     [SerializeField] private GameObject jokenpoCanvas;
 
     [Header("Final Boss")]
@@ -36,15 +38,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private AudioClip youLoseS;
     private AudioSource reproduce;
 
+    public event Action OnHidePanel;
+    public event Action OnShowPanel;
+
     private void Start()
     {
         GameManager.instance.OnFirstTurnEnd += ActivateCard;
         GameManager.instance.OnShowTurnEnd += BackCard;
 
         endPanel.SetActive(false);
-        jokenpoCanvas.SetActive(true);
+        jokenpoCanvas.SetActive(false);
 
-        if(ScoreManager.instance._enemyName != Enemy.Name.AngryAna)
+        if (ScoreManager.instance._enemyName != Enemy.Name.AngryAna)
         {
             angryACanvas.SetActive(false);
         }
@@ -66,6 +71,27 @@ public class UIManager : MonoBehaviour
         endTurnB.SetActive(false);
         reproduce = GetComponent<AudioSource>();
         cardIndex[6].GetComponent<Button>().interactable = false;
+
+        StartCoroutine(WaitCameraAnim());
+    }
+    private IEnumerator WaitCameraAnim()
+    {
+        OnHidePanel?.Invoke();
+        yield return new WaitForSeconds(3);
+
+        OnShowPanel?.Invoke();
+        yield return new WaitForSeconds(1.5f);
+
+        if (Settings.isFirstTimePlaying)
+        {
+            tutArrows.SetActive(true);
+            Settings.isFirstTimePlaying = false;
+        }
+        else
+        {
+            tutArrows.SetActive(false);
+        }
+        jokenpoCanvas.SetActive(true);
     }
 
     void ActivateCard()

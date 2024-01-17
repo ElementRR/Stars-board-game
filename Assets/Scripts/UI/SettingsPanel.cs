@@ -19,6 +19,7 @@ public class SettingsPanel : TutPanel
     private void Awake()
     {
         PlayerPrefs.GetFloat("musicVolume", Settings.musicVolume);
+        
         slider.value = Settings.musicVolume;
         toggle.isOn = Settings.isFirstTimePlaying;
     }
@@ -32,6 +33,10 @@ public class SettingsPanel : TutPanel
     private void ToggleChangeCheck()
     {
         Settings.isFirstTimePlaying = toggle.isOn;
+        if(Settings.isFirstTimePlaying == false ) { PlayerPrefs.SetString("First time playing?","false"); } else
+        {
+            PlayerPrefs.SetString("First time playing?", "false");
+        }
     }
 
 }
