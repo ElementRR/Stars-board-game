@@ -25,9 +25,10 @@ public class Card : MonoBehaviour
 
     private IEnumerator InvokeSword(float t)
     {
-        Vector3 offset = new Vector3(0, 0.5f, -1.5f);
+        Vector3 offset = new Vector3(0, 0.5f, 1.5f);
+        Quaternion rotationOffset = Quaternion.Euler(0, 180, 0);
 
         yield return new WaitForSeconds(t);
-        Instantiate(swordFX, gameObject.transform.position + offset, gameObject.transform.rotation);
+        Instantiate(swordFX, gameObject.transform.position + offset, rotationOffset);
     }
 }

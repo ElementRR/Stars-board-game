@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 5
   swordFX: {fileID: 8942332715188239566, guid: 30a8b923551f17946b4a244ddb408a61, type: 3}
-  timeSword: 0.9
+  timeSword: 1.2
 --- !u!4 &5262040842411480221 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4426292675422155348, guid: 0941f786976c9c94083d0cb1908b513a,
