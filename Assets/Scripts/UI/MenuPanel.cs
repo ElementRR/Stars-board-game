@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuPanel : MonoBehaviour
 {
-    [SerializeField] GameObject tut;
+    [SerializeField] GameObject window1;
     [SerializeField] GameObject enemyPanel;
     [SerializeField] GameObject settingsPanel;
+
+    [SerializeField] Animator blackPanel;
 
     private void Awake()
     {
@@ -14,7 +16,7 @@ public class MenuPanel : MonoBehaviour
     }
     public void EnterTutorial()
     {
-        Instantiate(tut);
+        Instantiate(window1);
     }
     public void EnterSettings()
     {
@@ -27,7 +29,7 @@ public class MenuPanel : MonoBehaviour
     }
     public void BackToMenu()
     {
-        SceneManager.LoadScene(0);
+        StartCoroutine(ChangeScene(0));
     }
 
     public void ExitApp()
@@ -37,6 +39,13 @@ public class MenuPanel : MonoBehaviour
 #endif
 
         Application.Quit();
+    }
+
+    private IEnumerator ChangeScene(int scene)
+    {
+        blackPanel.Play("TransToBlack");
+        yield return new WaitForSecondsRealtime(0.5f);
+        SceneManager.LoadScene(scene);
     }
 
     public void ResetPoints()

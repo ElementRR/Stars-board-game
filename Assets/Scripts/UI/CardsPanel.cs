@@ -13,6 +13,8 @@ public class CardsPanel : MonoBehaviour
         GameManager.instance.OnShowTurnEnd += ShowPanel;
         UIManager.instance.OnHidePanel += HidePanel;
         UIManager.instance.OnShowPanel += ShowPanel;
+
+        animator.Play("CardsPanelOut", 0, 0.9f);
     }
 
     void HidePanel()

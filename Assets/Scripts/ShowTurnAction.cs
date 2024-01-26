@@ -35,6 +35,9 @@ public class ShowTurnAction : MonoBehaviour
     public delegate void Outdoor(string message);
     public static event Outdoor OnMessageSent;
 
+    public delegate void Sword(Vector3 en_position);
+    public static event Sword OnEn_positionLoc;
+
     private void Awake()
     {
         reproduce = GetComponent<AudioSource>();
@@ -363,12 +366,10 @@ public class ShowTurnAction : MonoBehaviour
 
                 if (en_value.Count == 2 && en_value[1] is (1 or 3))
                 {
-                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
                     UIManager.instance.ReturnCard(en_value[1]);
                 }
                 else if (en_value[0] is (1 or 3))
                 {
-                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
                     UIManager.instance.ReturnCard(en_value[0]);
                 }
             }
@@ -400,27 +401,34 @@ public class ShowTurnAction : MonoBehaviour
                     (fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate == hotNcoldValue ||
                     fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate == hotNcoldValue + 2))
         {
+            // Give tower's position to sword
+            OnEn_positionLoc?.Invoke(fieldSlots[minSlot + 1].transform.position);
+
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().towerToInstantiate = blankIndex;
             fieldSlots[minSlot + 1].GetComponent<FieldSlot>().isFilled = false;
 
             if (fieldSlots[minSlot + 1].transform.childCount > 0)
             {
-                InhibitSequence(minSlot + 1);
+                StartCoroutine(InhibitSequence(minSlot + 1));
             }
 
         }
-        else
+        else if(fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled)
         {
+            // Give tower's position to sword
+            OnEn_positionLoc?.Invoke(fieldSlots[minSlot].transform.position);
+
             fieldSlots[minSlot].GetComponent<FieldSlot>().towerToInstantiate = blankIndex;
             fieldSlots[minSlot].GetComponent<FieldSlot>().isFilled = false;
             if (fieldSlots[minSlot].transform.childCount > 0)
             {
-                InhibitSequence(minSlot);
+                StartCoroutine(InhibitSequence(minSlot));
             }
         }
     }
-    private void InhibitSequence(int slot)
+    private IEnumerator InhibitSequence(int slot)
     {
+        yield return new WaitForSeconds(0.2f);
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);

@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 public class Settings : MonoBehaviour
 {
     public static Settings instance;
-    public static float musicVolume = 0.5f;
-    [SerializeField] private AudioListener AudioListener;
 
     public static bool isFirstTimePlaying = true;
 
@@ -24,16 +22,10 @@ public class Settings : MonoBehaviour
         {
             instance = this;
         }
-        AudioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
 
-        if (PlayerPrefs.GetString("First time playing?") == "false")
-        {
-            isFirstTimePlaying = false;
-        }
-        else
-        {
-           isFirstTimePlaying = true;
-        }
+        AudioListener.volume = PlayerPrefs.GetFloat("musicVolume");
+        bool intToBool = PlayerPrefs.GetInt("isFirstTime") != 0;
+        isFirstTimePlaying = intToBool;
     }
 
     void OnEnable()
@@ -54,12 +46,5 @@ public class Settings : MonoBehaviour
         Debug.Log(scene.name);
         Debug.Log(mode);
 
-        AudioListener = GameObject.Find("Main Camera").GetComponent<AudioListener>();
-        AudioListener.volume = musicVolume;
-    }
-    public void UpdateVolume()
-    {
-        AudioListener.volume = musicVolume;
-        PlayerPrefs.SetFloat("musicVolume", musicVolume);
     }
 }

@@ -85,7 +85,6 @@ public class UIManager : MonoBehaviour
         if (Settings.isFirstTimePlaying)
         {
             tutArrows.SetActive(true);
-            Settings.isFirstTimePlaying = false;
         }
         else
         {

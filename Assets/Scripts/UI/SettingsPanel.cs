@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,25 +14,28 @@ public class SettingsPanel : TutPanel
     }
     private void Awake()
     {
-        PlayerPrefs.GetFloat("musicVolume", Settings.musicVolume);
+        PlayerPrefs.GetFloat("musicVolume", AudioListener.volume);
         
-        slider.value = Settings.musicVolume;
+        slider.value = AudioListener.volume;
         toggle.isOn = Settings.isFirstTimePlaying;
     }
 
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
-        Settings.musicVolume = slider.value;
-        Settings.instance.UpdateVolume();
+        AudioListener.volume = slider.value;
+        PlayerPrefs.SetFloat("musicVolume", AudioListener.volume);
     }
     private void ToggleChangeCheck()
     {
         Settings.isFirstTimePlaying = toggle.isOn;
-        if(Settings.isFirstTimePlaying == false ) { PlayerPrefs.SetString("First time playing?","false"); } else
-        {
-            PlayerPrefs.SetString("First time playing?", "false");
-        }
-    }
 
+        int boolToInt = toggle.isOn ? 1 : 0;
+        PlayerPrefs.SetInt("isFirstTime", boolToInt);
+    }
+    private void OnDestroy()
+    {
+        slider.onValueChanged.RemoveListener(delegate { ValueChangeCheck(); });
+        toggle.onValueChanged.RemoveListener(delegate { ToggleChangeCheck(); });
+    }
 }

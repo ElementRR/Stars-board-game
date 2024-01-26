@@ -39,10 +39,7 @@ public class TutPanel : MonoBehaviour
     }
     public void NoMoreFirstTime()
     {
-        if (Settings.isFirstTimePlaying)
-        {
-            Settings.isFirstTimePlaying = false;
-            PlayerPrefs.SetString("First time playing?", "false");
-        }
+          Settings.isFirstTimePlaying = false;
+        PlayerPrefs.SetInt("isFirstTime", 0);
     }
 }
