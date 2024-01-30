@@ -7,6 +7,15 @@ public class Tower : MonoBehaviour
 {
     public GameObject destrFX;
 
+    [Header("Sound FX")]
+    public AudioClip installTower;
+    [SerializeField] private AudioSource reproduce;
+
+    private void Awake()
+    {
+        reproduce = GetComponent<AudioSource>();
+        reproduce.PlayOneShot(installTower);
+    }
     private void WaitAnim()
     {
         GameManager.instance.installEnd = false;

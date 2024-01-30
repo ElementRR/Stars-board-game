@@ -15,6 +15,10 @@ public class Sword : MonoBehaviour
     private Material mat;
     [SerializeField] private float appearSpeed = 20f;
 
+    [Header("Sound FX")]
+    public AudioClip slashSound;
+    [SerializeField] private AudioSource reproduce;
+
     private void Awake()
     {
         ShowTurnAction.OnEn_positionLoc += GetEndPos;
@@ -22,6 +26,7 @@ public class Sword : MonoBehaviour
         endPos = transform.position;
         mat = mesh.material;
         mat.color = new Color(mat.color.r, mat.color.g, mat.color.b, 0f);
+        reproduce = GetComponent<AudioSource>();
     }
 
     private void GetEndPos(Vector3 pos)
@@ -30,6 +35,7 @@ public class Sword : MonoBehaviour
         transform.LookAt(endPos);
         isActive = true;
         elapsedTime = 0;
+        reproduce.PlayOneShot(slashSound);
     }
 
     private void FixedUpdate()

@@ -9,15 +9,15 @@ public class FieldSlot : MonoBehaviour
     public bool isFilled;
     public bool isEnemy;
 
-    [Header("Sound FX")]
-    public AudioClip installTower;
-    [SerializeField] private AudioSource reproduce;
+    //[Header("Sound FX")]
+    //public AudioClip installTower;
+    //[SerializeField] private AudioSource reproduce;
 
     public void InstantiateInSlot()
     {
         //Quaternion towerRotation = Quaternion.Euler(0, 90, 0);
 
-        reproduce.PlayOneShot(installTower);
+        //reproduce.PlayOneShot(installTower);
         Instantiate(towerIndex[towerToInstantiate], transform.position, transform.rotation, gameObject.transform);
         Instantiate(installFX, transform.position, transform.rotation, gameObject.transform);
         isFilled = true;
