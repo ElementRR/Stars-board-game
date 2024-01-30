@@ -70,7 +70,7 @@ public class EndGamePanel : MonoBehaviour
                 Enemy.Name.Rick => "Rick: Hey, how could this happen?\nDid you cheat or something?\nC-congrats!",
                 Enemy.Name.Ana => "Ana: NO! This is not possible!!!\nI've been training for a long time!\nI'm a genius! Get back here for another round!",
                 Enemy.Name.AngryAna => "Ana: W-wait... How could you win against me?\nThat's not possible, I had an advantage... I-I mean..." +
-                "\nI don't believe you was able to beat me under these circumstances.",
+                "\nI don't believe you were able to beat me under these circumstances.",
                 _ => "Error",
             };
 
