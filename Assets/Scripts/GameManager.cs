@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public bool actionTurn;
     public bool showFase1;
-    public bool installEnd = false;
+    public bool installEnd = true;
 
     public GameObject cardFlipped;
 
@@ -103,8 +103,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn1()
     {
-        float timeToWait = 1.4f;
-        float waitToFlip = 0.15f;
+        float timeToWait = 1.0f;
+        float waitToFlip = 0.19f;
 
         for (int i = 0; i < 6;)
         {
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(false, i + 1);
 
-                StartCoroutine(WaitInstallAnimation(timeToWait));
+                yield return StartCoroutine(WaitInstallAnimation(timeToWait));
 
                 i += 3;
             }
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(true, i + 1);
 
-                StartCoroutine(WaitInstallAnimation(timeToWait));
+                yield return StartCoroutine(WaitInstallAnimation(timeToWait));
 
                 if (i == 5)
                 {
@@ -169,8 +169,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ShowTurn2()
     {
-        float timeToWait = 1.5f;
-        float waitToFlip = 0.15f;
+        float timeToWait = 1.0f;
+        float waitToFlip = 0.19f;
 
         for (int i = 3; i < 6;)
         {
@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(false, i + 1);
 
-                StartCoroutine(WaitInstallAnimation(timeToWait));
+                yield return StartCoroutine(WaitInstallAnimation(timeToWait));
 
                 i += 4;
             }
@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
                 // action
                 showTurnAction.ActionInShowTurn(true, i + 1);
 
-                StartCoroutine(WaitInstallAnimation(timeToWait));
+                yield return StartCoroutine(WaitInstallAnimation(timeToWait));
 
                 i -= 3;
             }

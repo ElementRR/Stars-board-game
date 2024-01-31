@@ -143,11 +143,7 @@ public class ShowTurnAction : MonoBehaviour
                 OnMessageSent?.Invoke("+2 Stars for you!");
             }
             
-
-            if (cardSlot1.transform.childCount > 0)
-            {
-                Destroy(cardSlot1.transform.GetChild(0).gameObject);
-            }
+            DestroyChildObject(cardSlot1);
         }
     }
 

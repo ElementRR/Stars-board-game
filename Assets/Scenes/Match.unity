@@ -18142,8 +18142,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 1
-  installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &700504549
 GameObject:
   m_ObjectHideFlags: 0
@@ -18345,8 +18343,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 0
-  installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -18792,8 +18788,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 1
-  installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &949506780
 GameObject:
   m_ObjectHideFlags: 0
@@ -22083,8 +22077,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 0
-  installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &1494213451
 GameObject:
   m_ObjectHideFlags: 0
@@ -23006,7 +22998,7 @@ MonoBehaviour:
   enemyAI: {fileID: 0}
   actionTurn: 0
   showFase1: 1
-  installEnd: 0
+  installEnd: 1
   cardFlipped: {fileID: 3845989541241727890, guid: 0941f786976c9c94083d0cb1908b513a,
     type: 3}
   cardSlots:
@@ -23268,8 +23260,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 1
-  installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &1849600738
 GameObject:
   m_ObjectHideFlags: 0
@@ -23385,8 +23375,6 @@ MonoBehaviour:
   towerToInstantiate: 8
   isFilled: 0
   isEnemy: 0
-  installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
-  reproduce: {fileID: 1817210727}
 --- !u!1 &1926029846
 GameObject:
   m_ObjectHideFlags: 0
