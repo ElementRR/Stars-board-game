@@ -94,6 +94,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0941f786976c9c94083d0cb1908b513a, type: 3}
+--- !u!1 &2233961528035178592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3845989541241727890, guid: 0941f786976c9c94083d0cb1908b513a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3053180169930429426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6541149728376330084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,3 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  swordFX: {fileID: 0}
+  timeSword: 0.8
+  starSound: {fileID: 0}
+  flippedCard: {fileID: 2233961528035178592}

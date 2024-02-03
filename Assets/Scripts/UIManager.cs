@@ -145,7 +145,8 @@ public class UIManager : MonoBehaviour
 
         if (cardSlot.transform.childCount > 0)
         {
-            Destroy(cardSlot.transform.GetChild(0).gameObject);
+            StartCoroutine(cardSlot.transform.GetComponentInChildren<Card>().DestroySequence());
+            //Destroy(cardSlot.transform.GetChild(0).gameObject);
         }
     }
 

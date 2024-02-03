@@ -8811,7 +8811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ce6fe80e33c7f4f9fe06775aa39e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meTowerSkins: 0000000000000000000000000100000000000000
+  meTowerSkins: 0100000000000000000000000100000000000000
 --- !u!1 &78693885997187204
 GameObject:
   m_ObjectHideFlags: 0

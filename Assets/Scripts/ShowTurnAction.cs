@@ -325,7 +325,8 @@ public class ShowTurnAction : MonoBehaviour
     {
         if (parent.transform.childCount != 0)
         {
-            Destroy(parent.transform.GetChild(0).gameObject);
+            StartCoroutine(parent.transform.GetComponentInChildren<Card>().DestroySequence());
+            //Destroy(parent.transform.GetChild(0).gameObject);
         }
     }
 
@@ -427,6 +428,7 @@ public class ShowTurnAction : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         OnMessageSent?.Invoke("Tower was destroyed");
         fieldSlots[slot].transform.GetComponentInChildren<Tower>().Destruction();
+
         Destroy(fieldSlots[slot].transform.GetChild(0).gameObject);
     }
 

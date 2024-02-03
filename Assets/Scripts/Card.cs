@@ -9,14 +9,25 @@ public class Card : MonoBehaviour
     private ParticleSystem starParticle;
     [SerializeField] private GameObject swordFX;
     [SerializeField] private float timeSword = 0.8f;
+
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip starSound;
+
+    private Animator animator;
+
     private void Awake()
     {
         starParticle = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnParticleTrigger()
     {
-         if(index == 7) { starParticle.Play(); }
+         if(index == 7) 
+        { starParticle.Play();
+            StartCoroutine(InvokeStar(0.5f));
+        }
          else if(index == 5)
          {
             StartCoroutine(InvokeSword(timeSword));
@@ -31,4 +42,17 @@ public class Card : MonoBehaviour
         yield return new WaitForSeconds(t);
         Instantiate(swordFX, gameObject.transform.position + offset, rotationOffset);
     }
+    private IEnumerator InvokeStar(float t)
+    {
+        yield return new WaitForSeconds(t);
+        audioSource.PlayOneShot(starSound);
+        yield return new WaitForSeconds(0.1f);
+        audioSource.PlayOneShot(starSound);
+    }
+    public IEnumerator DestroySequence()
+    {
+        animator.SetTrigger("Destroy");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    } 
 }
