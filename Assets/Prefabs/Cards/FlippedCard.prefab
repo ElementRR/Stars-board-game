@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6124577863185018062}
   - component: {fileID: 2083331737659979901}
   - component: {fileID: 5231107802674720243}
-  - component: {fileID: -5632182393734740849}
   m_Layer: 0
   m_Name: FlippedCard
   m_TagString: FlippedCard
@@ -120,19 +119,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!111 &-5632182393734740849
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3845989541241727890}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
-  m_WrapMode: 1
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0

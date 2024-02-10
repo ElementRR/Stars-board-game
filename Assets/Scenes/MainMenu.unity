@@ -1393,9 +1393,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: EnterShop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6500,7 +6500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shop (soon)
+  m_text: Shop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 60ca55b38fb89204096701f75413f844, type: 2}
   m_sharedMaterial: {fileID: -3706816381523553075, guid: 60ca55b38fb89204096701f75413f844,
@@ -7986,6 +7986,8 @@ MonoBehaviour:
     type: 3}
   settingsPanel: {fileID: 7214866110137433794, guid: 8148c0e82bb02a14a99e2626eee08f51,
     type: 3}
+  shopPanel: {fileID: 7214866110137433794, guid: 987796570db6c284099f24d068d7091e,
+    type: 3}
   blackPanel: {fileID: 0}
 --- !u!1001 &1638075683
 PrefabInstance:
@@ -8811,7 +8813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ce6fe80e33c7f4f9fe06775aa39e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meTowerSkins: 0100000000000000000000000100000000000000
+  meTowerSkins: 0000000000000000000000000000000000000000
 --- !u!1 &78693885997187204
 GameObject:
   m_ObjectHideFlags: 0

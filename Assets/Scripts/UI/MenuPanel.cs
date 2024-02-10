@@ -7,6 +7,7 @@ public class MenuPanel : MonoBehaviour
     [SerializeField] GameObject window1;
     [SerializeField] GameObject enemyPanel;
     [SerializeField] GameObject settingsPanel;
+    [SerializeField] GameObject shopPanel;
 
     [SerializeField] Animator blackPanel;
 
@@ -21,6 +22,10 @@ public class MenuPanel : MonoBehaviour
     public void EnterSettings()
     {
         Instantiate(settingsPanel);
+    }
+    public void EnterShop()
+    {
+        Instantiate(shopPanel);
     }
 
     public void PlayMatch()

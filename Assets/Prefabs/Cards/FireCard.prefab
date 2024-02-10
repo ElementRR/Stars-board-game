@@ -94,12 +94,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0941f786976c9c94083d0cb1908b513a, type: 3}
---- !u!1 &2233961528035178592 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3845989541241727890, guid: 0941f786976c9c94083d0cb1908b513a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3053180169930429426}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6541149728376330084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -167,6 +161,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 5231107802674720243, guid: 0941f786976c9c94083d0cb1908b513a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6124577863185018062, guid: 0941f786976c9c94083d0cb1908b513a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -191,22 +190,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6541149728376330084}
   m_PrefabAsset: {fileID: 0}
---- !u!111 &-5735356097566945842
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8041570867762117878}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d2f45043719b9074c912cba952ab4584, type: 2}
-  m_WrapMode: 1
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &-3891614655231938219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,4 +206,3 @@ MonoBehaviour:
   swordFX: {fileID: 0}
   timeSword: 0.8
   starSound: {fileID: 0}
-  flippedCard: {fileID: 2233961528035178592}
