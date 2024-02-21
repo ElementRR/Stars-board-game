@@ -14,7 +14,7 @@ public class Settings : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
-        if (instance = null)
+        if (instance != null)
         {
             Destroy(gameObject);
         }
