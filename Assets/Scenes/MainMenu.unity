@@ -577,11 +577,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: EnterSettings
-        m_Mode: 1
+        m_MethodName: EnterWindow
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7214866110137433794, guid: 8148c0e82bb02a14a99e2626eee08f51,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1395,11 +1396,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: EnterShop
-        m_Mode: 1
+        m_MethodName: EnterWindow
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7214866110137433794, guid: 987796570db6c284099f24d068d7091e,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7456,11 +7458,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: EnterReset
-        m_Mode: 1
+        m_MethodName: EnterWindow
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6344520324484415910, guid: 945c33b5b4d419b409a71c318b0b9000,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7597,11 +7600,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: EnterTutorial
-        m_Mode: 1
+        m_MethodName: EnterWindow
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 6866984211686753420, guid: 964ab5072c5950e449eaa37afaf9a6cb,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8461,11 +8465,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: PlayMatch
-        m_Mode: 1
+        m_MethodName: EnterWindow
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7214866110137433794, guid: 5b9b1dc7ee6020240880b7bc6e15f828,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

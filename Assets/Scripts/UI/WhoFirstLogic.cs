@@ -14,6 +14,7 @@ public class WhoFirstLogic : MonoBehaviour
     private void Awake()
     {
         jokenpoLogic = GetComponentInParent<JokepoLogic>();
+        audioSource = GetComponentInParent<AudioSource>();
         if(!GameManager.instance.showFase1)
         {
             OnMessageSent?.Invoke("Enemy will start showing cards!!");

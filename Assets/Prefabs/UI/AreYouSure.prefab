@@ -834,11 +834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66803afec1870994f8285c9e9ed658c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window1: {fileID: 0}
-  enemyPanel: {fileID: 0}
-  settingsPanel: {fileID: 0}
-  shopPanel: {fileID: 0}
-  UIclick: {fileID: 0}
+  UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
   blackPanel: {fileID: 9203780060595735333}
 --- !u!114 &8371842966903612345
 MonoBehaviour:

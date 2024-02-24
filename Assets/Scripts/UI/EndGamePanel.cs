@@ -17,8 +17,14 @@ public class EndGamePanel : MonoBehaviour
     public delegate void Outdoor(Enemy.Name enemyName);
     public static event Outdoor OnEnemyChose;
 
+    [Header("Sound FX")]
+    protected AudioSource audioSource;
+    [SerializeField] protected AudioClip selectEnemySound;
+    [SerializeField] protected AudioClip[] enemySounds;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         angryAnaBt.SetActive(false);
     }
 
@@ -49,6 +55,15 @@ public class EndGamePanel : MonoBehaviour
                 Enemy.Name.AngryAna => "Ana: HAHAHA I imagine you had beginner's luck before!\nYou will never beat me.\nTry another day.",
                 _ => "Error",
             };
+
+            audioSource.PlayOneShot(enemySounds[enemyIndex switch
+            {
+                Enemy.Name.Ed => 0,
+                Enemy.Name.Rick => 1,
+                Enemy.Name.Ana => 2,
+                Enemy.Name.AngryAna => 3,
+                _ => 0,
+            }]);
         }
         else
         {
@@ -73,8 +88,16 @@ public class EndGamePanel : MonoBehaviour
                 "\nI don't believe you were able to beat me under these circumstances.",
                 _ => "Error",
             };
+            audioSource.PlayOneShot(enemySounds[enemyIndex switch
+            {
+                Enemy.Name.Ed => 4,
+                Enemy.Name.Rick => 5,
+                Enemy.Name.Ana => 6,
+                Enemy.Name.AngryAna => 7,
+                _ => 4,
+            }]);
 
-            if(enemyIndex == Enemy.Name.Ed)
+            if (enemyIndex == Enemy.Name.Ed)
             {
                 ScoreManager.isEdWon = true;
                 PlayerPrefs.SetInt("isEdWon", 1);
@@ -87,6 +110,7 @@ public class EndGamePanel : MonoBehaviour
 
     public void OnAngryBtClick()
     {
+        audioSource.PlayOneShot(selectEnemySound);
         OnEnemyChose?.Invoke(Enemy.Name.AngryAna);
         StartCoroutine(ChangeScene());
     }

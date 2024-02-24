@@ -4,12 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuPanel : MonoBehaviour
 {
-    [SerializeField] GameObject window1;
-    [SerializeField] GameObject enemyPanel;
-    [SerializeField] GameObject settingsPanel;
-    [SerializeField] GameObject shopPanel;
-    [SerializeField] GameObject resetPanel;
-
     [Header("Sound FX")]
     AudioSource audioSource;
     [SerializeField] AudioClip UIclick;
@@ -21,36 +15,16 @@ public class MenuPanel : MonoBehaviour
         Time.timeScale = 1;
         audioSource = GetComponent<AudioSource>();
     }
-    public void EnterTutorial()
-    {
-        audioSource.PlayOneShot(UIclick);
-        Instantiate(window1);
-    }
-    public void EnterSettings()
-    {
-        audioSource.PlayOneShot(UIclick);
-        Instantiate(settingsPanel);
-    }
-    public void EnterShop()
-    {
-        audioSource.PlayOneShot(UIclick);
-        Instantiate(shopPanel);
-    }
 
-    public void PlayMatch()
+    public void EnterWindow(GameObject window)
     {
         audioSource.PlayOneShot(UIclick);
-        Instantiate(enemyPanel);
+        Instantiate(window);
     }
     public void BackToMenu()
     {
         audioSource.PlayOneShot(UIclick);
         StartCoroutine(ChangeScene(0));
-    }
-    public void EnterReset()
-    {
-        audioSource.PlayOneShot(UIclick);
-        Instantiate(resetPanel);
     }
 
     public void ExitApp()
