@@ -26,6 +26,10 @@ public class Settings : MonoBehaviour
         AudioListener.volume = PlayerPrefs.GetFloat("musicVolume");
         bool intToBool = PlayerPrefs.GetInt("isFirstTime") != 0;
         isFirstTimePlaying = intToBool;
+
+        meTowerSkins[0] = PlayerPrefs.GetInt("FireTower");
+        meTowerSkins[1] = PlayerPrefs.GetInt("WaterTower");
+        meTowerSkins[3] = PlayerPrefs.GetInt("MoonTower");
     }
 
     void OnEnable()

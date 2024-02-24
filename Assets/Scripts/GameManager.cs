@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static Enemy.Name enemyIndex;
 
     public bool actionTurn;
+    // if showFase1 = true, the player starts showing cards
     public bool showFase1;
     public bool installEnd = true;
 
@@ -262,12 +263,12 @@ public class GameManager : MonoBehaviour
         showFase1 = !isTurn1;
 
         ShowTurnEnd();
-        enemyAI.EnemyPlay();
         meStars += endTurnStars;
         UIManager.instance.starCount.text = "" + meStars;
         enemyStars += endTurnStars;
         UIManager.instance.enemyStarCount.text = "" + enemyStars;
         OnMessageSent?.Invoke("+" + endTurnStars + " star to both players");
+        enemyAI.EnemyPlay();
     }
 
     private IEnumerator WaitInstallAnimation(float t)

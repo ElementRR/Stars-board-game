@@ -15,7 +15,7 @@ public class AnaAI : EnemyAI
         profilePhoto.SetActive(true);
         showTurnAction = GetComponent<ShowTurnAction>();
         firstTurn = true;
-        Settings.enemyTowerSkins = new(new int[] { 1, 1, 0, 0, 0 });
+        Settings.enemyTowerSkins = new(new int[] { 1, 0, 0, 1, 0 });
         EnemyPlay();
     }
 
@@ -46,6 +46,24 @@ public class AnaAI : EnemyAI
                 cardsToPlay.Add(7);
                 enemyStars += 2;
                 continue;
+            }
+
+            //if Ana have 2 towers installed and more than 2 stars, choose a tower
+
+            bool isFieldSlot3filled = showTurnAction.fieldSlots[3].GetComponent<FieldSlot>().isFilled;
+            bool isFieldSlot4filled = showTurnAction.fieldSlots[4].GetComponent<FieldSlot>().isFilled;
+
+            if (isFieldSlot3filled && isFieldSlot4filled && !GameManager.instance.showFase1)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (cardsToChooseFrom.Contains(i))
+                    {
+                        cardsToPlay.Add(i);
+                        cardsToChooseFrom.Remove(i);
+                        break;
+                    }
+                }
             }
 
             // check towers in the field and add inhibitors

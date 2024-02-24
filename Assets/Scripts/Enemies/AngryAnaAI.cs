@@ -18,7 +18,7 @@ public class AngryAnaAI : EnemyAI
         profilePhoto.SetActive(true);
         showTurnAction = GetComponent<ShowTurnAction>();
         firstTurn = true;
-        Settings.enemyTowerSkins = new(new int[] { 1, 1, 0, 0, 0 });
+        Settings.enemyTowerSkins = new(new int[] { 1, 0, 0, 1, 0 });
         EnemyPlay();
     }
 
@@ -57,10 +57,12 @@ public class AngryAnaAI : EnemyAI
                 continue;
             }
 
+            //if Ana have 2 towers installed and more than 2 stars, choose a tower
+
             bool isFieldSlot3filled = showTurnAction.fieldSlots[3].GetComponent<FieldSlot>().isFilled;
             bool isFieldSlot4filled = showTurnAction.fieldSlots[4].GetComponent<FieldSlot>().isFilled;
 
-            if (isFieldSlot3filled && isFieldSlot4filled && !GameManager.instance.showFase1)
+            if (isFieldSlot3filled && isFieldSlot4filled && !GameManager.instance.showFase1 && enemyStars > 2)
             {
                 for (int i = 0; i < 4; i++)
                 {

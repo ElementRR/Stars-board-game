@@ -12,8 +12,9 @@ public class SettingsPanel : TutPanel
         slider.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
         toggle.onValueChanged.AddListener(delegate { ToggleChangeCheck(); });
     }
-    private void Awake()
+    protected override void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         PlayerPrefs.GetFloat("musicVolume", AudioListener.volume);
         
         slider.value = AudioListener.volume;

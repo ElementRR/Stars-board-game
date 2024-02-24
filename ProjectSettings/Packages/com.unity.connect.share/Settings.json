@@ -6,7 +6,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-85;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-8;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-7;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-69;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V7-0;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/Public/Games/Stars-board-game/Builds/WebGL V1;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-85;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-8;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-7;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V0-69;C:/Users/Public/Games/Stars-board-game/Builds/WebGL V7-0;;;;\"}"
             }
         ]
     }

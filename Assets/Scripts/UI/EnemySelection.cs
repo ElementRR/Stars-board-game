@@ -15,8 +15,9 @@ public class EnemySelection : TutPanel
     [Header("Erase later")]
     [SerializeField] int FalseScore;
 
-    private void Awake()
+    protected override void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         ScoreManager.instance.AddScore(FalseScore);
 
         if (ScoreManager.isEdWon == true)
