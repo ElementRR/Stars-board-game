@@ -8,6 +8,7 @@ public class MenuPanel : MonoBehaviour
     [SerializeField] GameObject enemyPanel;
     [SerializeField] GameObject settingsPanel;
     [SerializeField] GameObject shopPanel;
+    [SerializeField] GameObject resetPanel;
 
     [Header("Sound FX")]
     AudioSource audioSource;
@@ -46,6 +47,11 @@ public class MenuPanel : MonoBehaviour
         audioSource.PlayOneShot(UIclick);
         StartCoroutine(ChangeScene(0));
     }
+    public void EnterReset()
+    {
+        audioSource.PlayOneShot(UIclick);
+        Instantiate(resetPanel);
+    }
 
     public void ExitApp()
     {
@@ -64,11 +70,17 @@ public class MenuPanel : MonoBehaviour
         SceneManager.LoadScene(scene);
     }
 
-    public void ResetPoints()
+    public void ResetPoints() => StartCoroutine(ResetRoutine());
+    private IEnumerator ResetRoutine()
     {
         audioSource.PlayOneShot(UIclick);
         ScoreManager.score = 0;
         ScoreManager.isEdWon = false;
+        Settings.isFirstTimePlaying = true;
         PlayerPrefs.DeleteAll();
+
+        yield return new WaitForSeconds(1.1f);
+        
+        Destroy(gameObject);
     }
 }

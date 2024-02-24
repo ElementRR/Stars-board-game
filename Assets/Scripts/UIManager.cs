@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     [Header("Sound FX")]
     [SerializeField] private AudioClip youWinS;
     [SerializeField] private AudioClip youLoseS;
+    [SerializeField] private AudioClip selectCard;
+    [SerializeField] private AudioClip UIclick;
     private AudioSource reproduce;
 
     public event Action OnHidePanel;
@@ -61,6 +63,7 @@ public class UIManager : MonoBehaviour
 
     public void SpeedTime(bool isFast)
     {
+        reproduce.PlayOneShot(UIclick);
         Time.timeScale = (isFast) ? 2 : 1;  
     }
 
@@ -101,6 +104,7 @@ public class UIManager : MonoBehaviour
 
     public void GetCardIndex(int index)
     {
+        reproduce.PlayOneShot(selectCard);
         if (GameManager.instance.actionTurn && cardCount < 3)
         {
             slotCards.Add(index);
@@ -114,7 +118,8 @@ public class UIManager : MonoBehaviour
 
     public void BackCard()
     {
-        if(slotCards.Any())
+        reproduce.PlayOneShot(UIclick);
+        if (slotCards.Any())
         {
             int lastUIIndex = slotCards.Last<int>();
             GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];

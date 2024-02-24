@@ -27,13 +27,21 @@ public class JokepoLogic : MonoBehaviour
 
     public bool isWinner;
 
+    [Header("Sound FX")]
+    protected AudioSource audioSource;
+    [SerializeField] private AudioClip UIclick;
+    [SerializeField] private AudioClip drawSound;
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         ResetGame(false);
     }
 
     public void GetJokenpoGame(int number)
     {
+        audioSource.PlayOneShot(UIclick);
+
         if (!isHandPicked)
         {
             meHand = number;
@@ -109,6 +117,7 @@ public class JokepoLogic : MonoBehaviour
     {
         float time = 1.2f;
 
+        audioSource.PlayOneShot(drawSound);
         textDecision.text = "Draw";
         yield return new WaitForSeconds(time);
         textDecision.text = "Chose another";

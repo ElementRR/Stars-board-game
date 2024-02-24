@@ -7456,7 +7456,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1637986322}
         m_TargetAssemblyTypeName: MenuPanel, Assembly-CSharp
-        m_MethodName: ResetPoints
+        m_MethodName: EnterReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7988,6 +7988,8 @@ MonoBehaviour:
   settingsPanel: {fileID: 7214866110137433794, guid: 8148c0e82bb02a14a99e2626eee08f51,
     type: 3}
   shopPanel: {fileID: 7214866110137433794, guid: 987796570db6c284099f24d068d7091e,
+    type: 3}
+  resetPanel: {fileID: 6344520324484415910, guid: 945c33b5b4d419b409a71c318b0b9000,
     type: 3}
   UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
   blackPanel: {fileID: 0}

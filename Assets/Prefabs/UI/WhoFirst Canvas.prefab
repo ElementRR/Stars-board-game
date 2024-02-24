@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jokenpoLogic: {fileID: 0}
+  UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
 --- !u!1 &7398346542932424870
 GameObject:
   m_ObjectHideFlags: 0

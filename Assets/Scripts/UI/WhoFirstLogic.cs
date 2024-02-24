@@ -7,6 +7,10 @@ public class WhoFirstLogic : MonoBehaviour
     public delegate void Outdoor(string message);
     public static event Outdoor OnMessageSent;
 
+    [Header("Sound FX")]
+    protected AudioSource audioSource;
+    [SerializeField] private AudioClip UIclick;
+
     private void Awake()
     {
         jokenpoLogic = GetComponentInParent<JokepoLogic>();
@@ -18,6 +22,7 @@ public class WhoFirstLogic : MonoBehaviour
     }
     public void GetPlayerChoice(bool isYou)
     {
+        audioSource.PlayOneShot(UIclick);
         if (isYou)
         {
             GameManager.instance.showFase1 = true;

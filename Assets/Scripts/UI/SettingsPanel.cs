@@ -29,6 +29,7 @@ public class SettingsPanel : TutPanel
     }
     private void ToggleChangeCheck()
     {
+        audioSource.PlayOneShot(UIclick);
         Settings.isFirstTimePlaying = toggle.isOn;
 
         int boolToInt = toggle.isOn ? 1 : 0;

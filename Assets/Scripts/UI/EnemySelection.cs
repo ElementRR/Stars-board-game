@@ -12,6 +12,8 @@ public class EnemySelection : TutPanel
     [SerializeField] private GameObject textRoot1;
     [SerializeField] private GameObject textRoot2;
 
+    [SerializeField] private AudioClip selectEnemy;
+
     [Header("Erase later")]
     [SerializeField] int FalseScore;
 
@@ -34,6 +36,7 @@ public class EnemySelection : TutPanel
     //enemyIndex = 0 : Ed, 1 : Rick, 2 : Ana
     public void EnemyChose(int enemyIndex)
     {
+        audioSource.PlayOneShot(selectEnemy);
         switch (enemyIndex)
         {
             case 0:

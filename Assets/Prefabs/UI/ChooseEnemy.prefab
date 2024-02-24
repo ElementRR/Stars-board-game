@@ -1858,6 +1858,7 @@ MonoBehaviour:
   blackPanel: {fileID: 21816885555997156}
   textRoot1: {fileID: 8346556388948312510}
   textRoot2: {fileID: 7236265443973073094}
+  selectEnemy: {fileID: 8300000, guid: 8f9571e82ab1fac44940c86c71a629fd, type: 3}
   FalseScore: 0
 --- !u!82 &3975203789192652043
 AudioSource:

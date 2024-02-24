@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Sound FX")]
     public AudioClip flipCard;
+    [SerializeField] AudioClip endTurnSound;
     private AudioSource reproduce;
 
     [Header("Animations")]
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void EndTurn()
     {
+        reproduce.PlayOneShot(endTurnSound);
         if (UIManager.instance.cardCount > 2)
         {
             UIManager.instance.cardCount = 0;

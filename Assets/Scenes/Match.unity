@@ -11999,6 +11999,7 @@ MonoBehaviour:
   tutPanels:
   - {fileID: 487312091}
   panel: 0
+  UIclick: {fileID: 0}
 --- !u!114 &487312094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18924,6 +18925,7 @@ MonoBehaviour:
   tutPanels:
   - {fileID: 954478280}
   panel: 0
+  UIclick: {fileID: 0}
 --- !u!114 &954478287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20124,6 +20126,8 @@ MonoBehaviour:
   enemyStarCount: {fileID: 588333061}
   youWinS: {fileID: 8300000, guid: b769a9a0c7db1f64693f5e9c707cdc04, type: 3}
   youLoseS: {fileID: 8300000, guid: a1c0f2e701963da46a41a63a217ace83, type: 3}
+  selectCard: {fileID: 8300000, guid: 324515ab23f6cac46baff58b4b98b203, type: 3}
+  UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
 --- !u!82 &1053211830
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21400,6 +21404,8 @@ MonoBehaviour:
   window1: {fileID: 6344520324484415910, guid: 2970197b5c2149d48a09240d8cb08c5b, type: 3}
   enemyPanel: {fileID: 0}
   settingsPanel: {fileID: 0}
+  shopPanel: {fileID: 0}
+  UIclick: {fileID: 0}
   blackPanel: {fileID: 0}
 --- !u!1 &1311761758
 GameObject:
@@ -23018,6 +23024,7 @@ MonoBehaviour:
   - {fileID: 2035681050910321514, guid: 6d239056f9ed2da45910f4b2cec20c29, type: 3}
   - {fileID: 2090661258493998730, guid: fc0033c564551b34ebc3ba3a6566339c, type: 3}
   flipCard: {fileID: 8300000, guid: 43807b570d8603841aa763673dbdcb3f, type: 3}
+  endTurnSound: {fileID: 8300000, guid: af647ef483d392c4bbe59abbde6c03ae, type: 3}
   blackPanel: {fileID: 1593668340}
 --- !u!114 &1817210725
 MonoBehaviour:
@@ -23525,6 +23532,7 @@ GameObject:
   - component: {fileID: 1934062788}
   - component: {fileID: 1934062790}
   - component: {fileID: 1934062789}
+  - component: {fileID: 1934062791}
   m_Layer: 5
   m_Name: Jokenpo Canvas
   m_TagString: Untagged
@@ -23649,6 +23657,8 @@ MonoBehaviour:
   meHand: 0
   enemyHand: 0
   isWinner: 0
+  UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
+  drawSound: {fileID: 8300000, guid: 11dcb796b2fd41846b3e56921d7ae0e4, type: 3}
 --- !u!114 &1934062789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23687,6 +23697,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934062783}
   m_CullTransparentMesh: 1
+--- !u!82 &1934062791
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934062783}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1938284590
 GameObject:
   m_ObjectHideFlags: 0
@@ -24941,6 +25047,8 @@ MonoBehaviour:
   window1: {fileID: 0}
   enemyPanel: {fileID: 0}
   settingsPanel: {fileID: 0}
+  shopPanel: {fileID: 0}
+  UIclick: {fileID: 0}
   blackPanel: {fileID: 1593668340}
 --- !u!224 &2236463758961546612
 RectTransform:
