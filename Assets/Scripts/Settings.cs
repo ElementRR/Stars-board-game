@@ -24,6 +24,11 @@ public class Settings : MonoBehaviour
         }
 
         AudioListener.volume = PlayerPrefs.GetFloat("musicVolume");
+
+        if(AudioListener.volume == 0) {
+            AudioListener.volume = 0.5f;
+        }
+
         bool intToBool = PlayerPrefs.GetInt("isFirstTime") != 0;
         isFirstTimePlaying = intToBool;
 

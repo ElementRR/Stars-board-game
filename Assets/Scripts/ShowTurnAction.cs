@@ -242,7 +242,7 @@ public class ShowTurnAction : MonoBehaviour
                     case false when fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().isFilled:
                         fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().FailedToInstall();
                         break;
-                    case true when fieldSlots[blockTowerIndex + 3].GetComponent<FieldSlot>().isFilled:
+                    case true when fieldSlots[blockTowerIndex].GetComponent<FieldSlot>().isFilled:
                         fieldSlots[blockTowerIndex].GetComponent<FieldSlot>().FailedToInstall();
                         break;
                     default:

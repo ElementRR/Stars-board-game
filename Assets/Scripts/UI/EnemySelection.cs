@@ -27,7 +27,7 @@ public class EnemySelection : TutPanel
             Destroy(textRoot1);
         }
 
-        if (ScoreManager.score >= 400)
+        if (ScoreManager.score >= 250)
         {
             Destroy(textRoot2 );
         }

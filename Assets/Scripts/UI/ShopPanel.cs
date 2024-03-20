@@ -36,7 +36,7 @@ public class ShopPanel : TutPanel
             {
                 payBlockers[i].SetActive(false);
             }
-        }else if (ScoreManager.score >= 300)
+        }else if (ScoreManager.score >= 200)
         {
             payBlockers[0].SetActive(false);
         }
