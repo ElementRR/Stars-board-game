@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EnemySelection : TutPanel
 {
@@ -11,6 +12,7 @@ public class EnemySelection : TutPanel
 
     [SerializeField] private GameObject textRoot1;
     [SerializeField] private GameObject textRoot2;
+    [SerializeField] private TMP_InputField inputPass;
 
     [SerializeField] private AudioClip selectEnemy;
 
@@ -41,25 +43,37 @@ public class EnemySelection : TutPanel
         {
             case 0:
                 OnEnemyChose?.Invoke(Enemy.Name.Ed);
+                StartCoroutine(ChangeScene(1));
                 break;
             case 1:
                 OnEnemyChose?.Invoke(Enemy.Name.Rick);
+                StartCoroutine(ChangeScene(1));
                 break;
             case 2:
                 OnEnemyChose?.Invoke(Enemy.Name.Ana);
+                StartCoroutine(ChangeScene(1));
+                break;
+            case 3:
+                if(inputPass.text == "rato")
+                {
+                    StartCoroutine(ChangeScene(2));
+                }
+                else
+                {
+                    inputPass.text = "Soon!";
+                }
                 break;
             default:
                 OnEnemyChose?.Invoke(Enemy.Name.Ed);
+                StartCoroutine(ChangeScene(1));
                 break;
         }
-
-        StartCoroutine(ChangeScene());
     }
 
-    private IEnumerator ChangeScene()
+    private IEnumerator ChangeScene(int scene)
     {
         blackPanel.Play("TransToBlack");
         yield return new WaitForSecondsRealtime(0.5f);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(scene);
     }
 }

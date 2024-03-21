@@ -7986,15 +7986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66803afec1870994f8285c9e9ed658c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window1: {fileID: 6866984211686753420, guid: 964ab5072c5950e449eaa37afaf9a6cb, type: 3}
-  enemyPanel: {fileID: 7214866110137433794, guid: 5b9b1dc7ee6020240880b7bc6e15f828,
-    type: 3}
-  settingsPanel: {fileID: 7214866110137433794, guid: 8148c0e82bb02a14a99e2626eee08f51,
-    type: 3}
-  shopPanel: {fileID: 7214866110137433794, guid: 987796570db6c284099f24d068d7091e,
-    type: 3}
-  resetPanel: {fileID: 6344520324484415910, guid: 945c33b5b4d419b409a71c318b0b9000,
-    type: 3}
   UIclick: {fileID: 8300000, guid: 374606c9162312f43af90c5ef7766980, type: 3}
   blackPanel: {fileID: 0}
 --- !u!82 &1637986323
