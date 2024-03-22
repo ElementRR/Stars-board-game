@@ -39,10 +39,10 @@ public class CardsPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (GameObject.Find("GameManager").GetComponent<NetworkGM>())
+        if (GameObject.Find("GameManager").TryGetComponent(out NetworkGM net))
         {
-            NetworkGM.instance.OnFirstTurnEnd -= HidePanel;
-            NetworkGM.instance.OnShowTurnEnd -= ShowPanel;
+            net.OnFirstTurnEnd -= HidePanel;
+            net.OnShowTurnEnd -= ShowPanel;
             NetworkUI.instance.OnHidePanel -= HidePanel;
             NetworkUI.instance.OnShowPanel -= ShowPanel;
         }

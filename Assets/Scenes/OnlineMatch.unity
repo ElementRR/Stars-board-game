@@ -11633,21 +11633,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1053211831}
+        m_TargetAssemblyTypeName: NetworkUI, Assembly-CSharp
         m_MethodName: GetCardIndex
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: FillSlot
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18445,8 +18433,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1053211831}
+        m_TargetAssemblyTypeName: NetworkUI, Assembly-CSharp
         m_MethodName: BackCard
         m_Mode: 1
         m_Arguments:
@@ -18723,7 +18711,6 @@ MonoBehaviour:
   _uidString: f6adacd7-6fa3-49a5-bf79-f8c9666fd52b
   Reliability: 1
   LocalMethodBehavior: 1
-  avatar: {fileID: 0}
   camerasPos:
   - {fileID: 961931759}
   - {fileID: 622983159}
@@ -18741,7 +18728,8 @@ MonoBehaviour:
   - {fileID: 6945147706704924704}
   - {fileID: 4943377451207171379}
   - {fileID: 4867693937251599395}
-  slotCards: 
+  host_slotCards: 
+  guest_slotCards: 
   starCount: {fileID: 475358867}
   enemyStarCount: {fileID: 588333061}
   youWinS: {fileID: 8300000, guid: b769a9a0c7db1f64693f5e9c707cdc04, type: 3}
@@ -20335,8 +20323,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1817210729}
+        m_TargetAssemblyTypeName: NetworkGM, Assembly-CSharp
         m_MethodName: EndTurn
         m_Mode: 1
         m_Arguments:
@@ -21385,6 +21373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ceb41f787e80846adc430469c639a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Multiplayer: {fileID: 0}
+  _uidString: 08449523-4788-4022-9d91-20da80366345
+  Reliability: 1
+  LocalMethodBehavior: 1
   actionTurn: 0
   showFase1: 0
   installEnd: 1
@@ -22323,9 +22315,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1053211828}
     m_Modifications:
+    - target: {fileID: 203257309, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 256042719, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 332926864, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 479408578, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 614504083, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1102478636, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
       propertyPath: ShowUserCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379062223, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517702012, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1668572796, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005701999, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114741777, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421340488016314253, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101912235669417, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22367,6 +22404,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -28.401886
       objectReference: {fileID: 0}
+    - target: {fileID: 8763101912235669423, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912515878524, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912591529868, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8763101912591529871, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -22376,6 +22428,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912620878674, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912917073176, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101912917073179, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22391,6 +22453,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912947651789, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101912947651791, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22411,6 +22478,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912960744425, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101912994461553, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913179935572, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913419821384, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913419821385, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913419821390, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22447,6 +22539,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8763101913419821391, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913424356129, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913662790853, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -22465,22 +22572,22 @@ PrefabInstance:
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22545,12 +22652,12 @@ PrefabInstance:
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 679.32764
+      value: 0.32763672
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 382.1218
+      value: 0.121795654
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298803, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
@@ -22574,8 +22681,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8763101913705298807, guid: 5a577542a281e0a448dc3b383023e1f2,
         type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913705298807, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8763101913713047505, guid: 5a577542a281e0a448dc3b383023e1f2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a577542a281e0a448dc3b383023e1f2, type: 3}
@@ -22585,6 +22702,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2021318207}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &2021318213
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003837043}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2051446558
 GameObject:
   m_ObjectHideFlags: 0
@@ -24331,13 +24460,38 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704979064345948128, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2704979064345948131, guid: e8ecee49f4837ae4d8451d5cbe96d47a,
         type: 3}
@@ -24466,13 +24620,38 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4158705818800621618, guid: 6cf4152c91beffa4fb08293bcaf895be,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4158705818800621622, guid: 6cf4152c91beffa4fb08293bcaf895be,
         type: 3}
@@ -24711,13 +24890,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 577822768526694736, guid: 35cd38f35fa08cc4193040f2335c763c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35cd38f35fa08cc4193040f2335c763c, type: 3}
@@ -24846,13 +25050,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943377450996565814, guid: 2145b56bd94aa464b87f18189c700824,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2145b56bd94aa464b87f18189c700824, type: 3}
@@ -24987,13 +25216,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5442973329524161401, guid: 90f9bea4afba80c4cbcd35233b8708b8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90f9bea4afba80c4cbcd35233b8708b8, type: 3}
@@ -25122,13 +25376,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945147706517091101, guid: f945067226d5305488663ee408ad9259,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f945067226d5305488663ee408ad9259, type: 3}
@@ -25147,13 +25426,38 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1053211831}
     - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1817210729}
+    - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetCardIndex
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: FillSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NetworkUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029593253607892112, guid: 266a891552f959e4e94a17b532f448f6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: NetworkGM, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8029593253607892124, guid: 266a891552f959e4e94a17b532f448f6,
         type: 3}

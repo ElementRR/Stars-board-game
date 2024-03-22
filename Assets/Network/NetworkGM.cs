@@ -60,36 +60,48 @@ public class NetworkGM : AttributesSync
     public event Action OnShowTurnEnd;
     void ShowTurnEnd() => OnShowTurnEnd?.Invoke();
 
+    public void RoomJoined()
+    {
+        showTurnAction.cameraLocs[0] = NetworkUI.instance.mainCamera.transform;
+    }
+
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
         Instantiate(fieldCardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
     }
 
-    public void FillSlot(int cardIndex)
+    public void FillSlot(int cardIndex, bool isHost)
     {
-        if (actionTurn && UIManager.instance.cardCount < 3)
+        BroadcastRemoteMethod("FillSlotNet", cardIndex, isHost);
+    }
+
+    [SynchronizableMethod]
+    private void FillSlotNet(int cardIndex, bool isHost)
+    {
+        int slotValue;
+
+        if (isHost)
         {
-            InstantiateInSlot(cardSlots[UIManager.instance.cardCount], cardIndex);
-            UIManager.instance.cardCount++;
+            slotValue = NetworkUI.instance.host_slotCards.Count;
         }
         else
         {
-            if (UIManager.instance.cardCount < 3)
-            {
-                UIManager.instance.cardCount++;
-            }
+            slotValue = NetworkUI.instance.guest_slotCards.Count + 3;
         }
 
-        UIManager.instance.endTurnB.SetActive(_ = (UIManager.instance.cardCount > 2));
+        if (actionTurn && NetworkUI.instance.cardCount < 3)
+        {
+            InstantiateInSlot(cardSlots[slotValue], cardIndex);
+        }
     }
 
     public void EndTurn()
     {
         reproduce.PlayOneShot(endTurnSound);
-        if (UIManager.instance.cardCount > 2)
+        if (NetworkUI.instance.cardCount > 2)
         {
-            UIManager.instance.cardCount = 0;
+            NetworkUI.instance.cardCount = 0;
             actionTurn = false;
             if (showFase1)
             {
@@ -240,9 +252,9 @@ public class NetworkGM : AttributesSync
         firstIndicator.UpdateIndPos(showFase1);
         ShowTurnEnd();
         meStars += endTurnStars;
-        UIManager.instance.starCount.text = "" + meStars;
+        NetworkUI.instance.starCount.text = "" + meStars;
         enemyStars += endTurnStars;
-        UIManager.instance.enemyStarCount.text = "" + enemyStars;
+        NetworkUI.instance.enemyStarCount.text = "" + enemyStars;
         OnMessageSent?.Invoke("+" + endTurnStars + " star to both players");
     }
 
@@ -260,7 +272,7 @@ public class NetworkGM : AttributesSync
 
     public void ResetSlots()
     {
-        UIManager.instance.slotCards = new();
+        NetworkUI.instance.host_slotCards = new();
     }
 
 }

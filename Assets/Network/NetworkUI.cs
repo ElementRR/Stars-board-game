@@ -11,13 +11,14 @@ public class NetworkUI : AttributesSync
 {
     public static NetworkUI instance;
 
-    private bool imEnemy;
+    private bool isHost;
 
     [SerializeField] private Transform[] camerasPos;
-    [SerializeField] private Camera mainCamera;
+    public Camera mainCamera;
 
     [Header("Start of match")]
     [SerializeField] private GameObject netRoomsWindow;
+     private CanvasGroup canvasNet;
     [SerializeField] private GameObject jokenpoCanvas;
 
     [Header("Game")]
@@ -28,7 +29,8 @@ public class NetworkUI : AttributesSync
     public GameObject endTurnB;
     public GameObject[] cardIndex;
 
-    public List<int> slotCards = new();
+    [SynchronizableField] public List<int> host_slotCards = new();
+    [SynchronizableField] public List<int> guest_slotCards = new();
 
     public TextMeshProUGUI starCount;
 
@@ -49,6 +51,8 @@ public class NetworkUI : AttributesSync
         NetworkGM.instance.OnFirstTurnEnd += ActivateCard;
         NetworkGM.instance.OnShowTurnEnd += BackCard;
         netRoomsWindow.GetComponent<RoomMenu>().OnRoomCreated += RoomJoined;
+
+        canvasNet = netRoomsWindow.GetComponent<CanvasGroup>();
 
         endPanel.SetActive(false);
     }
@@ -83,11 +87,12 @@ public class NetworkUI : AttributesSync
     
     void RoomJoined()
     {
-        netRoomsWindow.SetActive(false);
+        canvasNet.alpha = 0f;
+        canvasNet.blocksRaycasts = false;
 
-        imEnemy = (Multiplayer.CurrentRoom.GetUserCount() == 2) ? true : false;
+        isHost = (Multiplayer.CurrentRoom.GetUserCount() == 2) ? false : true;
 
-        if (!imEnemy)
+        if (isHost)
         {
             mainCamera.transform.position = camerasPos[0].position;
             mainCamera.transform.rotation = camerasPos[0].rotation;
@@ -97,49 +102,103 @@ public class NetworkUI : AttributesSync
             mainCamera.transform.position = camerasPos[1].position;
             mainCamera.transform.rotation = camerasPos[1].rotation;
         }
+        NetworkGM.instance.RoomJoined();
     }
 
     void ActivateCard()
     {
         cardIndex[6].GetComponent<Button>().interactable = true;
-        GameManager.instance.OnFirstTurnEnd -= ActivateCard;
+        NetworkGM.instance.OnFirstTurnEnd -= ActivateCard;
     }
 
     public void GetCardIndex(int index)
     {
+        List<int> slotcards;
+
+        slotcards = (isHost) ? host_slotCards : guest_slotCards;
+
         reproduce.PlayOneShot(selectCard);
-        if (GameManager.instance.actionTurn && cardCount < 3)
+        if (NetworkGM.instance.actionTurn && cardCount < 3)
         {
-            slotCards.Add(index);
             if (index < 7)
             {
                 //cardIndex[index].SetActive(false);
                 cardIndex[index].GetComponent<Button>().interactable = false;
             }
+            NetworkGM.instance.FillSlot(index, isHost);
+
+            BroadcastRemoteMethod("AddSlotcard", index, isHost);
+
+            cardCount++;
+            endTurnB.SetActive(_ = (cardCount > 2));
+        }
+    }
+    [SynchronizableMethod]
+    private void AddSlotcard(int cardindex, bool sentByHost)
+    {
+        if (sentByHost)
+        {
+            host_slotCards.Add(cardindex);
+        }
+        else
+        {
+            guest_slotCards.Add(cardindex);
         }
     }
 
     public void BackCard()
     {
-        reproduce.PlayOneShot(UIclick);
-        if (slotCards.Any())
+        if (NetworkGM.instance.actionTurn && cardCount > 0)
         {
-            int lastUIIndex = slotCards.Last<int>();
-            GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];
+            reproduce.PlayOneShot(UIclick);
 
-            if (GameManager.instance.actionTurn && cardCount > 0)
+            List<int> slotcards;
+
+            slotcards = (isHost) ? host_slotCards : guest_slotCards;
+
+            int slotValue;
+
+            if (isHost)
             {
-                ReturnCard(lastUIIndex, lastCardIndex, false);
-                slotCards.Remove(slotCards.Last<int>());
-                cardCount--;
-                endTurnB.SetActive(_ = (cardCount > 2));
+                slotValue = slotcards.Count;
             }
             else
             {
-                return;
+                slotValue = slotcards.Count + 3;
             }
+
+            if (slotcards.Any())
+            {
+                int lastUIIndex = slotcards.Last();
+
+                ReturnCard(lastUIIndex);
+                BroadcastRemoteMethod("BackCardNet", slotValue - 1, isHost);
+
+            }
+
+
+            cardCount--;
+            endTurnB.SetActive(_ = (cardCount > 2));
         }
-        endTurnB.SetActive(_ = (cardCount > 2));
+    }
+    [SynchronizableMethod]
+    private void BackCardNet(int slotValue, bool sentByHost)
+    {
+        GameObject lastCardIndex = NetworkGM.instance.cardSlots[slotValue];
+
+        if (lastCardIndex.transform.childCount > 0)
+        {
+            StartCoroutine(lastCardIndex.transform.GetComponentInChildren<Card>().DestroySequence());
+        }
+
+        if (sentByHost)
+        {
+            host_slotCards.RemoveAt(host_slotCards.Count - 1);
+        }
+        else
+        {
+            guest_slotCards.RemoveAt(guest_slotCards.Count - 1);
+        }
     }
 
     public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
@@ -158,7 +217,7 @@ public class NetworkUI : AttributesSync
         }
     }
 
-    public void ReturnCard(int cardNumber)
+    public void ReturnCard(int cardNumber) 
     {
         if (cardNumber < 7)
         {
@@ -172,7 +231,6 @@ public class NetworkUI : AttributesSync
         endPanel.SetActive(true);
         endPanel.GetComponent<Animator>().SetTrigger("End");
 
-        GameManager.instance.GetEnemyAI();
 
         if (!enemyWins)
         {

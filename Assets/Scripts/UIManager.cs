@@ -121,13 +121,13 @@ public class UIManager : MonoBehaviour
         reproduce.PlayOneShot(UIclick);
         if (slotCards.Any())
         {
-            int lastUIIndex = slotCards.Last<int>();
+            int lastUIIndex = slotCards.Last();
             GameObject lastCardIndex = GameManager.instance.cardSlots[cardCount - 1];
 
             if (GameManager.instance.actionTurn && cardCount > 0)
             {
                 ReturnCard(lastUIIndex, lastCardIndex, false);
-                slotCards.Remove(slotCards.Last<int>());
+                slotCards.RemoveAt(slotCards.Count - 1);
                 cardCount--;
                 endTurnB.SetActive(_ = (cardCount > 2));
             }
