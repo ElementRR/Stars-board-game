@@ -9,10 +9,21 @@ public class CardsPanel : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        GameManager.instance.OnFirstTurnEnd += HidePanel;
-        GameManager.instance.OnShowTurnEnd += ShowPanel;
-        UIManager.instance.OnHidePanel += HidePanel;
-        UIManager.instance.OnShowPanel += ShowPanel;
+
+        if (GameObject.Find("GameManager").GetComponent<NetworkGM>())
+        {
+            NetworkGM.instance.OnFirstTurnEnd += HidePanel;
+            NetworkGM.instance.OnShowTurnEnd += ShowPanel;
+            NetworkUI.instance.OnHidePanel += HidePanel;
+            NetworkUI.instance.OnShowPanel += ShowPanel;
+        }
+        else
+        {
+            GameManager.instance.OnFirstTurnEnd += HidePanel;
+            GameManager.instance.OnShowTurnEnd += ShowPanel;
+            UIManager.instance.OnHidePanel += HidePanel;
+            UIManager.instance.OnShowPanel += ShowPanel;
+        }
 
         animator.Play("CardsPanelOut", 0, 0.9f);
     }
@@ -28,9 +39,19 @@ public class CardsPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.instance.OnFirstTurnEnd -= HidePanel;
-        GameManager.instance.OnShowTurnEnd -= ShowPanel;
-        UIManager.instance.OnHidePanel -= HidePanel;
-        UIManager.instance.OnShowPanel -= ShowPanel;
+        if (GameObject.Find("GameManager").GetComponent<NetworkGM>())
+        {
+            NetworkGM.instance.OnFirstTurnEnd -= HidePanel;
+            NetworkGM.instance.OnShowTurnEnd -= ShowPanel;
+            NetworkUI.instance.OnHidePanel -= HidePanel;
+            NetworkUI.instance.OnShowPanel -= ShowPanel;
+        }
+        else
+        {
+            GameManager.instance.OnFirstTurnEnd -= HidePanel;
+            GameManager.instance.OnShowTurnEnd -= ShowPanel;
+            UIManager.instance.OnHidePanel -= HidePanel;
+            UIManager.instance.OnShowPanel -= ShowPanel;
+        }
     }
 }

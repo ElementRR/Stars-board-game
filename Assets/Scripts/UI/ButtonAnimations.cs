@@ -6,8 +6,16 @@ public class ButtonAnimations : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.OnFirstTurnEnd += EndActionT;
-        GameManager.instance.OnShowTurnEnd += EndShowT;
+        if (GameObject.Find("GameManager").GetComponent<NetworkGM>())
+        {
+            NetworkGM.instance.OnFirstTurnEnd += EndActionT;
+            NetworkGM.instance.OnShowTurnEnd += EndShowT;
+        }
+        else
+        {
+            GameManager.instance.OnFirstTurnEnd += EndActionT;
+            GameManager.instance.OnShowTurnEnd += EndShowT;
+        }
     }
     // Update is called once per frame
     public void EndActionT()

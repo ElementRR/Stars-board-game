@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class MatchMusic : MonoBehaviour
@@ -28,19 +29,29 @@ public class MatchMusic : MonoBehaviour
         source.clip = tensionSong;
         source.PlayDelayed(1);
         yield return new WaitUntil(() => !source.isPlaying);
-        GameManager.instance.GetEnemyAI();
 
-        if(GameManager.enemyIndex == Enemy.Name.AngryAna)
+        if (GameObject.Find("GameManager").GetComponent<GameManager>())
         {
-            source.clip = musics[^1];
-            source.loop = true;
-            source.Play();
-        }else
+            GameManager.instance.GetEnemyAI();
+
+            if (GameManager.enemyIndex == Enemy.Name.AngryAna)
+            {
+                source.clip = musics[^1];
+                source.loop = true;
+                source.Play();
+            }
+            else
+            {
+                source.clip = GetAudioClip();
+                source.loop = true;
+                source.Play();
+            }
+        }
+        else
         {
             source.clip = GetAudioClip();
             source.loop = true;
             source.Play();
         }
-        
     }
 }

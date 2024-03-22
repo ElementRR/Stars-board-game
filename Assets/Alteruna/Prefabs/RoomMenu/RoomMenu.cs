@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Alteruna.Trinity;
+using System;
 
 namespace Alteruna
 {
@@ -30,7 +31,10 @@ namespace Alteruna
 		private int _roomI = -1;
 
 
-		private void Start()
+        //Rato changes
+        public event Action OnRoomCreated;
+
+        private void Start()
 		{
 			if (Multiplayer == null)
 			{
@@ -201,6 +205,10 @@ namespace Alteruna
 			{
 				TitleText.text = "In Room " + room.Name;
 			}
+
+            //Rato changes
+            OnRoomCreated?.Invoke();
+
 		}
 
 		private void LeftRoom(Multiplayer multiplayer)

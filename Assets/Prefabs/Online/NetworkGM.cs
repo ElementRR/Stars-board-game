@@ -2,16 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Alteruna;
 
-[RequireComponent(typeof(ShowTurnAction))]
-[RequireComponent(typeof(AudioSource))]
-public class GameManager : MonoBehaviour
+public class NetworkGM : AttributesSync
 {
-    public static GameManager instance;
+    public static NetworkGM instance;
 
     private ShowTurnAction showTurnAction;
-    public EnemyAI enemyAI;
-    public static Enemy.Name enemyIndex;
 
     public bool actionTurn;
     // if showFase1 = true, the player starts showing cards
@@ -48,14 +45,13 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         Time.timeScale = 1;
-        UIManager.instance.cardCount = 0;
+        NetworkUI.instance.cardCount = 0;
         meStars = 0;
         enemyStars = 0;
         actionTurn = true;
         showTurnAction = GetComponent<ShowTurnAction>();
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
-        OnFirstTurnEnd += GetEnemyAI;
     }
 
     public event Action OnFirstTurnEnd;
@@ -72,14 +68,14 @@ public class GameManager : MonoBehaviour
 
     public void FillSlot(int cardIndex)
     {
-        if(actionTurn && UIManager.instance.cardCount < 3)
+        if (actionTurn && UIManager.instance.cardCount < 3)
         {
             InstantiateInSlot(cardSlots[UIManager.instance.cardCount], cardIndex);
             UIManager.instance.cardCount++;
         }
         else
         {
-            if(UIManager.instance.cardCount < 3)
+            if (UIManager.instance.cardCount < 3)
             {
                 UIManager.instance.cardCount++;
             }
@@ -114,7 +110,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 6;)
         {
-            if(i < 3)
+            if (i < 3)
             {
                 yield return new WaitForSeconds(timeToWait);
                 // show the first card
@@ -232,31 +228,6 @@ public class GameManager : MonoBehaviour
         EndOfShowTurn(false);
     }
 
-    public void GetEnemyAI()
-    {
-        if (GetComponent<EdAI>() != null)
-        {
-            enemyAI = GetComponent<EdAI>();
-            enemyIndex = Enemy.Name.Ed;
-        }
-        else if (GetComponent<RickAI>() != null)
-        {
-            enemyAI = GetComponent<RickAI>();
-            enemyIndex = Enemy.Name.Rick;
-        }
-        else if (GetComponent<AnaAI>() != null)
-        {
-            enemyAI = GetComponent<AnaAI>();
-            enemyIndex = Enemy.Name.Ana;
-        }
-        else if (GetComponent<AngryAnaAI>() != null)
-        {
-            enemyAI = GetComponent<AngryAnaAI>();
-            enemyIndex = Enemy.Name.AngryAna;
-        }
-        Debug.Log(enemyAI);
-    }
-
     private void EndOfShowTurn(bool isTurn1)
     {
         // reset slots
@@ -273,7 +244,6 @@ public class GameManager : MonoBehaviour
         enemyStars += endTurnStars;
         UIManager.instance.enemyStarCount.text = "" + enemyStars;
         OnMessageSent?.Invoke("+" + endTurnStars + " star to both players");
-        enemyAI.EnemyPlay();
     }
 
     private IEnumerator WaitInstallAnimation(float t)
@@ -293,8 +263,4 @@ public class GameManager : MonoBehaviour
         UIManager.instance.slotCards = new();
     }
 
-    private void OnDestroy()
-    {
-        OnFirstTurnEnd -= GetEnemyAI;
-    }
 }
