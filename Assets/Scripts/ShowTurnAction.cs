@@ -46,12 +46,23 @@ public class ShowTurnAction : MonoBehaviour
 
     private void GetCardAndSlot(int faseNumber, out int slotcard, out GameObject cardSlot1)
     {
-        cardSlot1 = GameManager.instance.cardSlots[faseNumber - 1];
+        if(TryGetComponent(out GameManager gm))
+        {
+            cardSlot1 = gm.cardSlots[faseNumber - 1];
+        }
+        else
+        {
+            cardSlot1 = NetworkGM.instance.cardSlots[faseNumber - 1];
+        }
+
         slotcard = cardSlot1.GetComponentInChildren<Card>().index;
     }
 
     public void ActionInShowTurn(bool isEnemy, int faseNumber)
     {
+        bool isOffline;
+        isOffline = TryGetComponent(out GameManager gm);
+
         bool adversaryHasAnt;
         en_value = new List<int>(0);
 
@@ -83,34 +94,70 @@ public class ShowTurnAction : MonoBehaviour
                 InstallTower(whereInstallT, cardSlot1);
                 en_value.Clear();
             }
-        }else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
+        }
+        else if (me_value1 > 3 && me_value1 < 6) //  inhibitor: adversary has tower?
         {
-            int stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
+            int stars;
+
+            if (isOffline)
+            {
+                stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
+            }
+            else
+            {
+                stars = (whereInstallT == 3) ? NetworkGM.enemyStars : NetworkGM.meStars;
+            }
 
             if (stars < inhCost) // inhibitor: do you have enough stars?
             {
-                UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                if (isOffline)
+                {
+                    UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                }
+                else
+                {
+                    NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                }
 
                 NotEnoughStars();
             }
             else // stars requisition: success
             {
-                if (isEnemy)
+                switch ((isEnemy ? 1 : 0) + (isOffline ? 2 : 0))
                 {
-                    GameManager.enemyStars -= inhCost;
-                    UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
-                }
-                else
-                {
-                    GameManager.meStars -= inhCost;
-                    UIManager.instance.starCount.text = "" + GameManager.meStars;
+                    case 3: // isEnemy = true, isOffline = true
+                        GameManager.enemyStars -= inhCost;
+                        UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
+                        break;
+                    case 2: // isEnemy = false, isOffline = true
+                        GameManager.meStars -= inhCost;
+                        UIManager.instance.starCount.text = "" + GameManager.meStars;
+                        break;
+                    case 1: // isEnemy = true, isOffline = false
+                        NetworkGM.enemyStars -= inhCost;
+                        NetworkUI.instance.enemyStarCount.text = "" + NetworkGM.enemyStars;
+                        break;
+                    case 0: // isEnemy = false, isOffline = false
+                        NetworkGM.meStars -= inhCost;
+                        NetworkUI.instance.starCount.text = "" + NetworkGM.meStars;
+                        break;
+                    default:
+                        // Handle unexpected cases
+                        break;
                 }
 
                 if (!adversaryHasAnt) // no : return inhibitor card
                 {
                     reproduce.PlayOneShot(inhTower);
                     OnMessageSent?.Invoke("Inhibitor did not work! -1 star!");
-                    UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    if (isOffline)
+                    {
+                        UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    }
+                    else
+                    {
+                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    }
 
                     en_value.Clear();
                 }
@@ -120,7 +167,14 @@ public class ShowTurnAction : MonoBehaviour
 
                     DestroyAdversaryTower(isEnemy); // yes: destroy 1 enemy tower
 
-                    UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    if (isOffline)
+                    {
+                        UIManager.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    }
+                    else
+                    {
+                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    }
 
                     me_value1 = blankIndex;
 
@@ -130,20 +184,34 @@ public class ShowTurnAction : MonoBehaviour
         }
         else
         {
-            if (isEnemy)
-            { 
-                GameManager.enemyStars += 2;
-                UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
-                OnMessageSent?.Invoke("+2 Stars for enemy!");
-            }
-            else
+            switch ((isEnemy ? 1 : 0) + (isOffline ? 2 : 0))
             {
-                GameManager.meStars += 2;
-                UIManager.instance.starCount.text = "" + GameManager.meStars;
-                OnMessageSent?.Invoke("+2 Stars for you!");
+                case 3: // isEnemy = true, isOffline = true
+                    GameManager.enemyStars += 2;
+                    UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
+                    OnMessageSent?.Invoke("+2 Stars for enemy!");
+                    break;
+                case 2: // isEnemy = false, isOffline = true
+                    GameManager.meStars += 2;
+                    UIManager.instance.starCount.text = "" + GameManager.meStars;
+                    OnMessageSent?.Invoke("+2 Stars for you!");
+                    break;
+                case 1: // isEnemy = true, isOffline = false
+                    NetworkGM.enemyStars += 2;
+                    NetworkUI.instance.enemyStarCount.text = "" + NetworkGM.enemyStars;
+                    OnMessageSent?.Invoke("+2 Stars for guest!");
+                    break;
+                case 0: // isEnemy = false, isOffline = false
+                    NetworkGM.meStars += 2;
+                    NetworkUI.instance.starCount.text = "" + NetworkGM.meStars;
+                    OnMessageSent?.Invoke("+2 Stars for host!");
+                    break;
+                default:
+                    // Handle unexpected cases
+                    break;
             }
-            
             DestroyChildObject(cardSlot1);
+            
         }
     }
 
@@ -216,7 +284,14 @@ public class ShowTurnAction : MonoBehaviour
 
         if (shouldReturnCard)
         {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+            if(TryGetComponent(out GameManager gm))
+            {
+                UIManager.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+            }
+            else
+            {
+                NetworkUI.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+            }
 
             if (failBellTower)
             {
@@ -269,11 +344,30 @@ public class ShowTurnAction : MonoBehaviour
 
     private void InstallTower(int slot, GameObject cardSlot)
     {
-        int stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
+        bool isOffline;
+        isOffline = TryGetComponent(out GameManager gm);
+
+        int stars;
+
+        if (isOffline)
+        {
+            stars = (whereInstallT == 3) ? GameManager.enemyStars : GameManager.meStars;
+        }
+        else
+        {
+            stars = (whereInstallT == 3) ? NetworkGM.enemyStars : NetworkGM.meStars;
+        }
 
         if (stars < towerCost)
         {
-            UIManager.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false );
+            if(isOffline)
+            {
+                UIManager.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false);
+            }
+            else
+            {
+                NetworkUI.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false);
+            }
             
             NotEnoughStars();
             
@@ -298,16 +392,25 @@ public class ShowTurnAction : MonoBehaviour
 
         DestroyChildObject(cardSlot);
 
-        switch (whereInstallT)
+        switch (whereInstallT + (isOffline ? 0 : 1))
         {
-            case 3:
-                GameManager.enemyStars -= towerCost;
-                UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
-
-                break;
             default:
                 GameManager.meStars -= towerCost;
                 UIManager.instance.starCount.text = "" + GameManager.meStars;
+                break;
+
+            case 3:
+                GameManager.enemyStars -= towerCost;
+                UIManager.instance.enemyStarCount.text = "" + GameManager.enemyStars;
+                break;
+            case 1:
+                NetworkGM.meStars -= towerCost;
+                NetworkUI.instance.starCount.text = "" + NetworkGM.meStars;
+                break;
+
+            case 4:
+                NetworkGM.enemyStars -= towerCost;
+                NetworkUI.instance.enemyStarCount.text = "" + NetworkGM.enemyStars;
                 break;
         }
 
@@ -339,6 +442,9 @@ public class ShowTurnAction : MonoBehaviour
 
     private void DestroyAdversaryTower(bool isEnemy)
     {
+        bool isOffline;
+        isOffline = TryGetComponent(out GameManager gm);
+
         if (!isEnemy)
         {
             if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
@@ -350,6 +456,44 @@ public class ShowTurnAction : MonoBehaviour
             {
                 // Destroy 1 enemy hot tower
                 Destroy1InhTower(3, 0);
+            }
+        }
+        else if (isEnemy && !isOffline)
+        {
+            if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
+            {
+                // Destroy 1 me cold tower
+                Destroy1InhTower(0, 1);
+
+                // and return me card
+
+                if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                {
+                    NetworkUI.instance.ReturnCard(en_value[1]);
+                }
+                else if (en_value[0] is (1 or 3))
+                {
+                    NetworkUI.instance.ReturnCard(en_value[0]);
+                }
+            }
+            else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
+            {
+                // Destroy 1 me hot tower
+                Destroy1InhTower(0, 0);
+
+                // and return me card
+                if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                {
+                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
+                    NetworkUI.instance.ReturnCard(en_value[1]);
+
+                }
+                else if (en_value[0] is (0 or 2))
+                {
+                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
+                    NetworkUI.instance.ReturnCard(en_value[0]);
+                }
+
             }
         }
         else
@@ -435,7 +579,16 @@ public class ShowTurnAction : MonoBehaviour
     private IEnumerator EndGameRoutine(bool enemyWins)
     {
         yield return new WaitForSeconds(1.5f);
-        UIManager.instance.GameOver(enemyWins);
+
+        if(TryGetComponent(out GameManager gm))
+        {
+            UIManager.instance.GameOver(enemyWins);
+        }
+        else
+        {
+            NetworkUI.instance.GameOver(enemyWins);
+        }
+
         isGameOver = true;
         Time.timeScale = 0;
 

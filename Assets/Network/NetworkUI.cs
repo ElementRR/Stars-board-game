@@ -11,7 +11,7 @@ public class NetworkUI : AttributesSync
 {
     public static NetworkUI instance;
 
-    private bool isHost;
+    [SerializeField] private bool isHost;
 
     [SerializeField] private Transform[] camerasPos;
     public Camera mainCamera;
@@ -31,6 +31,7 @@ public class NetworkUI : AttributesSync
 
     [SynchronizableField] public List<int> host_slotCards = new();
     [SynchronizableField] public List<int> guest_slotCards = new();
+    [SynchronizableField] private int playersWaiting;
 
     public TextMeshProUGUI starCount;
 
@@ -45,6 +46,13 @@ public class NetworkUI : AttributesSync
 
     public event Action OnHidePanel;
     public event Action OnShowPanel;
+
+    [Header("Time management")]
+    private const float timeToChoose = 55;
+    private float timeRemain = timeToChoose;
+    [SerializeField] private TextMeshProUGUI trText;
+    [SerializeField] private TextMeshProUGUI timeText;
+    public TextMeshProUGUI waiting;
 
     private void Start()
     {
@@ -65,21 +73,73 @@ public class NetworkUI : AttributesSync
         reproduce = GetComponent<AudioSource>();
         cardIndex[6].GetComponent<Button>().interactable = false;
 
-        StartCoroutine(WaitCameraAnim());
+        //StartCoroutine(WaitCameraAnim());
 
-        //OnHidePanel?.Invoke();
+        OnHidePanel?.Invoke();
         //OnShowPanel?.Invoke();
 
         jokenpoCanvas.SetActive(false); //change to true later
 
     }
-    
+
+    private void Update()
+    {
+        if (NetworkGM.instance.actionTurn)
+        {
+            timeRemain -= Time.deltaTime;
+            int time = (int)timeRemain;
+            timeText.text = time.ToString();
+
+            if(timeRemain <= 0.0f)
+            {
+                WaitFase();
+            }
+        }
+    }
+    public void WaitFase()
+    {
+        NetworkGM.instance.actionTurn = false;
+        OnHidePanel?.Invoke();
+        //change time to choose
+        timeRemain = timeToChoose;
+        //deactivate time
+        trText.gameObject.SetActive(false);
+        //fill with stars
+        /*
+        int cardCount;
+        cardCount = (isHost) ? host_slotCards.Count : guest_slotCards.Count;
+
+        for (int i = cardCount; i < 3; i++)
+        {
+            GetCardIndex(7);
+        }
+        */
+
+        //activate waiting
+        waiting.gameObject.SetActive(true);
+
+        BroadcastRemoteMethod("WaitFaseNet", isHost);
+    }
+
+    [SynchronizableMethod]
+    void WaitFaseNet(bool isHost)
+    {
+
+        playersWaiting++;
+        if(playersWaiting == 2)
+        {
+            //function endturn in gm
+            NetworkGM.instance.EndTurn();
+            playersWaiting = 0;
+        }
+    }
+
     private IEnumerator WaitCameraAnim()
     {
         OnHidePanel?.Invoke();
         yield return new WaitForSeconds(0.5f);
 
-        OnShowPanel?.Invoke();
+        //OnShowPanel?.Invoke();
         yield return new WaitForSeconds(1f);
 
         //jokenpoCanvas.SetActive(true);
@@ -90,12 +150,14 @@ public class NetworkUI : AttributesSync
         canvasNet.alpha = 0f;
         canvasNet.blocksRaycasts = false;
 
-        isHost = (Multiplayer.CurrentRoom.GetUserCount() == 2) ? false : true;
+        isHost = Multiplayer.CurrentRoom.GetUserCount() != 2;
 
         if (isHost)
         {
             mainCamera.transform.position = camerasPos[0].position;
             mainCamera.transform.rotation = camerasPos[0].rotation;
+            OnHidePanel?.Invoke();
+            waiting.gameObject.SetActive(true);
         }
         else
         {
@@ -113,16 +175,11 @@ public class NetworkUI : AttributesSync
 
     public void GetCardIndex(int index)
     {
-        List<int> slotcards;
-
-        slotcards = (isHost) ? host_slotCards : guest_slotCards;
-
         reproduce.PlayOneShot(selectCard);
         if (NetworkGM.instance.actionTurn && cardCount < 3)
         {
             if (index < 7)
             {
-                //cardIndex[index].SetActive(false);
                 cardIndex[index].GetComponent<Button>().interactable = false;
             }
             NetworkGM.instance.FillSlot(index, isHost);

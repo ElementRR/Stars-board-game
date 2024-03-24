@@ -10,6 +10,8 @@ public class NetworkGM : AttributesSync
 
     private ShowTurnAction showTurnAction;
 
+    [SynchronizableField] public int playersInRoom;
+
     public bool actionTurn;
     // if showFase1 = true, the player starts showing cards
     public bool showFase1;
@@ -45,10 +47,7 @@ public class NetworkGM : AttributesSync
     {
         instance = this;
         Time.timeScale = 1;
-        NetworkUI.instance.cardCount = 0;
-        meStars = 0;
-        enemyStars = 0;
-        actionTurn = true;
+        actionTurn = false;
         showTurnAction = GetComponent<ShowTurnAction>();
         reproduce = GetComponent<AudioSource>();
         blackPanel.Play("BlackToTrans");
@@ -63,10 +62,29 @@ public class NetworkGM : AttributesSync
     public void RoomJoined()
     {
         showTurnAction.cameraLocs[0] = NetworkUI.instance.mainCamera.transform;
+        
+        playersInRoom++;
+
+        if(playersInRoom > 1)
+        {
+            BroadcastRemoteMethod("StartGame");
+        }
+        
+    }
+    [SynchronizableMethod]
+    private void StartGame()
+    {
+        ShowTurnEnd();
+        actionTurn = true;
+        meStars = 0;
+        enemyStars = 0;
+        NetworkUI.instance.cardCount = 0;
+        NetworkUI.instance.waiting.gameObject.SetActive(false);
     }
 
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
+        Debug.Log("card" + index + "down");
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
         Instantiate(fieldCardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
     }
@@ -81,6 +99,8 @@ public class NetworkGM : AttributesSync
     {
         int slotValue;
 
+        Debug.Log(isHost);
+
         if (isHost)
         {
             slotValue = NetworkUI.instance.host_slotCards.Count;
@@ -90,10 +110,7 @@ public class NetworkGM : AttributesSync
             slotValue = NetworkUI.instance.guest_slotCards.Count + 3;
         }
 
-        if (actionTurn && NetworkUI.instance.cardCount < 3)
-        {
-            InstantiateInSlot(cardSlots[slotValue], cardIndex);
-        }
+        InstantiateInSlot(cardSlots[slotValue], cardIndex);
     }
 
     public void EndTurn()

@@ -11,19 +11,39 @@ public class Tower : MonoBehaviour
     public AudioClip installTower;
     [SerializeField] private AudioSource reproduce;
 
+    private bool isOffline;
+
     private void Awake()
     {
         reproduce = GetComponent<AudioSource>();
         reproduce.PlayOneShot(installTower);
+
+        isOffline = TryGetComponent(out GameManager gm);
     }
     private void WaitAnim()
     {
-        GameManager.instance.installEnd = false;
+        if(isOffline)
+        {
+            GameManager.instance.installEnd = false;
+        }
+        else
+        {
+            NetworkGM.instance.installEnd = false;
+        }
     }
     private void GoAhead()
     {
-        GameManager.instance.installEnd = true;
+        if (isOffline)
+        {
+            GameManager.instance.installEnd = true;
+        }
+        else
+        {
+            NetworkGM.instance.installEnd = true;
+        }
+
     }
+
 
     public void Destruction()
     {
