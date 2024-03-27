@@ -68,6 +68,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: e0dcaaf96c7a78f4e9120ab9bbdba154, type: 3}
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
   reproduce: {fileID: 0}
+  animTime: 0.83
 --- !u!82 &-5443047619329677643
 AudioSource:
   m_ObjectHideFlags: 0

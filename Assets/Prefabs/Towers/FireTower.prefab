@@ -5280,6 +5280,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: e0dcaaf96c7a78f4e9120ab9bbdba154, type: 3}
   installTower: {fileID: 8300000, guid: a13fe0ef9e8952a45a00b8ec64e5902a, type: 3}
   reproduce: {fileID: 6386473109467719496}
+  animTime: 1.16
 --- !u!95 &5130397498025999179
 Animator:
   serializedVersion: 4
@@ -15106,6 +15107,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: e0dcaaf96c7a78f4e9120ab9bbdba154, type: 3}
   installTower: {fileID: 8300000, guid: 9f3bb70641fc5ea43bbc13570339f55c, type: 3}
   reproduce: {fileID: 910753880022111150}
+  animTime: 0.83
 --- !u!82 &910753880022111150
 AudioSource:
   m_ObjectHideFlags: 0

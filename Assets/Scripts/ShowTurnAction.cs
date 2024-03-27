@@ -116,7 +116,7 @@ public class ShowTurnAction : MonoBehaviour
                 }
                 else
                 {
-                    NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                    NetworkUI.instance.ReturnCard(me_value1, cardSlot1);
                 }
 
                 NotEnoughStars();
@@ -142,7 +142,7 @@ public class ShowTurnAction : MonoBehaviour
                         NetworkUI.instance.starCount.text = "" + NetworkGM.meStars;
                         break;
                     default:
-                        // Handle unexpected cases
+                        Debug.Log("Stars number instance not found");
                         break;
                 }
 
@@ -156,7 +156,7 @@ public class ShowTurnAction : MonoBehaviour
                     }
                     else
                     {
-                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1);
                     }
 
                     en_value.Clear();
@@ -173,7 +173,7 @@ public class ShowTurnAction : MonoBehaviour
                     }
                     else
                     {
-                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1, isEnemy);
+                        NetworkUI.instance.ReturnCard(me_value1, cardSlot1);
                     }
 
                     me_value1 = blankIndex;
@@ -290,7 +290,7 @@ public class ShowTurnAction : MonoBehaviour
             }
             else
             {
-                NetworkUI.instance.ReturnCard(me_value1, cardSlot, isEnemy);
+                NetworkUI.instance.ReturnCard(me_value1, cardSlot);
             }
 
             if (failBellTower)
@@ -366,7 +366,7 @@ public class ShowTurnAction : MonoBehaviour
             }
             else
             {
-                NetworkUI.instance.ReturnCard(me_value1, cardSlot, (whereInstallT == 3) ? true : false);
+                NetworkUI.instance.ReturnCard(me_value1, cardSlot);
             }
             
             NotEnoughStars();
@@ -394,7 +394,7 @@ public class ShowTurnAction : MonoBehaviour
 
         switch (whereInstallT + (isOffline ? 0 : 1))
         {
-            default:
+            case 0:
                 GameManager.meStars -= towerCost;
                 UIManager.instance.starCount.text = "" + GameManager.meStars;
                 break;
@@ -412,6 +412,10 @@ public class ShowTurnAction : MonoBehaviour
                 NetworkGM.enemyStars -= towerCost;
                 NetworkUI.instance.enemyStarCount.text = "" + NetworkGM.enemyStars;
                 break;
+            default:
+                Debug.Log("Error to subtract stars");
+                break;
+            
         }
 
         if (fieldSlots[2].GetComponent<FieldSlot>().isFilled && !isGameOver)
@@ -445,94 +449,126 @@ public class ShowTurnAction : MonoBehaviour
         bool isOffline;
         isOffline = TryGetComponent(out GameManager gm);
 
-        if (!isEnemy)
+        switch ((isEnemy ? 0 : 1) + (isOffline ? 0 : 2))
         {
-            if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
-            {
-                // Destroy 1 enemy cold tower
-                Destroy1InhTower(3, 1);
-            }
-            else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
-            {
-                // Destroy 1 enemy hot tower
-                Destroy1InhTower(3, 0);
-            }
-        }
-        else if (isEnemy && !isOffline)
-        {
-            if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
-            {
-                // Destroy 1 me cold tower
-                Destroy1InhTower(0, 1);
-
-                // and return me card
-
-                if (en_value.Count == 2 && en_value[1] is (1 or 3))
+            case 0: //isEnemy and isOffline
+                if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
                 {
-                    NetworkUI.instance.ReturnCard(en_value[1]);
+                    // Destroy 1 me cold tower
+                    Destroy1InhTower(0, 1);
+
+                    // and return me card
+
+                    if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                    {
+                        UIManager.instance.ReturnCard(en_value[1]);
+                    }
+                    else if (en_value[0] is (1 or 3))
+                    {
+                        UIManager.instance.ReturnCard(en_value[0]);
+                    }
                 }
-                else if (en_value[0] is (1 or 3))
+                else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
                 {
-                    NetworkUI.instance.ReturnCard(en_value[0]);
-                }
-            }
-            else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
-            {
-                // Destroy 1 me hot tower
-                Destroy1InhTower(0, 0);
+                    // Destroy 1 me hot tower
+                    Destroy1InhTower(0, 0);
 
-                // and return me card
-                if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                    // and return me card
+                    if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                    {
+                        UIManager.instance.ReturnCard(en_value[1]);
+
+                    }
+                    else if (en_value[0] is (0 or 2))
+                    {
+                        UIManager.instance.ReturnCard(en_value[0]);
+                    }
+                }
+                break;
+            case 1: //isMe and isOffline
+                if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
                 {
-                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
-                    NetworkUI.instance.ReturnCard(en_value[1]);
-
+                    // Destroy 1 enemy cold tower
+                    Destroy1InhTower(3, 1);
                 }
-                else if (en_value[0] is (0 or 2))
+                else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
                 {
-                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
-                    NetworkUI.instance.ReturnCard(en_value[0]);
+                    // Destroy 1 enemy hot tower
+                    Destroy1InhTower(3, 0);
                 }
-
-            }
-        }
-        else
-        {
-            if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
-            {
-                // Destroy 1 me cold tower
-                Destroy1InhTower(0, 1);
-
-                // and return me card
-
-                if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                break;
+            case 2: // isGuest and !isOffline
+                if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
                 {
-                    UIManager.instance.ReturnCard(en_value[1]);
-                }
-                else if (en_value[0] is (1 or 3))
-                {
-                    UIManager.instance.ReturnCard(en_value[0]);
-                }
-            }
-            else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
-            {
-                // Destroy 1 me hot tower
-                Destroy1InhTower(0, 0);
+                    // Destroy 1 cold tower
+                    Destroy1InhTower(0, 1);
 
-                // and return me card
-                if (en_value.Count == 2 && en_value[1] is (0 or 2))
-                {
-                    //UIManager.instance.cardIndex[en_value[1]].SetActive(true);
-                    UIManager.instance.ReturnCard(en_value[1]);
+                    // and return card
 
+                    if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[1], true);
+                    }
+                    else if (en_value[0] is (1 or 3))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[0], true);
+                    }
                 }
-                else if (en_value[0] is (0 or 2))
+                else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
                 {
-                    //UIManager.instance.cardIndex[en_value[0]].SetActive(true);
-                    UIManager.instance.ReturnCard(en_value[0]);
-                }
+                    // Destroy 1 hot tower
+                    Destroy1InhTower(0, 0);
 
-            }
+                    // and return card
+                    if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[1], true);
+
+                    }
+                    else if (en_value[0] is (0 or 2))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[0], true);
+                    }
+                }
+                break;
+            case 3: // isHost and !isOffline
+                if (me_value1 == 4 && (en_value.Contains(1) || en_value.Contains(3)))
+                {
+                    // Destroy 1 cold tower
+                    Destroy1InhTower(3, 1);
+
+                    // and return card
+
+                    if (en_value.Count == 2 && en_value[1] is (1 or 3))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[1], true);
+                    }
+                    else if (en_value[0] is (1 or 3))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[0], true);
+                    }
+                }
+                else if (me_value1 == 5 && (en_value.Contains(0) || en_value.Contains(2)))
+                {
+                    // Destroy 1 hot tower
+                    Destroy1InhTower(3, 0);
+
+                    // and return card
+                    if (en_value.Count == 2 && en_value[1] is (0 or 2))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[1], true);
+
+                    }
+                    else if (en_value[0] is (0 or 2))
+                    {
+                        NetworkUI.instance.ReturnCard(en_value[0], true);
+                    }
+                }
+                break;
+
+            default:
+                Debug.Log("Error when trying to inhibit opposite tower.");
+                break;
         }
     }
 

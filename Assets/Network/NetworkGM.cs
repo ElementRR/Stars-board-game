@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Alteruna;
+using Alteruna.Trinity;
 
 public class NetworkGM : AttributesSync
 {
@@ -43,6 +44,10 @@ public class NetworkGM : AttributesSync
     public delegate void Outdoor(string message);
     public static event Outdoor OnMessageSent;
 
+    [Header("Tower skins")]
+    [SynchronizableField] public List<int> meTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
+    [SynchronizableField] public List<int> enemyTowerSkins = new(new int[] { 0, 0, 0, 0, 0 });
+
     void Awake()
     {
         instance = this;
@@ -61,20 +66,21 @@ public class NetworkGM : AttributesSync
 
     public void RoomJoined()
     {
-        showTurnAction.cameraLocs[0] = NetworkUI.instance.mainCamera.transform;
-        
+        showTurnAction.cameraLocs[0].position = NetworkUI.instance.mainCamera.transform.position;
+        showTurnAction.cameraLocs[0].rotation = NetworkUI.instance.mainCamera.transform.rotation;
+
         playersInRoom++;
 
         if(playersInRoom > 1)
         {
             BroadcastRemoteMethod("StartGame");
         }
-        
     }
     [SynchronizableMethod]
     private void StartGame()
     {
         ShowTurnEnd();
+        Debug.Log("Game Started");
         actionTurn = true;
         meStars = 0;
         enemyStars = 0;
@@ -84,7 +90,6 @@ public class NetworkGM : AttributesSync
 
     public void InstantiateInSlot(GameObject cardSlot, int index)
     {
-        Debug.Log("card" + index + "down");
         Quaternion newRotation = transform.rotation * Quaternion.Euler(0, 180, 180);
         Instantiate(fieldCardIndex[index], cardSlot.transform.position, newRotation, cardSlot.transform);
     }
@@ -99,7 +104,7 @@ public class NetworkGM : AttributesSync
     {
         int slotValue;
 
-        Debug.Log(isHost);
+        Debug.Log("is Host: " + isHost);
 
         if (isHost)
         {
@@ -116,6 +121,7 @@ public class NetworkGM : AttributesSync
     public void EndTurn()
     {
         reproduce.PlayOneShot(endTurnSound);
+        NetworkUI.instance.waiting.gameObject.SetActive(false);
         if (NetworkUI.instance.cardCount > 2)
         {
             NetworkUI.instance.cardCount = 0;
@@ -259,9 +265,6 @@ public class NetworkGM : AttributesSync
 
     private void EndOfShowTurn(bool isTurn1)
     {
-        // reset slots
-        ResetSlots();
-
         // reset action turn
         actionTurn = true;
 
@@ -286,10 +289,4 @@ public class NetworkGM : AttributesSync
         showTurnAction.mainCamera.transform.SetPositionAndRotation(showTurnAction.cameraLocs[0].position,
             showTurnAction.cameraLocs[0].rotation);
     }
-
-    public void ResetSlots()
-    {
-        NetworkUI.instance.host_slotCards = new();
-    }
-
 }

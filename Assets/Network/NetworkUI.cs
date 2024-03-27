@@ -45,10 +45,9 @@ public class NetworkUI : AttributesSync
     private AudioSource reproduce;
 
     public event Action OnHidePanel;
-    public event Action OnShowPanel;
 
     [Header("Time management")]
-    private const float timeToChoose = 55;
+    private const float timeToChoose = 30;
     private float timeRemain = timeToChoose;
     [SerializeField] private TextMeshProUGUI trText;
     [SerializeField] private TextMeshProUGUI timeText;
@@ -58,6 +57,7 @@ public class NetworkUI : AttributesSync
     {
         NetworkGM.instance.OnFirstTurnEnd += ActivateCard;
         NetworkGM.instance.OnShowTurnEnd += BackCard;
+        NetworkGM.instance.OnShowTurnEnd += ShowTurnEnded;
         netRoomsWindow.GetComponent<RoomMenu>().OnRoomCreated += RoomJoined;
 
         canvasNet = netRoomsWindow.GetComponent<CanvasGroup>();
@@ -76,7 +76,6 @@ public class NetworkUI : AttributesSync
         //StartCoroutine(WaitCameraAnim());
 
         OnHidePanel?.Invoke();
-        //OnShowPanel?.Invoke();
 
         jokenpoCanvas.SetActive(false); //change to true later
 
@@ -92,28 +91,27 @@ public class NetworkUI : AttributesSync
 
             if(timeRemain <= 0.0f)
             {
+                //fill with stars
+                int cardCount;
+                cardCount = (isHost) ? host_slotCards.Count : guest_slotCards.Count;
+
+                for (int i = cardCount; i < 3; i++)
+                {
+                    GetCardIndex(7);
+                }
+
                 WaitFase();
             }
         }
     }
     public void WaitFase()
-    {
+    {  
         NetworkGM.instance.actionTurn = false;
         OnHidePanel?.Invoke();
         //change time to choose
         timeRemain = timeToChoose;
         //deactivate time
         trText.gameObject.SetActive(false);
-        //fill with stars
-        /*
-        int cardCount;
-        cardCount = (isHost) ? host_slotCards.Count : guest_slotCards.Count;
-
-        for (int i = cardCount; i < 3; i++)
-        {
-            GetCardIndex(7);
-        }
-        */
 
         //activate waiting
         waiting.gameObject.SetActive(true);
@@ -124,7 +122,6 @@ public class NetworkUI : AttributesSync
     [SynchronizableMethod]
     void WaitFaseNet(bool isHost)
     {
-
         playersWaiting++;
         if(playersWaiting == 2)
         {
@@ -150,6 +147,8 @@ public class NetworkUI : AttributesSync
         canvasNet.alpha = 0f;
         canvasNet.blocksRaycasts = false;
 
+        Settings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<Settings>();
+
         isHost = Multiplayer.CurrentRoom.GetUserCount() != 2;
 
         if (isHost)
@@ -158,11 +157,15 @@ public class NetworkUI : AttributesSync
             mainCamera.transform.rotation = camerasPos[0].rotation;
             OnHidePanel?.Invoke();
             waiting.gameObject.SetActive(true);
+            NetworkGM.instance.meTowerSkins = settings.meTowerSkins;
         }
         else
         {
             mainCamera.transform.position = camerasPos[1].position;
             mainCamera.transform.rotation = camerasPos[1].rotation;
+            NetworkGM.instance.enemyTowerSkins = settings.meTowerSkins;
+
+            (enemyStarCount, starCount) = (starCount, enemyStarCount);
         }
         NetworkGM.instance.RoomJoined();
     }
@@ -228,15 +231,15 @@ public class NetworkUI : AttributesSync
             {
                 int lastUIIndex = slotcards.Last();
 
-                ReturnCard(lastUIIndex);
+                ReturnCard(lastUIIndex, false);
                 BroadcastRemoteMethod("BackCardNet", slotValue - 1, isHost);
 
             }
 
 
             cardCount--;
-            endTurnB.SetActive(_ = (cardCount > 2));
         }
+        endTurnB.SetActive(_ = (cardCount > 2));
     }
     [SynchronizableMethod]
     private void BackCardNet(int slotValue, bool sentByHost)
@@ -258,11 +261,10 @@ public class NetworkUI : AttributesSync
         }
     }
 
-    public void ReturnCard(int cardNumber, GameObject cardSlot, bool isEnemy)
+    public void ReturnCard(int cardNumber, GameObject cardSlot)
     {
-        if (!isEnemy && cardNumber < 7)
+        if (cardNumber < 7)
         {
-            //cardIndex[cardNumber].SetActive(true);
             cardIndex[cardNumber].GetComponent<Button>().interactable = true;
         }
         Debug.Log("A carta " + cardNumber + " retornou!");
@@ -270,17 +272,48 @@ public class NetworkUI : AttributesSync
         if (cardSlot.transform.childCount > 0)
         {
             StartCoroutine(cardSlot.transform.GetComponentInChildren<Card>().DestroySequence());
-            //Destroy(cardSlot.transform.GetChild(0).gameObject);
         }
     }
 
-    public void ReturnCard(int cardNumber) 
+    public void ReturnCard(int cardNumber, bool isInhibiton) 
     {
-        if (cardNumber < 7)
+        if (cardNumber < 7 && !isInhibiton)
         {
             cardIndex[cardNumber].GetComponent<Button>().interactable = true;
         }
-        Debug.Log("A carta " + cardNumber + " retornou!");
+        else if (cardNumber < 7)
+        {
+            InvokeRemoteMethod("ReturnOtherCard", UserId.All, cardNumber);
+            //BroadcastRemoteMethod("ReturnOtherCard", cardNumber);
+        }
+    }
+    [SynchronizableMethod]
+    void ReturnOtherCard(int cardNumber)
+    {
+        cardIndex[cardNumber].GetComponent<Button>().interactable = true;
+        Debug.Log("other card " + cardNumber + "returned");
+        
+    }
+
+    private void ShowTurnEnded()
+    {
+        BroadcastRemoteMethod("ResetSlots", isHost);
+        endTurnB.SetActive(false);
+        cardCount = 0;
+        waiting.gameObject.SetActive(false);
+        trText.gameObject.SetActive(true);
+    }
+    [SynchronizableMethod]
+    private void ResetSlots(bool isHost)
+    {
+        if (isHost)
+        {
+            host_slotCards.Clear();
+        }
+        else
+        {
+            guest_slotCards.Clear();
+        }
     }
 
     public void GameOver(bool enemyWins)
@@ -289,15 +322,21 @@ public class NetworkUI : AttributesSync
         endPanel.GetComponent<Animator>().SetTrigger("End");
 
 
-        if (!enemyWins)
+        switch ((isHost ? 0 : 1) + (enemyWins ? 3 : 0))
         {
-            reproduce.PlayOneShot(youWinS);
+            case 0 or 4:
+                reproduce.PlayOneShot(youWinS);
+                endPanel.GetComponent<EndGamePanel>().GameResult(false);
+                break;
+            case 1 or 3:
+                reproduce.PlayOneShot(youLoseS);
+                endPanel.GetComponent<EndGamePanel>().GameResult(true);
+                break;
+            default:
+                Debug.Log("Wrong winner");
+                break;
         }
-        else
-        {
-            reproduce.PlayOneShot(youLoseS);
-        }
-        endPanel.GetComponent<EndGamePanel>().GameResult(enemyWins);
+
     }
 
     private new void OnDestroy()

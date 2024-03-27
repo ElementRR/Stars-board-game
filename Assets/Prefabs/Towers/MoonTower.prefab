@@ -602,6 +602,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: 1aba99676b6bc37408b48456b222d703, type: 3}
   installTower: {fileID: 8300000, guid: a13fe0ef9e8952a45a00b8ec64e5902a, type: 3}
   reproduce: {fileID: 2954492755638644689}
+  animTime: 3.58
 --- !u!82 &2954492755638644689
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3141,6 +3142,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: 1aba99676b6bc37408b48456b222d703, type: 3}
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
   reproduce: {fileID: 1601333586052383837}
+  animTime: 0.83
 --- !u!111 &2383780390032617412
 Animation:
   m_ObjectHideFlags: 0

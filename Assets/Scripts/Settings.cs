@@ -1,3 +1,4 @@
+using Alteruna;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -54,6 +55,5 @@ public class Settings : MonoBehaviour
         Debug.Log("Level Loaded");
         Debug.Log(scene.name);
         Debug.Log(mode);
-
     }
 }

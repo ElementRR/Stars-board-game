@@ -51,6 +51,7 @@ MonoBehaviour:
   destrFX: {fileID: 3879196137986154632, guid: e0dcaaf96c7a78f4e9120ab9bbdba154, type: 3}
   installTower: {fileID: 8300000, guid: 5ddf0a4e70f79644e98779c109c6278c, type: 3}
   reproduce: {fileID: -7618084976726259396}
+  animTime: 1.33
 --- !u!111 &1935391615454863602
 Animation:
   m_ObjectHideFlags: 0

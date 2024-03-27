@@ -15,7 +15,6 @@ public class CardsPanel : MonoBehaviour
             NetworkGM.instance.OnFirstTurnEnd += HidePanel;
             NetworkGM.instance.OnShowTurnEnd += ShowPanel;
             NetworkUI.instance.OnHidePanel += HidePanel;
-            NetworkUI.instance.OnShowPanel += ShowPanel;
         }
         else
         {
@@ -30,11 +29,13 @@ public class CardsPanel : MonoBehaviour
 
     void HidePanel()
     {
-        animator.SetTrigger("Hide");
+        //animator.SetTrigger("Hide");
+        animator.SetBool("isShowing", false);
     }
     void ShowPanel()
     {
-        animator.SetTrigger("Show");
+        //animator.SetTrigger("Show");
+        animator.SetBool("isShowing", true);
     }
 
     private void OnDestroy()
@@ -44,7 +45,6 @@ public class CardsPanel : MonoBehaviour
             net.OnFirstTurnEnd -= HidePanel;
             net.OnShowTurnEnd -= ShowPanel;
             NetworkUI.instance.OnHidePanel -= HidePanel;
-            NetworkUI.instance.OnShowPanel -= ShowPanel;
         }
         else
         {
