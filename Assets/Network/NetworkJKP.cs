@@ -131,8 +131,6 @@ public class NetworkJKP : AttributesSync
     {
         enemyImg.sprite = enemyImgs[enemyImgs.Length - 1];
 
-        //guestHand = Random.Range(0, 2);
-
         isHandPicked = false;
 
         if (isDraw)

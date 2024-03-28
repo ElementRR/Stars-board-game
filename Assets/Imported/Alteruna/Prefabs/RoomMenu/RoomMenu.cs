@@ -59,9 +59,14 @@ namespace Alteruna
 				StartButton.onClick.AddListener(() =>
 				{
 					// for more control, use Multiplayer.CreateRoom
-					// Multiplayer.JoinOnDemandRoom();
-
-					Multiplayer.CreateRoom(userName.text, false, 0, true, true, 2);
+					
+					if(userName.text != null)
+					{
+                        Multiplayer.CreateRoom(userName.text, false, 0, true, true, 2);
+                    }
+					else { 
+						Multiplayer.JoinOnDemandRoom(); 
+					}
 					_refreshTime = RefreshInterval;
 				});
 
