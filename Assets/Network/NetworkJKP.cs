@@ -47,7 +47,6 @@ public class NetworkJKP : AttributesSync
         Multiplayer.OnRoomJoined.AddListener(RoomJoined);
 
         waitingPlayer.SetActive(true);
-        Time.timeScale = 0;
         audioSource = GetComponent<AudioSource>();
         ResetGame(false);
     }

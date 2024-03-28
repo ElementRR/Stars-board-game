@@ -11,7 +11,7 @@ public class NetworkGM : AttributesSync
 
     private ShowTurnAction showTurnAction;
 
-    public bool actionTurn;
+    public bool actionTurn = false;
     // if showFase1 = true, the player starts showing cards
     public bool showFase1;
     public bool installEnd = true;
