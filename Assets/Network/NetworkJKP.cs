@@ -4,6 +4,7 @@ using UnityEngine;
 using Alteruna;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 
 public class NetworkJKP : AttributesSync
 {
@@ -17,7 +18,9 @@ public class NetworkJKP : AttributesSync
 
     public TextMeshProUGUI textDecision;
 
-    public WhoFirstLogic WhoFirstLogic;
+    [SerializeField] private GameObject waitingPlayer;
+
+    [SerializeField] private GameObject whoFirst;
 
     [SynchronizableField][SerializeField] private int hostHand;
     // 0 = rock, 1 = paper, 2 = scissors
@@ -25,28 +28,49 @@ public class NetworkJKP : AttributesSync
 
     private bool isHandPicked = false;
 
-    public bool isWinner;
+    [SynchronizableField] private bool isHostWinner;
+
+    public delegate void Outdoor(string message);
+    public static event Outdoor OnMessageSent;
 
     [Header("Sound FX")]
     protected AudioSource audioSource;
     [SerializeField] private AudioClip UIclick;
     [SerializeField] private AudioClip drawSound;
 
+    [Header("Network")]
+    private bool isHost;
+    [SynchronizableField] int playersWaiting = 0;
+
     private void Awake()
     {
+        Multiplayer.OnRoomJoined.AddListener(RoomJoined);
+
+        waitingPlayer.SetActive(true);
+        Time.timeScale = 0;
         audioSource = GetComponent<AudioSource>();
         ResetGame(false);
     }
 
-    public void GetJokenpoGame(int number)
+    private void RoomJoined(Multiplayer multiplayer, Room room, User user)
+    {
+        isHost = (user.IsHost);
+
+        if (Multiplayer.CurrentRoom.Users.Count > 1)
+        {
+            waitingPlayer.SetActive(false);
+        }
+    }
+
+    public void GetJokenpoGame(int handIndex)
     {
         audioSource.PlayOneShot(UIclick);
 
         if (!isHandPicked)
         {
-            hostHand = number;
             isHandPicked = true;
 
+            /*
             enemyImg.sprite = guestHand switch
             {
                 0 => enemyImgs[0],
@@ -54,12 +78,35 @@ public class NetworkJKP : AttributesSync
                 2 => enemyImgs[2],
                 _ => enemyImgs[0],
             };
+            */
 
             meChoices[0].gameObject.SetActive(false); meChoices[1].gameObject.SetActive(false); meChoices[2].gameObject.SetActive(false);
-            meChoices[hostHand].gameObject.SetActive(true);
-            choiceFirstPos = meChoices[hostHand].gameObject.transform.localPosition;
-            meChoices[hostHand].gameObject.transform.localPosition = meChoices[1].gameObject.transform.localPosition;
+            meChoices[handIndex].gameObject.SetActive(true);
+            choiceFirstPos = meChoices[handIndex].gameObject.transform.localPosition;
+            meChoices[handIndex].gameObject.transform.localPosition = meChoices[1].gameObject.transform.localPosition;
+            
+            waitingPlayer.SetActive(true);
 
+            BroadcastRemoteMethod("WaitOtherPlayerJKP", handIndex);
+        }
+    }
+    [SynchronizableMethod]
+    void WaitOtherPlayerJKP(int handIndex)
+    {
+        if (isHost)
+        {
+            hostHand = handIndex;
+        }
+        else
+        {
+            guestHand = handIndex;
+        }
+
+        playersWaiting++;
+
+        if (playersWaiting > 1)
+        {
+            waitingPlayer.SetActive(false);
             GameDecision();
         }
     }
@@ -71,7 +118,7 @@ public class NetworkJKP : AttributesSync
             return;
         }
 
-        isWinner = hostHand switch
+        isHostWinner = hostHand switch
         {
             0 when guestHand == 1 => false,
             1 when guestHand == 2 => false,
@@ -83,12 +130,17 @@ public class NetworkJKP : AttributesSync
     private void ResetGame(bool isDraw)
     {
         enemyImg.sprite = enemyImgs[enemyImgs.Length - 1];
-        guestHand = Random.Range(0, 2);
+
+        //guestHand = Random.Range(0, 2);
+
         isHandPicked = false;
 
         if (isDraw)
         {
-            meChoices[hostHand].gameObject.transform.localPosition = choiceFirstPos;
+            int meHand;
+            meHand = (isHost ? hostHand : guestHand);
+            meChoices[meHand].gameObject.transform.localPosition = choiceFirstPos;
+
             meChoices[0].gameObject.SetActive(true); meChoices[1].gameObject.SetActive(true); meChoices[2].gameObject.SetActive(true);
         }
     }
@@ -97,21 +149,21 @@ public class NetworkJKP : AttributesSync
     {
         float time = 1.2f;
 
-        if (isWinner)
+        yield return new WaitForSeconds(time);
+
+        switch ((isHostWinner?0 : 1) + (isHost?0:2))
         {
-            textDecision.text = "You win";
-            yield return new WaitForSeconds(time);
-            Instantiate(WhoFirstLogic.gameObject, transform);
-        }
-        else
-        {
-            textDecision.text = "You lose";
-            GameManager.instance.showFase1 = false;
-            yield return new WaitForSeconds(time);
-            Instantiate(WhoFirstLogic.gameObject, transform);
-            //gameObject.SetActive(false);
+            case 0 or 3:
+                textDecision.text = "You win";
+                break;
+            case 1 or 2:
+                textDecision.text = "You lose";
+                break;
+            default:
+                break;
         }
 
+        whoFirst.SetActive(true);
     }
     private IEnumerator DrawResult()
     {
@@ -122,6 +174,55 @@ public class NetworkJKP : AttributesSync
         yield return new WaitForSeconds(time);
         textDecision.text = "Chose another";
         ResetGame(true);
+    }
+
+    public void WhoFirst(bool isYou)
+    {
+        audioSource.PlayOneShot(UIclick);
+
+        if (isHost)
+        {
+            switch ((isYou ? 0 : 1) + (isHostWinner ? 0 : 2))
+            {
+                case 0:
+                    GameManager.instance.showFase1 = true;
+                    OnMessageSent?.Invoke(Multiplayer.CurrentRoom.Name + " will start showing cards!");
+                    BroadcastRemoteMethod("StartMatchItself");
+                    break;
+                case 1:
+                    GameManager.instance.showFase1 = false;
+                    OnMessageSent?.Invoke(Multiplayer.CurrentRoom.Users.Last().Name + " will start to show cards!");
+                    BroadcastRemoteMethod("StartMatchItself");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            switch ((isYou ? 0 : 1) + (isHostWinner ? 0 : 2))
+            {
+                case 3:
+                    GameManager.instance.showFase1 = true;
+                    OnMessageSent?.Invoke(Multiplayer.CurrentRoom.Name + " will start showing cards!");
+                    BroadcastRemoteMethod("StartMatchItself");
+                    break;
+                case 2:
+                    GameManager.instance.showFase1 = false;
+                    OnMessageSent?.Invoke(Multiplayer.CurrentRoom.Users.Last().Name + " will start to show cards!");
+                    BroadcastRemoteMethod("StartMatchItself");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    [SynchronizableMethod]
+    void StartMatchItself()
+    {
+        NetworkGM.instance.StartGame();
+        gameObject.SetActive(false);
     }
 
 }

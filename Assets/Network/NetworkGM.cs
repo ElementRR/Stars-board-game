@@ -3,15 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Alteruna;
-using Alteruna.Trinity;
+using UnityEditor;
 
 public class NetworkGM : AttributesSync
 {
     public static NetworkGM instance;
 
     private ShowTurnAction showTurnAction;
-
-    [SynchronizableField] public int playersInRoom;
 
     public bool actionTurn;
     // if showFase1 = true, the player starts showing cards
@@ -51,7 +49,6 @@ public class NetworkGM : AttributesSync
     void Awake()
     {
         instance = this;
-        Time.timeScale = 1;
         actionTurn = false;
         showTurnAction = GetComponent<ShowTurnAction>();
         reproduce = GetComponent<AudioSource>();
@@ -68,17 +65,19 @@ public class NetworkGM : AttributesSync
     {
         showTurnAction.cameraLocs[0].position = NetworkUI.instance.mainCamera.transform.position;
         showTurnAction.cameraLocs[0].rotation = NetworkUI.instance.mainCamera.transform.rotation;
-
+        /*
         playersInRoom++;
 
         if(playersInRoom > 1)
         {
             BroadcastRemoteMethod("StartGame");
         }
+        */
     }
-    [SynchronizableMethod]
-    private void StartGame()
+
+    public void StartGame()
     {
+        Time.timeScale = 1;
         ShowTurnEnd();
         Debug.Log("Game Started");
         actionTurn = true;

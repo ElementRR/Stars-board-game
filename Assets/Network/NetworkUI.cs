@@ -20,6 +20,7 @@ public class NetworkUI : AttributesSync
     [SerializeField] private GameObject netRoomsWindow;
      private CanvasGroup canvasNet;
     [SerializeField] private GameObject jokenpoCanvas;
+    [SerializeField] private TextMeshProUGUI enemyName;
 
     [Header("Game")]
 
@@ -53,12 +54,15 @@ public class NetworkUI : AttributesSync
     [SerializeField] private TextMeshProUGUI timeText;
     public TextMeshProUGUI waiting;
 
+    private float _count;
+
     private void Start()
     {
         NetworkGM.instance.OnFirstTurnEnd += ActivateCard;
-        NetworkGM.instance.OnShowTurnEnd += BackCard;
         NetworkGM.instance.OnShowTurnEnd += ShowTurnEnded;
-        netRoomsWindow.GetComponent<RoomMenu>().OnRoomCreated += RoomJoined;
+
+        Multiplayer.OnRoomJoined.AddListener(RoomJoined);
+        Multiplayer.OnConnected.AddListener(CheckOtherPlayer);
 
         canvasNet = netRoomsWindow.GetComponent<CanvasGroup>();
 
@@ -77,7 +81,7 @@ public class NetworkUI : AttributesSync
 
         OnHidePanel?.Invoke();
 
-        jokenpoCanvas.SetActive(false); //change to true later
+        jokenpoCanvas.SetActive(true);
 
     }
 
@@ -102,6 +106,16 @@ public class NetworkUI : AttributesSync
 
                 WaitFase();
             }
+        }
+    }
+
+    private void CheckOtherPlayer(Multiplayer multiplayer, Endpoint endpoint)
+    {
+        if (!Multiplayer.InRoom)
+        {
+            canvasNet.alpha = 1f;
+            canvasNet.blocksRaycasts = true;
+            enemyName.text = "Player";
         }
     }
     public void WaitFase()
@@ -142,28 +156,29 @@ public class NetworkUI : AttributesSync
         //jokenpoCanvas.SetActive(true);
     }
     
-    void RoomJoined()
+    void RoomJoined(Multiplayer multiplayer, Room room, User user)
     {
         canvasNet.alpha = 0f;
         canvasNet.blocksRaycasts = false;
 
-        Settings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<Settings>();
+        jokenpoCanvas.SetActive(true);
 
-        isHost = Multiplayer.CurrentRoom.GetUserCount() != 2;
+        //Settings settings = GameObject.FindGameObjectWithTag("Settings").GetComponent<Settings>();
+
+        isHost = user.IsHost;
 
         if (isHost)
         {
-            mainCamera.transform.position = camerasPos[0].position;
-            mainCamera.transform.rotation = camerasPos[0].rotation;
+            mainCamera.transform.SetPositionAndRotation(camerasPos[0].position, camerasPos[0].rotation);
             OnHidePanel?.Invoke();
             waiting.gameObject.SetActive(true);
-            NetworkGM.instance.meTowerSkins = settings.meTowerSkins;
+            //NetworkGM.instance.meTowerSkins = settings.meTowerSkins;
         }
         else
         {
-            mainCamera.transform.position = camerasPos[1].position;
-            mainCamera.transform.rotation = camerasPos[1].rotation;
-            NetworkGM.instance.enemyTowerSkins = settings.meTowerSkins;
+            enemyName.text = room.Name;
+            mainCamera.transform.SetPositionAndRotation(camerasPos[1].position, camerasPos[1].rotation);
+            //NetworkGM.instance.enemyTowerSkins = settings.meTowerSkins;
 
             (enemyStarCount, starCount) = (starCount, enemyStarCount);
         }
@@ -261,6 +276,7 @@ public class NetworkUI : AttributesSync
         }
     }
 
+
     public void ReturnCard(int cardNumber, GameObject cardSlot)
     {
         if (cardNumber < 7)
@@ -298,10 +314,15 @@ public class NetworkUI : AttributesSync
     private void ShowTurnEnded()
     {
         BroadcastRemoteMethod("ResetSlots", isHost);
-        endTurnB.SetActive(false);
         cardCount = 0;
+        endTurnB.SetActive(_ = (cardCount > 2));
         waiting.gameObject.SetActive(false);
         trText.gameObject.SetActive(true);
+
+        if (isHost)
+        {
+            enemyName.text = Multiplayer.CurrentRoom.Users.Last().Name;
+        }
     }
     [SynchronizableMethod]
     private void ResetSlots(bool isHost)

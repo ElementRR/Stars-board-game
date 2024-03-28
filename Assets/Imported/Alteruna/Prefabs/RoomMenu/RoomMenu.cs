@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Alteruna.Trinity;
 using System;
+using TMPro;
 
 namespace Alteruna
 {
@@ -30,9 +31,9 @@ namespace Alteruna
 		private float _statusTextTime;
 		private int _roomI = -1;
 
-
-        //Rato changes
-        public event Action OnRoomCreated;
+		//Rato changes
+		[Header("Room properties")]
+        [SerializeField] private TMP_InputField userName;
 
         private void Start()
 		{
@@ -58,8 +59,9 @@ namespace Alteruna
 				StartButton.onClick.AddListener(() =>
 				{
 					// for more control, use Multiplayer.CreateRoom
-					Multiplayer.JoinOnDemandRoom();
-					//Multiplayer.CreateRoom();
+					// Multiplayer.JoinOnDemandRoom();
+
+					Multiplayer.CreateRoom(userName.text, false, 0, true, true, 2);
 					_refreshTime = RefreshInterval;
 				});
 
@@ -205,10 +207,8 @@ namespace Alteruna
 			if (TitleText != null)
 			{
 				TitleText.text = "In Room " + room.Name;
+				Debug.Log("Room " + room.Name + " created");
 			}
-
-            //Rato changes
-            OnRoomCreated?.Invoke();
 
 		}
 
